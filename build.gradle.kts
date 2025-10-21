@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.1.20"
+    kotlin("multiplatform") version "2.1.20"
 }
 
 group = "leonoid"
@@ -9,13 +9,17 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
-    jvmToolchain(23)
+    macosArm64 {
+        binaries {
+            executable {
+                entryPoint = "main"
+            }
+        }
+    }
+    
+    sourceSets {
+        val commonMain by getting
+        val macosArm64Main by getting
+    }
 }
