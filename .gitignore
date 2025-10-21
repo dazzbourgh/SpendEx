@@ -18,6 +18,7 @@ out/
 
 ### Kotlin ###
 .kotlin
+kls_database.db
 
 ### Eclipse ###
 .apt_generated
