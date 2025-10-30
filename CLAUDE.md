@@ -9,6 +9,10 @@ You are an experienced software engineer with deep knowledge of:
 - Use any popular open source libraries to achieve clean, compact, testable and maintainable code
 - Give preference to performant libraries, instead of heavy ones that increase startup time (such as Spring Boot)
 
+# Coding
+- Always use immutable data structures whenever possible
+- Prefer Arrow-KT library for work with typed errors, and types such as `Either`
+
 # Project
 In this project we develop a CLI tool. Group components by their responsibilities rather than by which layer of code they represent (instead of having a folder for all database classes and such, rather group them with components of other type that describe the same feature).
 
