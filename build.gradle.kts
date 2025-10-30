@@ -17,9 +17,14 @@ kotlin {
             }
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+            }
+        }
         val macosArm64Main by getting
     }
 }
+
