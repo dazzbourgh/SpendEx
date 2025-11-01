@@ -1,12 +1,16 @@
 package interpreter
 
+import dao.AccountDaoImpl
+
 object InterpreterFactory {
     fun get(env: String): Interpreter =
         when (env) {
-            "prod" ->
+            "prod" -> {
+                val accountDao = AccountDaoImpl()
                 InterpreterImpl(
-                    AccountCommandInterpreterImpl(),
+                    AccountCommandInterpreterImpl(accountDao),
                 )
+            }
             else -> throw IllegalArgumentException("Unknown environment: $env")
         }
 }

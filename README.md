@@ -6,7 +6,6 @@ Spendex is a CLI tool for managing financial accounts and transactions.
 
 - Add and manage financial accounts from multiple banks
 - List all registered accounts with details
-- Track account usernames and addition timestamps
 
 ## Supported Banks
 
@@ -89,10 +88,3 @@ To manually format code:
 ./gradlew ktlintFormat
 ```
 
-### Technologies
-
-- Kotlin Multiplatform
-- Clikt - Command-line interface framework
-- Arrow-KT - Functional programming utilities
-- kotlinx-coroutines - Asynchronous programming
-- kotlinx-datetime - Date and time handling
