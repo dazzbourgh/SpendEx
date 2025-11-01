@@ -1,7 +1,6 @@
 package dao
 
 import command.BankDetails
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 expect class JsonAccountDaoImpl() : AccountDao {
@@ -11,5 +10,5 @@ expect class JsonAccountDaoImpl() : AccountDao {
 }
 
 internal object JsonConfig {
-    val json = Json { prettyPrinting = true }
+    val json = Json { prettyPrint = true }
 }

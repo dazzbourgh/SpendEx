@@ -2,9 +2,10 @@ package dao
 
 import command.BankDetails
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.toKString
+import kotlinx.cinterop.usePinned
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import platform.posix.chmod
 import platform.posix.fclose
 import platform.posix.fopen
@@ -30,14 +31,14 @@ actual class JsonAccountDaoImpl : AccountDao {
         mkdir(dataDir, 0x1C0u) // 0700 permissions - owner read/write/execute only
     }
 
-    override suspend fun save(bankDetails: BankDetails) {
+    actual override suspend fun save(bankDetails: BankDetails) {
         val currentAccounts = list().toMutableList()
         currentAccounts.add(bankDetails)
         val jsonContent = json.encodeToString(currentAccounts)
         writeFile(jsonContent)
     }
 
-    override suspend fun list(): Iterable<BankDetails> {
+    actual override suspend fun list(): Iterable<BankDetails> {
         val content = readFile() ?: return emptyList()
         if (content.isBlank()) return emptyList()
         return try {
@@ -54,7 +55,10 @@ actual class JsonAccountDaoImpl : AccountDao {
             val result = StringBuilder()
             var bytesRead: ULong
             while (true) {
-                bytesRead = fread(buffer.refTo(0), 1u, buffer.size.toULong(), file)
+                bytesRead =
+                    buffer.usePinned { pinned ->
+                        fread(pinned.addressOf(0), 1u, buffer.size.toULong(), file)
+                    }
                 if (bytesRead == 0uL) break
                 result.append(buffer.decodeToString(0, bytesRead.toInt()))
             }
@@ -68,7 +72,9 @@ actual class JsonAccountDaoImpl : AccountDao {
         val file = fopen(dataFile, "w") ?: throw IllegalStateException("Cannot open file for writing: $dataFile")
         try {
             val bytes = content.encodeToByteArray()
-            fwrite(bytes.refTo(0), 1u, bytes.size.toULong(), file)
+            bytes.usePinned { pinned ->
+                fwrite(pinned.addressOf(0), 1u, bytes.size.toULong(), file)
+            }
         } finally {
             fclose(file)
         }
