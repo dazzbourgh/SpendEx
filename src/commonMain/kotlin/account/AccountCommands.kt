@@ -9,18 +9,19 @@ import kotlinx.coroutines.runBlocking
 
 object AccountCommand : CliktCommand(
     name = "account",
-    help = "Manage financial accounts"
+    help = "Manage financial accounts",
 ) {
     override fun run() = Unit
 }
 
 class AccountAddCommand(private val addCommand: suspend (Bank) -> Unit) : CliktCommand(
     name = "add",
-    help = "Add a new financial account"
+    help = "Add a new financial account",
 ) {
     val bank by option().enum<Bank>().required().help("Bank name")
 
-    override fun run() = runBlocking {
-        addCommand(bank)
-    }
+    override fun run() =
+        runBlocking {
+            addCommand(bank)
+        }
 }

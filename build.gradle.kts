@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "2.1.20"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
 group = "leonoid"
@@ -30,3 +31,17 @@ kotlin {
     }
 }
 
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    verbose.set(true)
+    outputToConsole.set(true)
+    coloredOutput.set(true)
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
+}
+
+// Auto-format on build
+tasks.named("check") {
+    dependsOn("ktlintFormat")
+}
