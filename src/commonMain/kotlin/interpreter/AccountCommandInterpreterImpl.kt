@@ -1,6 +1,6 @@
 package interpreter
 
-import account.Bank
+import command.Bank
 
 class AccountCommandInterpreterImpl : AccountCommandInterpreter {
     override suspend fun addAccount(bank: Bank) {

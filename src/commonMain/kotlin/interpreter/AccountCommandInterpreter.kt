@@ -1,6 +1,6 @@
 package interpreter
 
-import account.Bank
+import command.Bank
 
 interface AccountCommandInterpreter {
     suspend fun addAccount(bank: Bank)

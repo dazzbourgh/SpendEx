@@ -1,5 +1,5 @@
-import account.AccountAddCommand
-import account.AccountCommand
+import command.AccountAddCommand
+import command.AccountCommand
 import cli.FinancialAdvisor
 import com.github.ajalt.clikt.core.subcommands
 import interpreter.Interpreter

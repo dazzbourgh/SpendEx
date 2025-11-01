@@ -1,4 +1,4 @@
-package account
+package command
 
 enum class Bank {
     Amex,
