@@ -2,15 +2,18 @@ import account.AccountAddCommand
 import account.AccountCommand
 import cli.FinancialAdvisor
 import com.github.ajalt.clikt.core.subcommands
+import interpreter.Interpreter
+import interpreter.InterpreterFactory
 
 fun main(args: Array<String>) {
+    val interpreter: Interpreter = InterpreterFactory.get("prod")
     FinancialAdvisor
         .subcommands(
             AccountCommand
                 .subcommands(
-                    AccountAddCommand {
-                        println("Adding account: $it")
-                    },
+                    AccountAddCommand(
+                        interpreter.accountCommandInterpreter::addAccount
+                    ),
                 ),
         )
         .main(args)
