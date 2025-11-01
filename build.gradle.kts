@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform") version "2.1.20"
+    kotlin("plugin.serialization") version "2.1.20"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
 }
 
@@ -26,6 +27,7 @@ kotlin {
                 implementation("io.arrow-kt:arrow-core:1.2.4")
                 implementation("com.github.ajalt.clikt:clikt:4.2.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
             }
         }
         val macosArm64Main by getting

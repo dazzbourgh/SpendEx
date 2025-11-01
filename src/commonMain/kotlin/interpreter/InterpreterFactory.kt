@@ -1,12 +1,12 @@
 package interpreter
 
-import dao.AccountDaoImpl
+import dao.JsonAccountDaoImpl
 
 object InterpreterFactory {
     fun get(env: String): Interpreter =
         when (env) {
             "prod" -> {
-                val accountDao = AccountDaoImpl()
+                val accountDao = JsonAccountDaoImpl()
                 InterpreterImpl(
                     AccountCommandInterpreterImpl(accountDao),
                 )

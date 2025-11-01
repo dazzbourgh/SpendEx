@@ -1,6 +1,7 @@
 package command
 
 import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
 /**
  * Details about a bank account.
@@ -9,6 +10,7 @@ import kotlinx.datetime.Instant
  * @property username The username for the account
  * @property dateAdded The timestamp when the account was added
  */
+@Serializable
 data class BankDetails(
     val name: String,
     val username: String,
