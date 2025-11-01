@@ -22,15 +22,32 @@ This project uses Gradle with the Kotlin Multiplatform plugin. To build the proj
 ./gradlew build
 ```
 
+## Installation
+
+To install the `spndx` command globally to `/usr/local/bin`:
+
+```bash
+sudo ./gradlew install
+```
+
+This will build the project and copy the binary to `/usr/local/bin/spndx`, making it available system-wide.
+
+After installation, you can run:
+
+```bash
+spndx command add --bank Chase --username john.doe@email.com
+spndx command list
+```
+
 ## Running
 
-To run the CLI tool:
+To run the CLI tool without installing:
 
 ```bash
 ./gradlew run --args="<command>"
 ```
 
-Or build and run the native binary:
+Or build and run the native binary directly:
 
 ```bash
 ./gradlew macosArm64Binaries
@@ -39,12 +56,14 @@ Or build and run the native binary:
 
 ## Usage
 
+The examples below show commands using the installed `spndx` binary. If you haven't installed it yet, replace `spndx` with `./gradlew run --args="..."`.
+
 ### Add an Account
 
 Add a new financial account with a bank name and username:
 
 ```bash
-./gradlew run --args="command add --bank Chase --username john.doe@email.com"
+spndx command add --bank Chase --username john.doe@email.com
 ```
 
 ### List Accounts
@@ -52,7 +71,7 @@ Add a new financial account with a bank name and username:
 View all registered accounts:
 
 ```bash
-./gradlew run --args="command list"
+spndx command list
 ```
 
 ### Help
@@ -60,13 +79,13 @@ View all registered accounts:
 Display help information:
 
 ```bash
-./gradlew run --args="--help"
+spndx --help
 ```
 
 Or get help for a specific command:
 
 ```bash
-./gradlew run --args="command add --help"
+spndx command add --help
 ```
 
 ## Project Structure
@@ -75,6 +94,11 @@ The project follows a feature-based organization:
 
 - `command/` - CLI command definitions and data models
 - `interpreter/` - Business logic implementation for commands
+- `dao/` - Data access layer for persistent storage
+
+### Data Storage
+
+Account data is stored in JSON format at `~/.spndx/banks.json` with secure permissions (0600 - owner read/write only). The directory is created automatically with 0700 permissions.
 
 ## Development
 
@@ -87,4 +111,3 @@ To manually format code:
 ```bash
 ./gradlew ktlintFormat
 ```
-

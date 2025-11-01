@@ -52,3 +52,25 @@ tasks.named("check") {
 tasks.named("build") {
     dependsOn("check")
 }
+
+// Install task to copy binary to /usr/local/bin
+tasks.register<Copy>("install") {
+    dependsOn("build")
+
+    val executableName = "spendex.kexe"
+    val targetName = "spndx"
+
+    from(layout.buildDirectory.file("bin/macosArm64/releaseExecutable/$executableName"))
+    into("/usr/local/bin")
+    rename(executableName, targetName)
+
+    doLast {
+        val targetFile = file("/usr/local/bin/$targetName")
+        if (targetFile.exists()) {
+            exec {
+                commandLine("chmod", "+x", targetFile.absolutePath)
+            }
+            println("Installed $targetName to /usr/local/bin")
+        }
+    }
+}
