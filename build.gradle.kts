@@ -52,29 +52,3 @@ tasks.named("check") {
 tasks.named("build") {
     dependsOn("check")
 }
-
-// Install task to copy binary to /usr/local/bin
-tasks.register<Exec>("install") {
-    dependsOn("build")
-
-    val executableName = "spendex.kexe"
-    val targetName = "spndx"
-    val sourceFile = layout.buildDirectory.file("bin/macosArm64/releaseExecutable/$executableName").get().asFile
-    val targetPath = "/usr/local/bin/$targetName"
-
-    doFirst {
-        if (!sourceFile.exists()) {
-            throw GradleException("Binary not found at ${sourceFile.absolutePath}. Run './gradlew build' first.")
-        }
-    }
-
-    commandLine("sudo", "cp", sourceFile.absolutePath, targetPath)
-
-    doLast {
-        exec {
-            commandLine("sudo", "chmod", "+x", targetPath)
-        }
-        println("Successfully installed $targetName to /usr/local/bin")
-        println("You can now run: $targetName --help")
-    }
-}

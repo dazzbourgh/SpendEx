@@ -24,13 +24,12 @@ This project uses Gradle with the Kotlin Multiplatform plugin. To build the proj
 
 ## Installation
 
-To install the `spndx` command globally to `/usr/local/bin`:
+To install the `spndx` command globally to `/usr/local/bin`, run:
+
 
 ```bash
-./gradlew install
+./install.sh
 ```
-
-This will build the project and copy the binary to `/usr/local/bin/spndx`, making it available system-wide. You will be prompted for your password to complete the installation.
 
 After installation, you can run:
 
