@@ -3,7 +3,6 @@ package plaid
 import arrow.core.Either
 import arrow.core.right
 import command.Bank
-import kotlinx.datetime.Clock
 import kotlin.random.Random
 
 /**
