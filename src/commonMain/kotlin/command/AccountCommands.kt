@@ -14,15 +14,16 @@ object AccountCommand : CliktCommand(
     override fun run() = Unit
 }
 
-class AccountAddCommand(private val addCommand: suspend (Bank) -> Unit) : CliktCommand(
+class AccountAddCommand(private val addCommand: suspend (Bank, String) -> Unit) : CliktCommand(
     name = "add",
     help = "Add a new financial account",
 ) {
     val bank by option().enum<Bank>().required().help("Bank name")
+    val username by option().required().help("Username for the account")
 
     override fun run() =
         runBlocking {
-            addCommand(bank)
+            addCommand(bank, username)
         }
 }
 
