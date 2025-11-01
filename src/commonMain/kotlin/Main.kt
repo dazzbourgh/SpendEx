@@ -1,8 +1,8 @@
-import command.RootCommand
 import com.github.ajalt.clikt.core.subcommands
 import command.AccountAddCommand
 import command.AccountCommand
 import command.AccountListCommand
+import command.RootCommand
 import interpreter.Interpreter
 import interpreter.InterpreterFactory
 

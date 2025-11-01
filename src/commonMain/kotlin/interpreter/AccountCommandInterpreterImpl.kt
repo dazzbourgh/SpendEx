@@ -8,7 +8,10 @@ class AccountCommandInterpreterImpl : AccountCommandInterpreter {
     // Mock storage for added accounts with timestamps
     private val accounts = mutableSetOf<BankDetails>()
 
-    override suspend fun addAccount(bank: Bank, username: String) {
+    override suspend fun addAccount(
+        bank: Bank,
+        username: String,
+    ) {
         val bankDetails =
             BankDetails(
                 name = bank.name,

@@ -7,8 +7,8 @@ import com.github.ajalt.clikt.core.CliktCommand
  * Delegates execution to the provided CommandExecutor.
  */
 object RootCommand : CliktCommand(
-    name = "financial-advisor",
-    help = "CLI tool for managing financial accounts and transactions",
+    name = "spndx",
+    help = "Spendex - CLI tool for managing financial accounts and transactions",
 ) {
     override fun run() = Unit
 }
