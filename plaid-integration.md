@@ -11,6 +11,8 @@ Do not implement list transactions operation, it will be a future enhancement. F
 ## Work instructions
 Split work into multiple commits, each should provide a meaningful change and produce a working build. Intermediate changes do not have to be fully working, parts of functionality can be mocked. Perform all work in a git branch.
 
+Run gradle build to verify there is no compilation errors, but do not run the built CLI for E2E testing.
+
 ## Permissions
 You are authorized to use:
 - gradle for builds
