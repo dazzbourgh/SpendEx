@@ -1,5 +1,9 @@
 package cli
 
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+
 /**
  * Parser for CLI arguments following the format: "program feature command --flag1 value1 --flag2 value2"
  * Returns parsed data structures without executing any business logic.
@@ -9,15 +13,15 @@ object CliParser {
     /**
      * Parses command line arguments and returns a ParsedCommand data structure.
      * @param args Array of command line arguments
-     * @return Result containing either a ParsedCommand or an error message
+     * @return Either with Left containing error message or Right containing ParsedCommand
      */
-    fun parse(args: Array<String>): Result<ParsedCommand> {
+    fun parse(args: Array<String>): Either<String, ParsedCommand> {
         if (args.isEmpty()) {
-            return Result.Failure("Usage: financial-advisor <feature> <command> [flags]\nAvailable features: account")
+            return "Usage: financial-advisor <feature> <command> [flags]\nAvailable features: account".left()
         }
 
         if (args.size < 2) {
-            return Result.Failure("Usage: financial-advisor <feature> <command> [flags]")
+            return "Usage: financial-advisor <feature> <command> [flags]".left()
         }
 
         val featureName = args[0]
@@ -26,24 +30,22 @@ object CliParser {
 
         return when (featureName.lowercase()) {
             "account" -> parseAccountFeature(commandName, flags)
-            else -> Result.Failure("Unknown feature: $featureName. Available features: account")
+            else -> "Unknown feature: $featureName. Available features: account".left()
         }
     }
 
-    private fun parseAccountFeature(commandName: String, flags: Map<String, String>): Result<ParsedCommand> {
+    private fun parseAccountFeature(commandName: String, flags: Map<String, String>): Either<String, ParsedCommand> {
         return when (commandName.lowercase()) {
             "add" -> {
                 val bank = flags["bank"]
-                    ?: return Result.Failure("Missing required flag: --bank")
+                    ?: return "Missing required flag: --bank".left()
 
-                Result.Success(
-                    ParsedCommand(
-                        feature = Feature.Account(AccountCommand.Add(bank)),
-                        flags = flags
-                    )
-                )
+                ParsedCommand(
+                    feature = Feature.Account(AccountCommand.Add(bank)),
+                    flags = flags
+                ).right()
             }
-            else -> Result.Failure("Unknown command: $commandName. Available commands: add")
+            else -> "Unknown command: $commandName. Available commands: add".left()
         }
     }
 

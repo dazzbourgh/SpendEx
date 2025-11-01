@@ -1,6 +1,6 @@
 import account.AccountCommandExecutor
+import arrow.core.Either
 import cli.CliParser
-import cli.Result
 import kotlinx.coroutines.runBlocking
 import kotlin.system.exitProcess
 
@@ -11,18 +11,18 @@ fun main(args: Array<String>) {
 
     runBlocking {
         when (parseResult) {
-            is Result.Success -> {
+            is Either.Right -> {
                 val parsedCommand = parseResult.value
                 when (val execResult = executor.execute(parsedCommand)) {
-                    is Result.Success -> println(execResult.value)
-                    is Result.Failure -> {
-                        printError("Error: ${execResult.message}")
+                    is Either.Right -> println(execResult.value)
+                    is Either.Left -> {
+                        printError("Error: ${execResult.value}")
                         exitProcess(1)
                     }
                 }
             }
-            is Result.Failure -> {
-                printError("Error: ${parseResult.message}")
+            is Either.Left -> {
+                printError("Error: ${parseResult.value}")
                 exitProcess(1)
             }
         }

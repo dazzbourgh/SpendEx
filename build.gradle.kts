@@ -22,6 +22,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+                implementation("io.arrow-kt:arrow-core:1.2.4")
             }
         }
         val macosArm64Main by getting
