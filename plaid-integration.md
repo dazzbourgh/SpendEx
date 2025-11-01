@@ -19,3 +19,5 @@ You are authorized to use:
 You are authorized to make changes to any project files.
 
 You are not authorized to make changes to any files outside of the project folder, except `~/.spndx`.
+
+You are authorized to add commits, but not amend commits. If you want to make a change to prior change - add a new commit.
