@@ -25,6 +25,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
                 implementation("io.arrow-kt:arrow-core:1.2.4")
                 implementation("com.github.ajalt.clikt:clikt:4.2.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
             }
         }
         val macosArm64Main by getting
@@ -44,4 +45,8 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
 // Auto-format on build
 tasks.named("check") {
     dependsOn("ktlintFormat")
+}
+
+tasks.named("build") {
+    dependsOn("check")
 }

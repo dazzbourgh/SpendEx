@@ -1,7 +1,8 @@
-import command.AccountAddCommand
-import command.AccountCommand
 import cli.FinancialAdvisor
 import com.github.ajalt.clikt.core.subcommands
+import command.AccountAddCommand
+import command.AccountCommand
+import command.AccountListCommand
 import interpreter.Interpreter
 import interpreter.InterpreterFactory
 
@@ -12,7 +13,10 @@ fun main(args: Array<String>) {
             AccountCommand
                 .subcommands(
                     AccountAddCommand(
-                        interpreter.accountCommandInterpreter::addAccount
+                        interpreter.accountCommandInterpreter::addAccount,
+                    ),
+                    AccountListCommand(
+                        interpreter.accountCommandInterpreter::listAccounts,
                     ),
                 ),
         )

@@ -25,3 +25,13 @@ class AccountAddCommand(private val addCommand: suspend (Bank) -> Unit) : CliktC
             addCommand(bank)
         }
 }
+
+class AccountListCommand(private val listCommand: suspend () -> Unit) : CliktCommand(
+    name = "list",
+    help = "List all added accounts",
+) {
+    override fun run() =
+        runBlocking {
+            listCommand()
+        }
+}
