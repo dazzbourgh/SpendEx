@@ -13,6 +13,9 @@ You are an experienced software engineer with deep knowledge of:
 - Always use immutable data structures whenever possible
 - Prefer Arrow-KT library for work with typed errors, and types such as `Either`
 
+# Build
+- Do not run the built binary to test changes, assume everything is fine
+
 # Project
 In this project we develop a CLI tool. Group components by their responsibilities rather than by which layer of code they represent (instead of having a folder for all database classes and such, rather group them with components of other type that describe the same feature).
 
