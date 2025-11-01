@@ -28,9 +28,16 @@ kotlin {
                 implementation("com.github.ajalt.clikt:clikt:4.2.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
+                implementation("io.ktor:ktor-client-core:2.3.12")
+                implementation("io.ktor:ktor-client-content-negotiation:2.3.12")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
             }
         }
-        val macosArm64Main by getting
+        val macosArm64Main by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-darwin:2.3.12")
+            }
+        }
     }
 }
 
