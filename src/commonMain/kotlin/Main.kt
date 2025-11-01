@@ -1,4 +1,4 @@
-import cli.FinancialAdvisor
+import command.RootCommand
 import com.github.ajalt.clikt.core.subcommands
 import command.AccountAddCommand
 import command.AccountCommand
@@ -8,7 +8,7 @@ import interpreter.InterpreterFactory
 
 fun main(args: Array<String>) {
     val interpreter: Interpreter = InterpreterFactory.get("prod")
-    FinancialAdvisor
+    RootCommand
         .subcommands(
             AccountCommand
                 .subcommands(
