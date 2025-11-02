@@ -1,5 +1,8 @@
 package dao
 
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
 import command.BankDetails
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.addressOf
@@ -31,22 +34,24 @@ actual class JsonAccountDaoImpl : AccountDao {
         mkdir(dataDir, 0x1C0u) // 0700 permissions - owner read/write/execute only
     }
 
-    actual override suspend fun save(bankDetails: BankDetails) {
-        val currentAccounts = list().toMutableList()
-        currentAccounts.add(bankDetails)
-        val jsonContent = json.encodeToString(currentAccounts)
-        writeFile(jsonContent)
-    }
-
-    actual override suspend fun list(): Iterable<BankDetails> {
-        val content = readFile() ?: return emptyList()
-        if (content.isBlank()) return emptyList()
-        return try {
-            json.decodeFromString<List<BankDetails>>(content)
-        } catch (e: Exception) {
-            emptyList()
+    actual override suspend fun save(bankDetails: BankDetails): Either<String, Unit> =
+        try {
+            list().map { currentAccounts ->
+                val jsonContent = json.encodeToString(currentAccounts + bankDetails)
+                writeFile(jsonContent)
+            }
+        } catch (exception: Exception) {
+            exception.stackTraceToString().left()
         }
-    }
+
+    actual override suspend fun list(): Either<String, Iterable<BankDetails>> =
+        try {
+            readFile()
+                ?.takeIf { it.isNotBlank() }
+                ?.let { json.decodeFromString<List<BankDetails>>(it).right() } ?: emptyList<BankDetails>().right()
+        } catch (e: Exception) {
+            e.stackTraceToString().left()
+        }
 
     private fun readFile(): String? {
         val file = fopen(dataFile, "r") ?: return null
