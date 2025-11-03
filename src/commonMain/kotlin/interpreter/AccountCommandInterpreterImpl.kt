@@ -4,6 +4,7 @@ import arrow.core.raise.either
 import browser.BrowserLauncher
 import command.BankDetails
 import config.ConfigDao
+import config.Constants
 import dao.AccountDao
 import dao.TokenDao
 import kotlinx.coroutines.async
@@ -27,7 +28,7 @@ class AccountCommandInterpreterImpl(
         either {
             val config = configDao.loadPlaidConfig().bind()
             val linkToken = plaidService.createLinkToken(username).bind()
-            val linkUrl = "https://cdn.plaid.com/link/v2/stable/link.html?token=$linkToken"
+            val linkUrl = "${Constants.Plaid.LINK_URL}?token=$linkToken"
             val port = extractPortFromUrl(config.redirect_url)
 
             val publicToken =
@@ -35,7 +36,7 @@ class AccountCommandInterpreterImpl(
                     oauthRedirectServerFactory().use { server ->
                         val serverDeferred = async { server.startAndWaitForCallback(port) }
                         browserLauncher.openUrl(linkUrl).bind()
-                        println("Waiting for authorization...")
+                        println(Constants.OAuth.Messages.WAITING_FOR_AUTH)
                         serverDeferred.await().bind()
                     }
                 }
@@ -43,7 +44,7 @@ class AccountCommandInterpreterImpl(
             val tokenResponse = plaidService.exchangePublicToken(publicToken).bind()
             val accountsResponse = plaidService.getAccounts(tokenResponse.accessToken).bind()
 
-            val institutionName = accountsResponse.accounts.firstOrNull()?.name ?: "Unknown Bank"
+            val institutionName = accountsResponse.accounts.firstOrNull()?.name ?: Constants.Plaid.UNKNOWN_BANK
 
             val bankDetails =
                 BankDetails(
@@ -63,17 +64,17 @@ class AccountCommandInterpreterImpl(
                 )
             tokenDao.save(plaidToken)
         }.fold(
-            { error -> println("Error adding account: $error") },
-            { println("Account added successfully!") },
+            { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_ADD_FAILED}: $error") },
+            { println(Constants.Commands.ErrorMessages.ACCOUNT_ADD_SUCCESS) },
         )
 
     private fun extractPortFromUrl(url: String): Int =
-        url.substringAfterLast(":")
-            .toIntOrNull() ?: 34432
+        url.substringAfterLast(Constants.OAuth.PORT_DELIMITER)
+            .toIntOrNull() ?: Constants.OAuth.DEFAULT_PORT
 
     override suspend fun listAccounts(): Iterable<BankDetails> =
         accountDao.list().fold({ error ->
-            println("Error listing accounts: $error")
+            println("${Constants.Commands.ErrorMessages.ACCOUNT_LIST_FAILED}: $error")
             emptyList()
         }, { it })
 }

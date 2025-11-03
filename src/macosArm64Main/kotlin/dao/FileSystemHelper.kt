@@ -1,5 +1,6 @@
 package dao
 
+import config.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.addressOf
 import kotlinx.cinterop.usePinned
@@ -13,19 +14,19 @@ import platform.posix.mkdir
 @OptIn(ExperimentalForeignApi::class)
 actual object FileSystemHelper {
     actual fun ensureDirectoryExists(path: String) {
-        mkdir(path, 0x1C0u) // 0700 permissions - owner read/write/execute only
+        mkdir(path, Constants.FileSystem.DIR_PERMISSIONS.toUShort())
     }
 
     actual fun readFile(path: String): String? {
-        val file = fopen(path, "r") ?: return null
+        val file = fopen(path, Constants.FileSystem.FILE_MODE_READ) ?: return null
         try {
-            val buffer = ByteArray(65536)
+            val buffer = ByteArray(Constants.FileSystem.BUFFER_SIZE)
             val result = StringBuilder()
             var bytesRead: ULong
             while (true) {
                 bytesRead =
                     buffer.usePinned { pinned ->
-                        fread(pinned.addressOf(0), 1u, buffer.size.toULong(), file)
+                        fread(pinned.addressOf(0), Constants.FileSystem.ELEMENT_SIZE, buffer.size.toULong(), file)
                     }
                 if (bytesRead == 0uL) break
                 result.append(buffer.decodeToString(0, bytesRead.toInt()))
@@ -40,16 +41,17 @@ actual object FileSystemHelper {
         path: String,
         content: String,
     ) {
-        val file = fopen(path, "w") ?: throw IllegalStateException("Cannot open file for writing: $path")
+        val file =
+            fopen(path, Constants.FileSystem.FILE_MODE_WRITE)
+                ?: throw IllegalStateException("${Constants.FileSystem.ErrorMessages.CANNOT_OPEN_FILE}: $path")
         try {
             val bytes = content.encodeToByteArray()
             bytes.usePinned { pinned ->
-                fwrite(pinned.addressOf(0), 1u, bytes.size.toULong(), file)
+                fwrite(pinned.addressOf(0), Constants.FileSystem.ELEMENT_SIZE, bytes.size.toULong(), file)
             }
         } finally {
             fclose(file)
         }
-        // Set file permissions to 0600 (owner read/write only)
-        chmod(path, 0x180u)
+        chmod(path, Constants.FileSystem.FILE_PERMISSIONS.toUShort())
     }
 }

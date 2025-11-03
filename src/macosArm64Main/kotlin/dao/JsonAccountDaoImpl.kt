@@ -4,6 +4,7 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import command.BankDetails
+import config.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import kotlinx.serialization.encodeToString
@@ -16,9 +17,11 @@ actual class JsonAccountDaoImpl : AccountDao {
     private val json = JsonConfig.json
 
     init {
-        val home = getenv("HOME")?.toKString() ?: throw IllegalStateException("HOME environment variable not set")
-        dataDir = "$home/.spndx"
-        dataFile = "$dataDir/banks.json"
+        val home =
+            getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()
+                ?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)
+        dataDir = "$home/${Constants.FileSystem.APP_DIR_NAME}"
+        dataFile = "$dataDir/${Constants.FileSystem.BANKS_FILE_NAME}"
         FileSystemHelper.ensureDirectoryExists(dataDir)
     }
 

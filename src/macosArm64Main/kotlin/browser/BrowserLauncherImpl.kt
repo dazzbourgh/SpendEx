@@ -3,6 +3,7 @@ package browser
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
+import config.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.posix.pclose
 import platform.posix.popen
@@ -11,17 +12,19 @@ import platform.posix.popen
 class BrowserLauncherImpl : BrowserLauncher {
     override suspend fun openUrl(url: String): Either<String, Unit> =
         try {
-            val command = "open \"$url\""
-            val process = popen(command, "r") ?: return "Failed to execute open command".left()
+            val command = "${Constants.Browser.MACOS_OPEN_COMMAND} \"$url\""
+            val process =
+                popen(command, Constants.FileSystem.FILE_MODE_READ)
+                    ?: return Constants.Browser.ErrorMessages.COMMAND_FAILED.left()
 
             val exitCode = pclose(process)
 
-            if (exitCode == 0) {
+            if (exitCode == Constants.Browser.SUCCESS_EXIT_CODE) {
                 Unit.right()
             } else {
-                "Browser launch failed with exit code $exitCode".left()
+                "${Constants.Browser.ErrorMessages.LAUNCH_FAILED} $exitCode".left()
             }
         } catch (e: Exception) {
-            "Failed to open browser: ${e.message}".left()
+            "${Constants.Browser.ErrorMessages.OPEN_FAILED}: ${e.message}".left()
         }
 }

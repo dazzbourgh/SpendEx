@@ -4,11 +4,12 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
+import config.Constants
 import kotlinx.coroutines.runBlocking
 
 object AccountCommand : CliktCommand(
-    name = "account",
-    help = "Manage financial accounts",
+    name = Constants.Commands.Account.NAME,
+    help = Constants.Commands.Account.HELP,
 ) {
     override fun run() = Unit
 }
@@ -16,10 +17,10 @@ object AccountCommand : CliktCommand(
 class AccountAddCommand(
     private val addCommand: suspend (String) -> Unit,
 ) : CliktCommand(
-        name = "add",
-        help = "Add a new financial account. You will select the bank and login in your browser.",
+        name = Constants.Commands.Account.Add.NAME,
+        help = Constants.Commands.Account.Add.HELP,
     ) {
-    val username by option().required().help("Your app user identifier (not your bank login)")
+    val username by option().required().help(Constants.Commands.Account.Add.USERNAME_HELP)
 
     override fun run() =
         runBlocking {
@@ -30,8 +31,8 @@ class AccountAddCommand(
 class AccountListCommand(
     private val listCommand: suspend () -> Unit,
 ) : CliktCommand(
-        name = "list",
-        help = "List all added accounts",
+        name = Constants.Commands.Account.List.NAME,
+        help = Constants.Commands.Account.List.HELP,
     ) {
     override fun run() =
         runBlocking {

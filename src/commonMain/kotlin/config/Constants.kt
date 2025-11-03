@@ -1,0 +1,133 @@
+package config
+
+/**
+ * Application-wide constants extracted from hardcoded values.
+ * Organized by category for easy maintenance and configuration.
+ */
+object Constants {
+    object App {
+        const val NAME = "spndx"
+        const val DISPLAY_NAME = "Spendex"
+        const val DESCRIPTION = "Spendex - CLI tool for managing financial accounts and transactions"
+        const val ENVIRONMENT_PROD = "prod"
+    }
+
+    object FileSystem {
+        const val HOME_ENV_VAR = "HOME"
+        const val APP_DIR_NAME = ".spndx"
+        const val BANKS_FILE_NAME = "banks.json"
+        const val TOKENS_FILE_NAME = "tokens.json"
+        const val CONFIG_FILE_NAME = "app-data-sandbox.json"
+
+        const val DIR_PERMISSIONS = 0x1C0u // 0700 octal (UShort for mkdir)
+        const val FILE_PERMISSIONS = 0x180u // 0600 octal (UShort for chmod)
+        const val BUFFER_SIZE = 65536 // 64KB
+        const val ELEMENT_SIZE = 1uL // ULong for fread/fwrite
+
+        const val FILE_MODE_READ = "r"
+        const val FILE_MODE_WRITE = "w"
+
+        object ErrorMessages {
+            const val HOME_NOT_SET = "HOME environment variable not set"
+            const val CANNOT_OPEN_FILE = "Cannot open file for writing"
+            const val CONFIG_NOT_FOUND = "Plaid configuration file not found at"
+            const val CONFIG_LOAD_FAILED = "Failed to load Plaid configuration"
+        }
+    }
+
+    object Plaid {
+        const val BASE_URL = "https://sandbox.plaid.com"
+        const val LINK_URL = "https://cdn.plaid.com/link/v2/stable/link.html"
+        const val CLIENT_NAME = "Spendex"
+        const val LANGUAGE = "en"
+        const val UNKNOWN_BANK = "Unknown Bank"
+
+        object Endpoints {
+            const val LINK_TOKEN_CREATE = "/link/token/create"
+            const val PUBLIC_TOKEN_EXCHANGE = "/item/public_token/exchange"
+            const val ACCOUNTS_GET = "/accounts/get"
+        }
+
+        object ErrorMessages {
+            const val LINK_TOKEN_FAILED = "Failed to create link token"
+            const val TOKEN_EXCHANGE_FAILED = "Failed to exchange public token"
+            const val ACCOUNTS_GET_FAILED = "Failed to get accounts"
+        }
+    }
+
+    object OAuth {
+        const val SERVER_HOST = "127.0.0.1"
+        const val DEFAULT_PORT = 34432
+        const val ROOT_PATH = "/"
+        const val PUBLIC_TOKEN_PARAM = "public_token"
+        const val PORT_DELIMITER = ":"
+
+        const val TIMEOUT_MILLIS = 300_000L // 5 minutes
+        const val SHUTDOWN_GRACE_MILLIS = 1000L
+        const val SHUTDOWN_TIMEOUT_MILLIS = 2000L
+
+        object Html {
+            const val SUCCESS_PAGE = """<!DOCTYPE html>
+<html>
+<head><title>Authorization Successful</title></head>
+<body>
+    <h1>Authorization Successful!</h1>
+    <p>You can close this window and return to the terminal.</p>
+</body>
+</html>"""
+
+            const val FAILURE_PAGE = """<!DOCTYPE html>
+<html>
+<head><title>Authorization Failed</title></head>
+<body>
+    <h1>Authorization Failed</h1>
+    <p>No public token received. Please try again.</p>
+</body>
+</html>"""
+        }
+
+        object Messages {
+            const val WAITING_FOR_AUTH = "Waiting for authorization..."
+            const val NO_TOKEN_RECEIVED = "No public token received in callback"
+            const val TIMEOUT = "Authorization timed out after 5 minutes"
+            const val SERVER_START_FAILED = "Failed to start OAuth redirect server"
+            const val SERVER_CLOSED_EARLY = "Server closed before receiving callback"
+        }
+    }
+
+    object Commands {
+        object Account {
+            const val NAME = "account"
+            const val HELP = "Manage financial accounts"
+
+            object Add {
+                const val NAME = "add"
+                const val HELP = "Add a new financial account. You will select the bank and login in your browser."
+                const val USERNAME_HELP = "Your app user identifier (not your bank login)"
+            }
+
+            object List {
+                const val NAME = "list"
+                const val HELP = "List all added accounts"
+            }
+        }
+
+        object ErrorMessages {
+            const val UNKNOWN_ENVIRONMENT = "Unknown environment"
+            const val ACCOUNT_ADD_FAILED = "Error adding account"
+            const val ACCOUNT_ADD_SUCCESS = "Account added successfully!"
+            const val ACCOUNT_LIST_FAILED = "Error listing accounts"
+        }
+    }
+
+    object Browser {
+        const val MACOS_OPEN_COMMAND = "open"
+        const val SUCCESS_EXIT_CODE = 0
+
+        object ErrorMessages {
+            const val COMMAND_FAILED = "Failed to execute open command"
+            const val LAUNCH_FAILED = "Browser launch failed with exit code"
+            const val OPEN_FAILED = "Failed to open browser"
+        }
+    }
+}

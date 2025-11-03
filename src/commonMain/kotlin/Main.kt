@@ -3,11 +3,12 @@ import command.AccountAddCommand
 import command.AccountCommand
 import command.AccountListCommand
 import command.RootCommand
+import config.Constants
 import interpreter.Interpreter
 import interpreter.InterpreterFactory
 
 fun main(args: Array<String>) {
-    val interpreter: Interpreter = InterpreterFactory.get("prod")
+    val interpreter: Interpreter = InterpreterFactory.get(Constants.App.ENVIRONMENT_PROD)
     RootCommand
         .subcommands(
             AccountCommand

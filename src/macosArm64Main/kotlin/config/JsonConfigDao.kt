@@ -15,8 +15,10 @@ actual class JsonConfigDao : ConfigDao {
     private val json = Json { ignoreUnknownKeys = true }
 
     init {
-        val home = getenv("HOME")?.toKString() ?: throw IllegalStateException("HOME environment variable not set")
-        configFile = "$home/.spndx/app-data-sandbox.json"
+        val home =
+            getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()
+                ?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)
+        configFile = "$home/${Constants.FileSystem.APP_DIR_NAME}/${Constants.FileSystem.CONFIG_FILE_NAME}"
     }
 
     actual override suspend fun loadPlaidConfig(): Either<String, PlaidConfig> =
@@ -24,8 +26,8 @@ actual class JsonConfigDao : ConfigDao {
             FileSystemHelper.readFile(configFile)
                 ?.takeIf { it.isNotBlank() }
                 ?.let { json.decodeFromString<PlaidConfig>(it).right() }
-                ?: "Plaid configuration file not found at $configFile".left()
+                ?: "${Constants.FileSystem.ErrorMessages.CONFIG_NOT_FOUND} $configFile".left()
         } catch (e: Exception) {
-            "Failed to load Plaid configuration: ${e.message}".left()
+            "${Constants.FileSystem.ErrorMessages.CONFIG_LOAD_FAILED}: ${e.message}".left()
         }
 }

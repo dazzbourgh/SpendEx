@@ -1,6 +1,7 @@
 package interpreter
 
 import browser.BrowserLauncher
+import config.Constants
 import config.JsonConfigDao
 import dao.JsonAccountDaoImpl
 import dao.JsonTokenDaoImpl
@@ -15,7 +16,7 @@ expect fun createOAuthRedirectServer(): OAuthRedirectServer
 object InterpreterFactory {
     fun get(env: String): Interpreter =
         when (env) {
-            "prod" -> {
+            Constants.App.ENVIRONMENT_PROD -> {
                 val accountDao = JsonAccountDaoImpl()
                 val tokenDao = JsonTokenDaoImpl()
                 val configDao = JsonConfigDao()
@@ -33,6 +34,6 @@ object InterpreterFactory {
                     ),
                 )
             }
-            else -> throw IllegalArgumentException("Unknown environment: $env")
+            else -> throw IllegalArgumentException("${Constants.Commands.ErrorMessages.UNKNOWN_ENVIRONMENT}: $env")
         }
 }
