@@ -1,8 +1,16 @@
 package interpreter
 
+import browser.BrowserLauncher
+import config.JsonConfigDao
 import dao.JsonAccountDaoImpl
 import dao.JsonTokenDaoImpl
-import plaid.MockPlaidServiceImpl
+import plaid.HttpClientFactory
+import plaid.OAuthRedirectServer
+import plaid.PlaidServiceImpl
+
+expect fun createBrowserLauncher(): BrowserLauncher
+
+expect fun createOAuthRedirectServer(): OAuthRedirectServer
 
 object InterpreterFactory {
     fun get(env: String): Interpreter =
@@ -10,9 +18,19 @@ object InterpreterFactory {
             "prod" -> {
                 val accountDao = JsonAccountDaoImpl()
                 val tokenDao = JsonTokenDaoImpl()
-                val plaidService = MockPlaidServiceImpl()
+                val configDao = JsonConfigDao()
+                val httpClient = HttpClientFactory.create()
+                val plaidService = PlaidServiceImpl(httpClient, configDao)
+                val browserLauncher = createBrowserLauncher()
                 InterpreterImpl(
-                    AccountCommandInterpreterImpl(accountDao, tokenDao, plaidService),
+                    AccountCommandInterpreterImpl(
+                        accountDao,
+                        tokenDao,
+                        plaidService,
+                        configDao,
+                        browserLauncher,
+                        ::createOAuthRedirectServer,
+                    ),
                 )
             }
             else -> throw IllegalArgumentException("Unknown environment: $env")

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  * Details about a bank account.
  *
  * @property name The name of the bank
- * @property username The username for the account
+ * @property username The app user identifier (not the bank login username)
  * @property dateAdded The timestamp when the account was added
  */
 @Serializable

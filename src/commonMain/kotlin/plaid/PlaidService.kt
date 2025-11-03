@@ -1,7 +1,6 @@
 package plaid
 
 import arrow.core.Either
-import command.Bank
 
 /**
  * Service for interacting with Plaid API.
@@ -9,15 +8,12 @@ import command.Bank
 interface PlaidService {
     /**
      * Creates a link token for initiating Plaid Link flow.
+     * User will select the institution in the Plaid Link UI.
      *
-     * @param bank The bank to link
      * @param username The username for the account
      * @return Either an error message or the link token
      */
-    suspend fun createLinkToken(
-        bank: Bank,
-        username: String,
-    ): Either<String, String>
+    suspend fun createLinkToken(username: String): Either<String, String>
 
     /**
      * Exchanges a public token for an access token.
