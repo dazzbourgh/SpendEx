@@ -7,13 +7,6 @@ SpendEx is a CLI tool for managing financial accounts and transactions.
 - Add and manage financial accounts from multiple banks
 - List all registered accounts with details
 
-## Supported Banks
-
-- American Express (Amex)
-- Bank of America (Bofa)
-- Chase
-- Goldman Sachs (GoldmanSachs)
-
 ## Building
 
 This project uses Gradle with the Kotlin Multiplatform plugin. To build the project:
