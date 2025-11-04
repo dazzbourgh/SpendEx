@@ -7,8 +7,8 @@ package config
 object Constants {
     object App {
         const val NAME = "spndx"
-        const val DISPLAY_NAME = "Spendex"
-        const val DESCRIPTION = "Spendex - CLI tool for managing financial accounts and transactions"
+        const val DISPLAY_NAME = "SpendEx"
+        const val DESCRIPTION = "SpendEx - CLI tool for managing financial accounts and transactions"
         const val ENVIRONMENT_PROD = "prod"
     }
 
@@ -38,7 +38,7 @@ object Constants {
     object Plaid {
         const val BASE_URL = "https://sandbox.plaid.com"
         const val LINK_URL = "https://cdn.plaid.com/link/v2/stable/link.html"
-        const val CLIENT_NAME = "Spendex"
+        const val CLIENT_NAME = "SpendEx"
         const val LANGUAGE = "en"
         const val UNKNOWN_BANK = "Unknown Bank"
 

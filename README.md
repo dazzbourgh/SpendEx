@@ -1,6 +1,6 @@
-# Spendex
+# SpendEx
 
-Spendex is a CLI tool for managing financial accounts and transactions.
+SpendEx is a CLI tool for managing financial accounts and transactions.
 
 ## Features
 
