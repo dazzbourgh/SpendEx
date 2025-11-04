@@ -6,6 +6,7 @@ import arrow.core.right
 import config.Constants
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.URLBuilder
 import io.ktor.server.application.call
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.ApplicationEngine
@@ -46,11 +47,18 @@ class OAuthRedirectServerImpl : OAuthRedirectServer {
 
                                 oauthStateId != null -> {
                                     // OAuth institution - redirect back to Plaid Link to continue
+                                    // Get the full URL that was received (protocol + host + port + path + query)
                                     val receivedRedirectUri =
                                         "http://${Constants.OAuth.SERVER_HOST}${Constants.OAuth.PORT_DELIMITER}$port" +
-                                            "${Constants.OAuth.ROOT_PATH}?${Constants.OAuth.OAUTH_STATE_ID_PARAM}=$oauthStateId"
+                                            call.request.local.uri
+
+                                    // Build the Plaid Link continuation URL with URL-encoded parameters
                                     val continuationUrl =
-                                        "${Constants.Plaid.LINK_URL}?token=$linkToken&receivedRedirectUri=$receivedRedirectUri"
+                                        URLBuilder(Constants.Plaid.LINK_URL).apply {
+                                            parameters.append("token", linkToken)
+                                            parameters.append("receivedRedirectUri", receivedRedirectUri)
+                                        }.buildString()
+
                                     val html =
                                         Constants.OAuth.Html.OAUTH_CONTINUATION_PAGE
                                             .replace("%s", continuationUrl, ignoreCase = false)
@@ -82,7 +90,7 @@ class OAuthRedirectServerImpl : OAuthRedirectServer {
             withTimeout(Constants.OAuth.TIMEOUT_MILLIS) {
                 resultDeferred.await()
             }
-        } catch (e: TimeoutCancellationException) {
+        } catch (_: TimeoutCancellationException) {
             Constants.OAuth.Messages.TIMEOUT.left()
         } catch (e: Exception) {
             "${Constants.OAuth.Messages.SERVER_START_FAILED}: ${e.message}".left()
