@@ -21,28 +21,57 @@ class OAuthRedirectServerImpl : OAuthRedirectServer {
     private var server: ApplicationEngine? = null
     private val resultDeferred = CompletableDeferred<Either<String, String>>()
 
-    override suspend fun startAndWaitForCallback(port: Int): Either<String, String> =
+    override suspend fun startAndWaitForCallback(
+        port: Int,
+        linkToken: String,
+    ): Either<String, String> =
         try {
             server =
                 embeddedServer(CIO, port = port, host = Constants.OAuth.SERVER_HOST) {
                     routing {
                         get(Constants.OAuth.ROOT_PATH) {
                             val publicToken = call.request.queryParameters[Constants.OAuth.PUBLIC_TOKEN_PARAM]
+                            val oauthStateId = call.request.queryParameters[Constants.OAuth.OAUTH_STATE_ID_PARAM]
 
-                            if (publicToken != null) {
-                                call.respondText(
-                                    Constants.OAuth.Html.SUCCESS_PAGE,
-                                    contentType = ContentType.Text.Html,
-                                    status = HttpStatusCode.OK,
-                                )
-                                resultDeferred.complete(publicToken.right())
-                            } else {
-                                call.respondText(
-                                    Constants.OAuth.Html.FAILURE_PAGE,
-                                    contentType = ContentType.Text.Html,
-                                    status = HttpStatusCode.BadRequest,
-                                )
-                                resultDeferred.complete(Constants.OAuth.Messages.NO_TOKEN_RECEIVED.left())
+                            when {
+                                publicToken != null -> {
+                                    // Final callback with public_token - complete successfully
+                                    call.respondText(
+                                        Constants.OAuth.Html.SUCCESS_PAGE,
+                                        contentType = ContentType.Text.Html,
+                                        status = HttpStatusCode.OK,
+                                    )
+                                    resultDeferred.complete(publicToken.right())
+                                }
+
+                                oauthStateId != null -> {
+                                    // OAuth institution - redirect back to Plaid Link to continue
+                                    val receivedRedirectUri =
+                                        "http://${Constants.OAuth.SERVER_HOST}${Constants.OAuth.PORT_DELIMITER}$port" +
+                                            "${Constants.OAuth.ROOT_PATH}?${Constants.OAuth.OAUTH_STATE_ID_PARAM}=$oauthStateId"
+                                    val continuationUrl =
+                                        "${Constants.Plaid.LINK_URL}?token=$linkToken&receivedRedirectUri=$receivedRedirectUri"
+                                    val html =
+                                        Constants.OAuth.Html.OAUTH_CONTINUATION_PAGE
+                                            .replace("%s", continuationUrl, ignoreCase = false)
+
+                                    call.respondText(
+                                        html,
+                                        contentType = ContentType.Text.Html,
+                                        status = HttpStatusCode.OK,
+                                    )
+                                    // Don't complete - wait for the second callback with public_token
+                                }
+
+                                else -> {
+                                    // No token or state ID received - error
+                                    call.respondText(
+                                        Constants.OAuth.Html.FAILURE_PAGE,
+                                        contentType = ContentType.Text.Html,
+                                        status = HttpStatusCode.BadRequest,
+                                    )
+                                    resultDeferred.complete(Constants.OAuth.Messages.NO_TOKEN_RECEIVED.left())
+                                }
                             }
                         }
                     }

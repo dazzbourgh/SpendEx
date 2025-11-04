@@ -60,6 +60,7 @@ object Constants {
         const val DEFAULT_PORT = 34432
         const val ROOT_PATH = "/"
         const val PUBLIC_TOKEN_PARAM = "public_token"
+        const val OAUTH_STATE_ID_PARAM = "oauth_state_id"
         const val PORT_DELIMITER = ":"
 
         const val TIMEOUT_MILLIS = 300_000L // 5 minutes
@@ -82,6 +83,20 @@ object Constants {
 <body>
     <h1>Authorization Failed</h1>
     <p>No public token received. Please try again.</p>
+</body>
+</html>"""
+
+            const val OAUTH_CONTINUATION_PAGE = """<!DOCTYPE html>
+<html>
+<head>
+    <title>Continuing Authorization</title>
+    <script>
+        window.location.href = '%s';
+    </script>
+</head>
+<body>
+    <h1>Continuing OAuth Authorization...</h1>
+    <p>You will be redirected automatically. If not, <a href="%s">click here</a>.</p>
 </body>
 </html>"""
         }

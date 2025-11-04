@@ -34,7 +34,7 @@ class AccountCommandInterpreterImpl(
             val publicToken =
                 coroutineScope {
                     oauthRedirectServerFactory().use { server ->
-                        val serverDeferred = async { server.startAndWaitForCallback(port) }
+                        val serverDeferred = async { server.startAndWaitForCallback(port, linkToken) }
                         browserLauncher.openUrl(linkUrl).bind()
                         println(Constants.OAuth.Messages.WAITING_FOR_AUTH)
                         serverDeferred.await().bind()
