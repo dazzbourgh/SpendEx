@@ -30,4 +30,20 @@ interface PlaidService {
      * @return Either an error message or the accounts response
      */
     suspend fun getAccounts(accessToken: String): Either<String, PlaidAccountsResponse>
+
+    /**
+     * Performs the complete Plaid Link OAuth flow.
+     * Opens the browser with Plaid Link, starts a local server to receive the callback,
+     * and returns the public token when the user completes authentication.
+     *
+     * @param linkToken The link token for Plaid Link
+     * @param redirectUrl The redirect URL for OAuth callbacks
+     * @param port The port for the local OAuth redirect server
+     * @return Either an error message or the public token
+     */
+    suspend fun performLinkFlow(
+        linkToken: String,
+        redirectUrl: String,
+        port: Int,
+    ): Either<String, String>
 }

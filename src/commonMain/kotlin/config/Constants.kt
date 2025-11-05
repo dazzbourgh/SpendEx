@@ -145,4 +145,10 @@ object Constants {
             const val OPEN_FAILED = "Failed to open browser"
         }
     }
+
+    object Resources {
+        const val LINK_HTML_FILE = "link.html"
+        const val DEV_RESOURCES_PATH = "src/macosArm64Main/resources"
+        const val BUILD_RESOURCES_PATH = "build/processedResources/macosArm64/main"
+    }
 }

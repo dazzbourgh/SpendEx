@@ -21,16 +21,20 @@ object InterpreterFactory {
                 val tokenDao = JsonTokenDaoImpl()
                 val configDao = JsonConfigDao()
                 val httpClient = HttpClientFactory.create()
-                val plaidService = PlaidServiceImpl(httpClient, configDao)
                 val browserLauncher = createBrowserLauncher()
+                val plaidService =
+                    PlaidServiceImpl(
+                        httpClient,
+                        configDao,
+                        browserLauncher,
+                        ::createOAuthRedirectServer,
+                    )
                 InterpreterImpl(
                     AccountCommandInterpreterImpl(
                         accountDao,
                         tokenDao,
                         plaidService,
                         configDao,
-                        browserLauncher,
-                        ::createOAuthRedirectServer,
                     ),
                 )
             }

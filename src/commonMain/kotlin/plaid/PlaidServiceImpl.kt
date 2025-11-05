@@ -2,6 +2,7 @@ package plaid
 
 import arrow.core.Either
 import arrow.core.raise.either
+import browser.BrowserLauncher
 import config.ConfigDao
 import config.Constants
 import io.ktor.client.HttpClient
@@ -10,10 +11,14 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 
 class PlaidServiceImpl(
     private val httpClient: HttpClient,
     private val configDao: ConfigDao,
+    private val browserLauncher: BrowserLauncher,
+    private val oauthRedirectServerFactory: () -> OAuthRedirectServer,
 ) : PlaidService {
     override suspend fun createLinkToken(username: String): Either<String, String> =
         either {
@@ -77,6 +82,22 @@ class PlaidServiceImpl(
                 }.body<PlaidAccountsResponse>()
             } catch (exception: Exception) {
                 raise("${Constants.Plaid.ErrorMessages.ACCOUNTS_GET_FAILED}: ${exception.message}")
+            }
+        }
+
+    override suspend fun performLinkFlow(
+        linkToken: String,
+        redirectUrl: String,
+        port: Int,
+    ): Either<String, String> =
+        either {
+            coroutineScope {
+                oauthRedirectServerFactory().use { server ->
+                    val serverDeferred = async { server.startAndWaitForCallback(port, linkToken) }
+                    browserLauncher.openPlaidLink(linkToken, redirectUrl).bind()
+                    println(Constants.OAuth.Messages.WAITING_FOR_AUTH)
+                    serverDeferred.await().bind()
+                }
             }
         }
 }
