@@ -8,7 +8,7 @@ import interpreter.Interpreter
 import interpreter.InterpreterFactory
 
 fun main(args: Array<String>) {
-    val interpreter: Interpreter = InterpreterFactory.get(Constants.App.ENVIRONMENT_PROD)
+    val interpreter: Interpreter = InterpreterFactory.get(Constants.App.ENVIRONMENT_SANDBOX)
     RootCommand
         .subcommands(
             AccountCommand

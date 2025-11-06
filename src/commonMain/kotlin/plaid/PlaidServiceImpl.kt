@@ -19,6 +19,7 @@ class PlaidServiceImpl(
     private val configDao: ConfigDao,
     private val browserLauncher: BrowserLauncher,
     private val oauthRedirectServerFactory: () -> OAuthRedirectServer,
+    private val environmentConfig: config.EnvironmentConfig,
 ) : PlaidService {
     override suspend fun createLinkToken(username: String): Either<String, String> =
         either {
@@ -36,7 +37,7 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${Constants.Plaid.BASE_URL}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
+                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
                     contentType(ContentType.Application.Json)
                     setBody(request)
                 }.body<PlaidLinkTokenResponse>().linkToken
@@ -56,7 +57,7 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${Constants.Plaid.BASE_URL}${Constants.Plaid.Endpoints.PUBLIC_TOKEN_EXCHANGE}") {
+                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.PUBLIC_TOKEN_EXCHANGE}") {
                     contentType(ContentType.Application.Json)
                     setBody(request)
                 }.body<PlaidAccessTokenResponse>()
@@ -76,7 +77,7 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${Constants.Plaid.BASE_URL}${Constants.Plaid.Endpoints.ACCOUNTS_GET}") {
+                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.ACCOUNTS_GET}") {
                     contentType(ContentType.Application.Json)
                     setBody(request)
                 }.body<PlaidAccountsResponse>()

@@ -9,7 +9,7 @@ object Constants {
         const val NAME = "spndx"
         const val DISPLAY_NAME = "SpendEx"
         const val DESCRIPTION = "SpendEx - CLI tool for managing financial accounts and transactions"
-        const val ENVIRONMENT_PROD = "prod"
+        const val ENVIRONMENT_SANDBOX = "sandbox"
     }
 
     object FileSystem {
@@ -17,7 +17,6 @@ object Constants {
         const val APP_DIR_NAME = ".spndx"
         const val BANKS_FILE_NAME = "banks.json"
         const val TOKENS_FILE_NAME = "tokens.json"
-        const val CONFIG_FILE_NAME = "app-data-sandbox.json"
 
         const val DIR_PERMISSIONS = 0x1C0u // 0700 octal (UShort for mkdir)
         const val FILE_PERMISSIONS = 0x180u // 0600 octal (UShort for chmod)
@@ -36,7 +35,6 @@ object Constants {
     }
 
     object Plaid {
-        const val BASE_URL = "https://sandbox.plaid.com"
         const val LINK_URL = "https://cdn.plaid.com/link/v2/stable/link.html"
         const val CLIENT_NAME = "SpendEx"
         const val LANGUAGE = "en"

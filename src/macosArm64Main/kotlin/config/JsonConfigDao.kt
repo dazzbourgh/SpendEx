@@ -10,7 +10,9 @@ import kotlinx.serialization.json.Json
 import platform.posix.getenv
 
 @OptIn(ExperimentalForeignApi::class)
-actual class JsonConfigDao : ConfigDao {
+actual class JsonConfigDao actual constructor(
+    environmentConfig: EnvironmentConfig,
+) : ConfigDao {
     private val configFile: String
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -18,7 +20,7 @@ actual class JsonConfigDao : ConfigDao {
         val home =
             getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()
                 ?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)
-        configFile = "$home/${Constants.FileSystem.APP_DIR_NAME}/${Constants.FileSystem.CONFIG_FILE_NAME}"
+        configFile = "$home/${Constants.FileSystem.APP_DIR_NAME}/${environmentConfig.configFileName}"
     }
 
     actual override suspend fun loadPlaidConfig(): Either<String, PlaidConfig> =
