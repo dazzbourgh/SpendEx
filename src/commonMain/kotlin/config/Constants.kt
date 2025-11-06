@@ -126,11 +126,25 @@ object Constants {
             }
         }
 
+        object Plaid {
+            const val NAME = "plaid"
+            const val HELP = "Manage Plaid configuration"
+
+            object Configure {
+                const val NAME = "configure"
+                const val HELP = "Configure Plaid API credentials"
+                const val CLIENT_ID_HELP = "Plaid client ID"
+                const val CLIENT_SECRET_HELP = "Plaid client secret"
+            }
+        }
+
         object ErrorMessages {
             const val UNKNOWN_ENVIRONMENT = "Unknown environment"
             const val ACCOUNT_ADD_FAILED = "Error adding account"
             const val ACCOUNT_ADD_SUCCESS = "Account added successfully!"
             const val ACCOUNT_LIST_FAILED = "Error listing accounts"
+            const val PLAID_CONFIGURE_FAILED = "Error configuring Plaid"
+            const val PLAID_CONFIGURE_SUCCESS = "Plaid configuration saved successfully!"
         }
     }
 

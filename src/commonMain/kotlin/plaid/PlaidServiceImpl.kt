@@ -101,4 +101,12 @@ class PlaidServiceImpl(
                 }
             }
         }
+
+    override suspend fun saveConfig(
+        clientId: String,
+        clientSecret: String,
+    ): Either<String, Unit> {
+        val plaidConfig = config.PlaidConfig(client_id = clientId, secret = clientSecret)
+        return configDao.savePlaidConfig(plaidConfig)
+    }
 }

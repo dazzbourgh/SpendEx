@@ -46,4 +46,16 @@ interface PlaidService {
         redirectUrl: String,
         port: Int,
     ): Either<String, String>
+
+    /**
+     * Saves Plaid API credentials to the configuration file.
+     *
+     * @param clientId The Plaid client ID
+     * @param clientSecret The Plaid client secret
+     * @return Either an error message or Unit on success
+     */
+    suspend fun saveConfig(
+        clientId: String,
+        clientSecret: String,
+    ): Either<String, Unit>
 }

@@ -39,6 +39,9 @@ object InterpreterFactory {
                         plaidService,
                         configDao,
                     ),
+                    PlaidCommandInterpreterImpl(
+                        plaidService,
+                    ),
                 )
             }
             else -> throw IllegalArgumentException("${Constants.Commands.ErrorMessages.UNKNOWN_ENVIRONMENT}: $env")

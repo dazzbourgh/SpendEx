@@ -2,6 +2,8 @@ import com.github.ajalt.clikt.core.subcommands
 import command.AccountAddCommand
 import command.AccountCommand
 import command.AccountListCommand
+import command.PlaidCommand
+import command.PlaidConfigureCommand
 import command.RootCommand
 import config.Constants
 import interpreter.Interpreter
@@ -18,6 +20,12 @@ fun main(args: Array<String>) {
                     ),
                     AccountListCommand(
                         interpreter.accountCommandInterpreter::listAccounts,
+                    ),
+                ),
+            PlaidCommand
+                .subcommands(
+                    PlaidConfigureCommand(
+                        interpreter.plaidCommandInterpreter::configure,
                     ),
                 ),
         )

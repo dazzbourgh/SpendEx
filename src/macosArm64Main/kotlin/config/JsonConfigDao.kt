@@ -32,4 +32,20 @@ actual class JsonConfigDao actual constructor(
         } catch (e: Exception) {
             "${Constants.FileSystem.ErrorMessages.CONFIG_LOAD_FAILED}: ${e.message}".left()
         }
+
+    actual override suspend fun savePlaidConfig(config: PlaidConfig): Either<String, Unit> =
+        try {
+            val home =
+                getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()
+                    ?: return Constants.FileSystem.ErrorMessages.HOME_NOT_SET.left()
+            val appDir = "$home/${Constants.FileSystem.APP_DIR_NAME}"
+
+            FileSystemHelper.ensureDirectoryExists(appDir)
+
+            val configJson = json.encodeToString(PlaidConfig.serializer(), config)
+            FileSystemHelper.writeFile(configFile, configJson)
+            Unit.right()
+        } catch (e: Exception) {
+            "Failed to save Plaid configuration: ${e.message}".left()
+        }
 }
