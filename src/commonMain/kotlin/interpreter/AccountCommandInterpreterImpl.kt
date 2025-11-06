@@ -1,5 +1,6 @@
 package interpreter
 
+import arrow.core.Either
 import arrow.core.raise.either
 import command.BankDetails
 import config.ConfigDao
@@ -18,7 +19,7 @@ class AccountCommandInterpreterImpl(
     private val configDao: ConfigDao,
     private val now: suspend () -> Instant = { Clock.System.now() },
 ) : AccountCommandInterpreter {
-    override suspend fun addAccount(username: String) =
+    override suspend fun addAccount(username: String): Either<String, Unit> =
         either {
             val config = configDao.loadPlaidConfig().bind()
             val linkToken = plaidService.createLinkToken(username).bind()
@@ -52,14 +53,7 @@ class AccountCommandInterpreterImpl(
                     createdAt = now(),
                 )
             tokenDao.save(plaidToken)
-        }.fold(
-            { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_ADD_FAILED}: $error") },
-            { println(Constants.Commands.ErrorMessages.ACCOUNT_ADD_SUCCESS) },
-        )
+        }
 
-    override suspend fun listAccounts(): Iterable<BankDetails> =
-        accountDao.list().fold({ error ->
-            println("${Constants.Commands.ErrorMessages.ACCOUNT_LIST_FAILED}: $error")
-            emptyList()
-        }, { it })
+    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = accountDao.list()
 }

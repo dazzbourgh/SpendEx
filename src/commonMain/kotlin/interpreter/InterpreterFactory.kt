@@ -32,13 +32,18 @@ object InterpreterFactory {
                         ::createOAuthRedirectServer,
                         environmentConfig,
                     )
-                InterpreterImpl(
-                    AccountCommandInterpreterImpl(
-                        accountDao,
-                        tokenDao,
-                        plaidService,
+                val accountCommandInterpreter =
+                    ValidatingAccountCommandInterpreter(
+                        AccountCommandInterpreterImpl(
+                            accountDao,
+                            tokenDao,
+                            plaidService,
+                            configDao,
+                        ),
                         configDao,
-                    ),
+                    )
+                InterpreterImpl(
+                    accountCommandInterpreter,
                     PlaidCommandInterpreterImpl(
                         plaidService,
                     ),
