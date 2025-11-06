@@ -32,7 +32,7 @@ class PlaidServiceImpl(
                     products = listOf(PlaidProduct.AUTH, PlaidProduct.TRANSACTIONS),
                     countryCodes = listOf(PlaidCountryCode.US),
                     language = Constants.Plaid.LANGUAGE,
-                    redirectUri = config.redirect_url,
+                    redirectUri = Constants.OAuth.REDIRECT_URL,
                 )
 
             try {

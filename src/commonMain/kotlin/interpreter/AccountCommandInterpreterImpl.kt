@@ -22,9 +22,13 @@ class AccountCommandInterpreterImpl(
         either {
             val config = configDao.loadPlaidConfig().bind()
             val linkToken = plaidService.createLinkToken(username).bind()
-            val port = extractPortFromUrl(config.redirect_url)
 
-            val publicToken = plaidService.performLinkFlow(linkToken, config.redirect_url, port).bind()
+            val publicToken =
+                plaidService.performLinkFlow(
+                    linkToken,
+                    Constants.OAuth.REDIRECT_URL,
+                    Constants.OAuth.DEFAULT_PORT,
+                ).bind()
 
             val tokenResponse = plaidService.exchangePublicToken(publicToken).bind()
             val accountsResponse = plaidService.getAccounts(tokenResponse.accessToken).bind()
@@ -52,10 +56,6 @@ class AccountCommandInterpreterImpl(
             { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_ADD_FAILED}: $error") },
             { println(Constants.Commands.ErrorMessages.ACCOUNT_ADD_SUCCESS) },
         )
-
-    private fun extractPortFromUrl(url: String): Int =
-        url.substringAfterLast(Constants.OAuth.PORT_DELIMITER)
-            .toIntOrNull() ?: Constants.OAuth.DEFAULT_PORT
 
     override suspend fun listAccounts(): Iterable<BankDetails> =
         accountDao.list().fold({ error ->

@@ -58,6 +58,7 @@ object Constants {
     object OAuth {
         const val SERVER_HOST = "127.0.0.1"
         const val DEFAULT_PORT = 34432
+        const val REDIRECT_URL = "http://$SERVER_HOST:$DEFAULT_PORT"
         const val ROOT_PATH = "/"
         const val PUBLIC_TOKEN_PARAM = "public_token"
         const val OAUTH_STATE_ID_PARAM = "oauth_state_id"
