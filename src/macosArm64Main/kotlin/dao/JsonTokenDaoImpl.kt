@@ -5,7 +5,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import plaid.PlaidToken
+import model.PlaidToken
 import platform.posix.getenv
 
 @OptIn(ExperimentalForeignApi::class)

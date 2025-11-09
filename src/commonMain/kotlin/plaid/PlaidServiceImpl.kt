@@ -13,6 +13,15 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import model.AccountsGetRequest
+import model.LinkTokenCreateRequest
+import model.LinkTokenUser
+import model.PlaidAccessTokenResponse
+import model.PlaidAccountsResponse
+import model.PlaidCountryCode
+import model.PlaidLinkTokenResponse
+import model.PlaidProduct
+import model.PublicTokenExchangeRequest
 
 class PlaidServiceImpl(
     private val httpClient: HttpClient,

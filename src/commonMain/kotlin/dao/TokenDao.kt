@@ -1,6 +1,6 @@
 package dao
 
-import plaid.PlaidToken
+import model.PlaidToken
 
 interface TokenDao {
     suspend fun save(token: PlaidToken)

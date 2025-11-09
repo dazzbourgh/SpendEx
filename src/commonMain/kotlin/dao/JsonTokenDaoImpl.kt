@@ -1,6 +1,6 @@
 package dao
 
-import plaid.PlaidToken
+import model.PlaidToken
 
 expect class JsonTokenDaoImpl() : TokenDao {
     override suspend fun save(token: PlaidToken)

@@ -1,8 +1,8 @@
 package interpreter
 
 import arrow.core.Either
-import command.Transaction
 import kotlinx.datetime.LocalDate
+import model.Transaction
 
 interface TransactionCommandInterpreter {
     suspend fun listTransactions(

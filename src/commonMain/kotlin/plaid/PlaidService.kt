@@ -1,6 +1,8 @@
 package plaid
 
 import arrow.core.Either
+import model.PlaidAccessTokenResponse
+import model.PlaidAccountsResponse
 
 /**
  * Service for interacting with Plaid API.

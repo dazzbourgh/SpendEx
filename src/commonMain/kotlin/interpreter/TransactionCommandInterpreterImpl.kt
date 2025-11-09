@@ -2,10 +2,10 @@ package interpreter
 
 import arrow.core.Either
 import arrow.core.raise.either
-import command.Transaction
 import config.Constants
 import dao.ConfigDao
 import kotlinx.datetime.LocalDate
+import model.Transaction
 import transaction.TransactionService
 import validation.ValidationHelper.ensurePlaidConfigValid
 

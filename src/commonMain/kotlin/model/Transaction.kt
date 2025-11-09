@@ -1,4 +1,4 @@
-package command
+package model
 
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable

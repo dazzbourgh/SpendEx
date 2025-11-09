@@ -2,8 +2,8 @@ package account
 
 import arrow.core.Either
 import arrow.core.right
-import command.BankDetails
 import dao.TokenDao
+import model.BankDetails
 
 class AccountServiceImpl(
     private val tokenDao: TokenDao,

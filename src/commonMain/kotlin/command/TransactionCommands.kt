@@ -8,6 +8,7 @@ import com.github.ajalt.clikt.parameters.options.option
 import config.Constants
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDate
+import model.Transaction
 
 object TransactionsCommand : CliktCommand(
     name = Constants.Commands.Transactions.NAME,

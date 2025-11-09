@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
 import config.Constants
 import kotlinx.coroutines.runBlocking
+import model.BankDetails
 
 object AccountsCommand : CliktCommand(
     name = Constants.Commands.Accounts.NAME,

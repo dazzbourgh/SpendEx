@@ -3,14 +3,14 @@ package interpreter
 import account.AccountService
 import arrow.core.Either
 import arrow.core.raise.either
-import command.BankDetails
 import config.Constants
 import dao.ConfigDao
 import dao.TokenDao
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import model.BankDetails
+import model.PlaidToken
 import plaid.PlaidService
-import plaid.PlaidToken
 import validation.ValidationHelper.ensurePlaidConfigValid
 
 class AccountCommandInterpreterImpl(
