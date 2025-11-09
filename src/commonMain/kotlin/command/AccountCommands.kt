@@ -1,11 +1,10 @@
 package command
 
-import arrow.core.Either
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
 import config.Constants
+import interpreter.AccountCommandInterpreter
 import kotlinx.coroutines.runBlocking
-import model.BankDetails
 
 object AccountsCommand : CliktCommand(
     name = Constants.Commands.Accounts.NAME,
@@ -15,14 +14,14 @@ object AccountsCommand : CliktCommand(
 }
 
 class AccountAddCommand(
-    private val addCommand: suspend () -> Either<String, Unit>,
+    private val interpreter: AccountCommandInterpreter,
 ) : CliktCommand(
         name = Constants.Commands.Accounts.Add.NAME,
         help = Constants.Commands.Accounts.Add.HELP,
     ) {
     override fun run() =
         runBlocking {
-            addCommand().fold(
+            interpreter.addAccount().fold(
                 { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_ADD_FAILED}: $error") },
                 { println(Constants.Commands.ErrorMessages.ACCOUNT_ADD_SUCCESS) },
             )
@@ -30,14 +29,14 @@ class AccountAddCommand(
 }
 
 class AccountListCommand(
-    private val listCommand: suspend () -> Either<String, Iterable<BankDetails>>,
+    private val interpreter: AccountCommandInterpreter,
 ) : CliktCommand(
         name = Constants.Commands.Accounts.List.NAME,
         help = Constants.Commands.Accounts.List.HELP,
     ) {
     override fun run() =
         runBlocking {
-            listCommand().fold(
+            interpreter.listAccounts().fold(
                 { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_LIST_FAILED}: $error") },
                 { accounts ->
                     if (accounts.none()) {

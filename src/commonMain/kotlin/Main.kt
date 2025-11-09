@@ -17,24 +17,16 @@ fun main(args: Array<String>) {
         .subcommands(
             AccountsCommand
                 .subcommands(
-                    AccountAddCommand(
-                        interpreter.accountCommandInterpreter::addAccount,
-                    ),
-                    AccountListCommand(
-                        interpreter.accountCommandInterpreter::listAccounts,
-                    ),
+                    AccountAddCommand(interpreter.accountCommandInterpreter),
+                    AccountListCommand(interpreter.accountCommandInterpreter),
                 ),
             PlaidCommand
                 .subcommands(
-                    PlaidConfigureCommand(
-                        interpreter.plaidCommandInterpreter::configure,
-                    ),
+                    PlaidConfigureCommand(interpreter.plaidCommandInterpreter),
                 ),
             TransactionsCommand
                 .subcommands(
-                    TransactionListCommand(
-                        interpreter.transactionCommandInterpreter::listTransactions,
-                    ),
+                    TransactionListCommand(interpreter.transactionCommandInterpreter),
                 ),
         )
         .main(args)

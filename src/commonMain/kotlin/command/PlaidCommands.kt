@@ -5,6 +5,7 @@ import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import config.Constants
+import interpreter.PlaidCommandInterpreter
 import kotlinx.coroutines.runBlocking
 
 object PlaidCommand : CliktCommand(
@@ -15,7 +16,7 @@ object PlaidCommand : CliktCommand(
 }
 
 class PlaidConfigureCommand(
-    private val configureCommand: suspend (String, String) -> Unit,
+    private val interpreter: PlaidCommandInterpreter,
 ) : CliktCommand(
         name = Constants.Commands.Plaid.Configure.NAME,
         help = Constants.Commands.Plaid.Configure.HELP,
@@ -25,6 +26,6 @@ class PlaidConfigureCommand(
 
     override fun run() =
         runBlocking {
-            configureCommand(clientId, clientSecret)
+            interpreter.configure(clientId, clientSecret)
         }
 }

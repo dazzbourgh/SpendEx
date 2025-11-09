@@ -1,14 +1,13 @@
 package command
 
-import arrow.core.Either
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
 import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import config.Constants
+import interpreter.TransactionCommandInterpreter
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDate
-import model.Transaction
 
 object TransactionsCommand : CliktCommand(
     name = Constants.Commands.Transactions.NAME,
@@ -18,7 +17,7 @@ object TransactionsCommand : CliktCommand(
 }
 
 class TransactionListCommand(
-    private val listCommand: suspend (LocalDate?, LocalDate?, Set<String>) -> Either<String, Iterable<Transaction>>,
+    private val interpreter: TransactionCommandInterpreter,
 ) : CliktCommand(
         name = Constants.Commands.Transactions.List.NAME,
         help = Constants.Commands.Transactions.List.HELP,
@@ -42,7 +41,7 @@ class TransactionListCommand(
                 return@runBlocking
             }
 
-            listCommand(fromDate, toDate, institutions.toSet()).fold(
+            interpreter.listTransactions(fromDate, toDate, institutions.toSet()).fold(
                 { error -> println("${Constants.Commands.ErrorMessages.TRANSACTION_LIST_FAILED}: $error") },
                 { transactions ->
                     if (transactions.none()) {
