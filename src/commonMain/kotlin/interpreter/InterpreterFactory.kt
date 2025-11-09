@@ -3,7 +3,6 @@ package interpreter
 import browser.BrowserLauncher
 import config.Constants
 import config.SandboxEnvironmentConfig
-import dao.JsonAccountDaoImpl
 import dao.JsonConfigDao
 import dao.JsonTokenDaoImpl
 import plaid.HttpClientFactory
@@ -19,7 +18,6 @@ object InterpreterFactory {
         when (env) {
             Constants.App.ENVIRONMENT_SANDBOX -> {
                 val environmentConfig = SandboxEnvironmentConfig
-                val accountDao = JsonAccountDaoImpl()
                 val tokenDao = JsonTokenDaoImpl()
                 val configDao = JsonConfigDao(environmentConfig)
                 val httpClient = HttpClientFactory.create()
@@ -35,7 +33,6 @@ object InterpreterFactory {
                 val accountCommandInterpreter =
                     ValidatingAccountCommandInterpreter(
                         AccountCommandInterpreterImpl(
-                            accountDao,
                             tokenDao,
                             plaidService,
                             configDao,

@@ -2,9 +2,9 @@ package interpreter
 
 import arrow.core.Either
 import arrow.core.raise.either
+import arrow.core.right
 import command.BankDetails
 import config.Constants
-import dao.AccountDao
 import dao.ConfigDao
 import dao.TokenDao
 import kotlinx.datetime.Clock
@@ -13,7 +13,6 @@ import plaid.PlaidService
 import plaid.PlaidToken
 
 class AccountCommandInterpreterImpl(
-    private val accountDao: AccountDao,
     private val tokenDao: TokenDao,
     private val plaidService: PlaidService,
     private val configDao: ConfigDao,
@@ -46,5 +45,5 @@ class AccountCommandInterpreterImpl(
             tokenDao.save(plaidToken)
         }
 
-    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = accountDao.list()
+    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = emptyList<BankDetails>().right()
 }

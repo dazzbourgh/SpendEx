@@ -4,6 +4,7 @@ import config.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import plaid.PlaidToken
 import platform.posix.getenv
 
@@ -11,7 +12,7 @@ import platform.posix.getenv
 actual class JsonTokenDaoImpl : TokenDao {
     private val dataDir: String
     private val dataFile: String
-    private val json = JsonConfig.json
+    private val json = Json { ignoreUnknownKeys = true }
 
     init {
         val home =
