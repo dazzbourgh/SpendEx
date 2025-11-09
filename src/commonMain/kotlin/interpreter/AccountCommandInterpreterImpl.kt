@@ -36,14 +36,6 @@ class AccountCommandInterpreterImpl(
 
             val institutionName = accountsResponse.accounts.firstOrNull()?.name ?: Constants.Plaid.UNKNOWN_BANK
 
-            val bankDetails =
-                BankDetails(
-                    name = institutionName,
-                    dateAdded = now(),
-                )
-
-            accountDao.save(bankDetails).bind()
-
             val plaidToken =
                 PlaidToken(
                     bankName = institutionName,
