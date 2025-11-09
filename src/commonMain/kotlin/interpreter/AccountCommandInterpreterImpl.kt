@@ -1,8 +1,8 @@
 package interpreter
 
+import account.AccountService
 import arrow.core.Either
 import arrow.core.raise.either
-import arrow.core.right
 import command.BankDetails
 import config.Constants
 import dao.ConfigDao
@@ -16,6 +16,7 @@ class AccountCommandInterpreterImpl(
     private val tokenDao: TokenDao,
     private val plaidService: PlaidService,
     private val configDao: ConfigDao,
+    private val accountService: AccountService,
     private val now: suspend () -> Instant = { Clock.System.now() },
 ) : AccountCommandInterpreter {
     override suspend fun addAccount(): Either<String, Unit> =
@@ -45,11 +46,5 @@ class AccountCommandInterpreterImpl(
             tokenDao.save(plaidToken)
         }
 
-    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> =
-        tokenDao.list().map { token ->
-            BankDetails(
-                name = token.bankName,
-                dateAdded = token.createdAt,
-            )
-        }.right()
+    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = accountService.listAccounts()
 }

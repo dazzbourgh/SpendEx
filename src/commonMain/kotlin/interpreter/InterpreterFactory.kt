@@ -1,5 +1,6 @@
 package interpreter
 
+import account.AccountServiceImpl
 import browser.BrowserLauncher
 import config.Constants
 import config.SandboxEnvironmentConfig
@@ -30,12 +31,14 @@ object InterpreterFactory {
                         ::createOAuthRedirectServer,
                         environmentConfig,
                     )
+                val accountService = AccountServiceImpl(tokenDao)
                 val accountCommandInterpreter =
                     ValidatingAccountCommandInterpreter(
                         AccountCommandInterpreterImpl(
                             tokenDao,
                             plaidService,
                             configDao,
+                            accountService,
                         ),
                         configDao,
                     )
