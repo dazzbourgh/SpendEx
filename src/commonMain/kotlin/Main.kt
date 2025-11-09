@@ -1,7 +1,7 @@
 import com.github.ajalt.clikt.core.subcommands
 import command.AccountAddCommand
-import command.AccountCommand
 import command.AccountListCommand
+import command.AccountsCommand
 import command.PlaidCommand
 import command.PlaidConfigureCommand
 import command.RootCommand
@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val interpreter: Interpreter = InterpreterFactory.get(Constants.App.ENVIRONMENT_SANDBOX)
     RootCommand
         .subcommands(
-            AccountCommand
+            AccountsCommand
                 .subcommands(
                     AccountAddCommand(
                         interpreter.accountCommandInterpreter::addAccount,

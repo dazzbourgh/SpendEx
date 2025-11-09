@@ -114,8 +114,8 @@ object Constants {
     }
 
     object Commands {
-        object Account {
-            const val NAME = "account"
+        object Accounts {
+            const val NAME = "accounts"
             const val HELP = "Manage financial accounts"
 
             object Add {

@@ -6,9 +6,9 @@ import com.github.ajalt.clikt.parameters.options.help
 import config.Constants
 import kotlinx.coroutines.runBlocking
 
-object AccountCommand : CliktCommand(
-    name = Constants.Commands.Account.NAME,
-    help = Constants.Commands.Account.HELP,
+object AccountsCommand : CliktCommand(
+    name = Constants.Commands.Accounts.NAME,
+    help = Constants.Commands.Accounts.HELP,
 ) {
     override fun run() = Unit
 }
@@ -16,8 +16,8 @@ object AccountCommand : CliktCommand(
 class AccountAddCommand(
     private val addCommand: suspend () -> Either<String, Unit>,
 ) : CliktCommand(
-        name = Constants.Commands.Account.Add.NAME,
-        help = Constants.Commands.Account.Add.HELP,
+        name = Constants.Commands.Accounts.Add.NAME,
+        help = Constants.Commands.Accounts.Add.HELP,
     ) {
     override fun run() =
         runBlocking {
@@ -31,8 +31,8 @@ class AccountAddCommand(
 class AccountListCommand(
     private val listCommand: suspend () -> Either<String, Iterable<BankDetails>>,
 ) : CliktCommand(
-        name = Constants.Commands.Account.List.NAME,
-        help = Constants.Commands.Account.List.HELP,
+        name = Constants.Commands.Accounts.List.NAME,
+        help = Constants.Commands.Accounts.List.HELP,
     ) {
     override fun run() =
         runBlocking {
