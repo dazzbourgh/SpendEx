@@ -3,8 +3,8 @@ package plaid
 import arrow.core.Either
 import arrow.core.raise.either
 import browser.BrowserLauncher
-import config.ConfigDao
 import config.Constants
+import dao.ConfigDao
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post

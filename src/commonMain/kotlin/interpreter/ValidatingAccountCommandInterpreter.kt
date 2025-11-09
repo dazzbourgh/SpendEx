@@ -3,7 +3,7 @@ package interpreter
 import arrow.core.Either
 import arrow.core.raise.either
 import command.BankDetails
-import config.ConfigDao
+import dao.ConfigDao
 
 class ValidatingAccountCommandInterpreter(
     private val delegate: AccountCommandInterpreter,

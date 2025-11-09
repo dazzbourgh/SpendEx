@@ -1,6 +1,7 @@
-package config
+package dao
 
 import arrow.core.Either
+import config.PlaidConfig
 
 interface ConfigDao {
     suspend fun loadPlaidConfig(): Either<String, PlaidConfig>

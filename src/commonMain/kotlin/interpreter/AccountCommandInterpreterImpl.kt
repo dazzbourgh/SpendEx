@@ -3,9 +3,9 @@ package interpreter
 import arrow.core.Either
 import arrow.core.raise.either
 import command.BankDetails
-import config.ConfigDao
 import config.Constants
 import dao.AccountDao
+import dao.ConfigDao
 import dao.TokenDao
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
