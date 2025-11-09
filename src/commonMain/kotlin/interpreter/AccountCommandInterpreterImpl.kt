@@ -45,5 +45,11 @@ class AccountCommandInterpreterImpl(
             tokenDao.save(plaidToken)
         }
 
-    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = emptyList<BankDetails>().right()
+    override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> =
+        tokenDao.list().map { token ->
+            BankDetails(
+                name = token.bankName,
+                dateAdded = token.createdAt,
+            )
+        }.right()
 }

@@ -15,7 +15,6 @@ object Constants {
     object FileSystem {
         const val HOME_ENV_VAR = "HOME"
         const val APP_DIR_NAME = ".spndx"
-        const val BANKS_FILE_NAME = "banks.json"
         const val TOKENS_FILE_NAME = "tokens.json"
 
         const val DIR_PERMISSIONS = 0x1C0u // 0700 octal (UShort for mkdir)
