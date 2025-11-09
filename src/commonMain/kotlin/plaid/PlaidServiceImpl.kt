@@ -21,7 +21,9 @@ import model.PlaidAccountsResponse
 import model.PlaidCountryCode
 import model.PlaidLinkTokenResponse
 import model.PlaidProduct
+import model.PlaidTransactionsSyncResponse
 import model.PublicTokenExchangeRequest
+import model.TransactionsSyncRequest
 
 class PlaidServiceImpl(
     private val httpClient: HttpClient,
@@ -46,10 +48,12 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
-                    contentType(ContentType.Application.Json)
-                    setBody(request)
-                }.body<PlaidLinkTokenResponse>().linkToken
+                httpClient
+                    .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
+                        contentType(ContentType.Application.Json)
+                        setBody(request)
+                    }.body<PlaidLinkTokenResponse>()
+                    .linkToken
             } catch (exception: Exception) {
                 "${Constants.Plaid.ErrorMessages.LINK_TOKEN_FAILED}: ${exception.message}"
             }
@@ -66,10 +70,11 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.PUBLIC_TOKEN_EXCHANGE}") {
-                    contentType(ContentType.Application.Json)
-                    setBody(request)
-                }.body<PlaidAccessTokenResponse>()
+                httpClient
+                    .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.PUBLIC_TOKEN_EXCHANGE}") {
+                        contentType(ContentType.Application.Json)
+                        setBody(request)
+                    }.body<PlaidAccessTokenResponse>()
             } catch (exception: Exception) {
                 raise("${Constants.Plaid.ErrorMessages.TOKEN_EXCHANGE_FAILED}: ${exception.message}")
             }
@@ -86,12 +91,38 @@ class PlaidServiceImpl(
                 )
 
             try {
-                httpClient.post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.ACCOUNTS_GET}") {
-                    contentType(ContentType.Application.Json)
-                    setBody(request)
-                }.body<PlaidAccountsResponse>()
+                httpClient
+                    .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.ACCOUNTS_GET}") {
+                        contentType(ContentType.Application.Json)
+                        setBody(request)
+                    }.body<PlaidAccountsResponse>()
             } catch (exception: Exception) {
                 raise("${Constants.Plaid.ErrorMessages.ACCOUNTS_GET_FAILED}: ${exception.message}")
+            }
+        }
+
+    override suspend fun syncTransactions(
+        accessToken: String,
+        cursor: String?,
+    ): Either<String, PlaidTransactionsSyncResponse> =
+        either {
+            val config = configDao.loadPlaidConfig().bind()
+            val request =
+                TransactionsSyncRequest(
+                    clientId = config.client_id,
+                    secret = config.secret,
+                    accessToken = accessToken,
+                    cursor = cursor,
+                )
+
+            try {
+                httpClient
+                    .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.TRANSACTIONS_SYNC}") {
+                        contentType(ContentType.Application.Json)
+                        setBody(request)
+                    }.body<PlaidTransactionsSyncResponse>()
+            } catch (exception: Exception) {
+                raise("${Constants.Plaid.ErrorMessages.TRANSACTIONS_SYNC_FAILED}: ${exception.message}")
             }
         }
 

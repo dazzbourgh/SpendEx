@@ -118,3 +118,68 @@ data class AccountsGetRequest(
     val secret: String,
     @SerialName("access_token") val accessToken: String,
 )
+
+/**
+ * Request to sync transactions
+ */
+@Serializable
+data class TransactionsSyncRequest(
+    @SerialName("client_id") val clientId: String,
+    val secret: String,
+    @SerialName("access_token") val accessToken: String,
+    val cursor: String? = null,
+)
+
+/**
+ * Response from Plaid's /transactions/sync endpoint
+ */
+@Serializable
+data class PlaidTransactionsSyncResponse(
+    @SerialName("added") val added: List<PlaidTransaction>,
+    @SerialName("modified") val modified: List<PlaidTransaction>,
+    @SerialName("removed") val removed: List<PlaidRemovedTransaction>,
+    @SerialName("next_cursor") val nextCursor: String?,
+    @SerialName("has_more") val hasMore: Boolean,
+    @SerialName("request_id") val requestId: String,
+)
+
+/**
+ * Plaid transaction information
+ */
+@Serializable
+data class PlaidTransaction(
+    @SerialName("transaction_id") val transactionId: String,
+    @SerialName("pending_transaction_id") val pendingTransactionId: String?,
+    val amount: Double,
+    val date: String,
+    @SerialName("authorized_date") val authorizedDate: String?,
+    @SerialName("name") val name: String,
+    @SerialName("merchant_name") val merchantName: String?,
+    @SerialName("category") val category: List<String>?,
+    @SerialName("category_id") val categoryId: String?,
+    @SerialName("location") val location: PlaidLocation?,
+    val pending: Boolean,
+)
+
+/**
+ * Plaid transaction location information
+ */
+@Serializable
+data class PlaidLocation(
+    val address: String?,
+    val city: String?,
+    val region: String?,
+    @SerialName("postal_code") val postalCode: String?,
+    val country: String?,
+    val lat: Double?,
+    val lon: Double?,
+    @SerialName("store_number") val storeNumber: String?,
+)
+
+/**
+ * Removed transaction information
+ */
+@Serializable
+data class PlaidRemovedTransaction(
+    @SerialName("transaction_id") val transactionId: String,
+)

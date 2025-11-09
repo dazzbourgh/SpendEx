@@ -16,6 +16,7 @@ object Constants {
         const val HOME_ENV_VAR = "HOME"
         const val APP_DIR_NAME = ".spndx"
         const val TOKENS_FILE_NAME = "tokens.json"
+        const val TRANSACTIONS_DIR_NAME = "transactions"
 
         const val DIR_PERMISSIONS = 0x1C0u // 0700 octal (UShort for mkdir)
         const val FILE_PERMISSIONS = 0x180u // 0600 octal (UShort for chmod)
@@ -48,12 +49,14 @@ object Constants {
             const val LINK_TOKEN_CREATE = "/link/token/create"
             const val PUBLIC_TOKEN_EXCHANGE = "/item/public_token/exchange"
             const val ACCOUNTS_GET = "/accounts/get"
+            const val TRANSACTIONS_SYNC = "/transactions/sync"
         }
 
         object ErrorMessages {
             const val LINK_TOKEN_FAILED = "Failed to create link token"
             const val TOKEN_EXCHANGE_FAILED = "Failed to exchange public token"
             const val ACCOUNTS_GET_FAILED = "Failed to get accounts"
+            const val TRANSACTIONS_SYNC_FAILED = "Failed to sync transactions"
         }
     }
 

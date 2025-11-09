@@ -3,6 +3,7 @@ package plaid
 import arrow.core.Either
 import model.PlaidAccessTokenResponse
 import model.PlaidAccountsResponse
+import model.PlaidTransactionsSyncResponse
 
 /**
  * Service for interacting with Plaid API.
@@ -31,6 +32,18 @@ interface PlaidService {
      * @return Either an error message or the accounts response
      */
     suspend fun getAccounts(accessToken: String): Either<String, PlaidAccountsResponse>
+
+    /**
+     * Syncs transactions using an access token and optional cursor.
+     *
+     * @param accessToken The Plaid access token
+     * @param cursor Optional cursor for pagination
+     * @return Either an error message or the transactions sync response
+     */
+    suspend fun syncTransactions(
+        accessToken: String,
+        cursor: String? = null,
+    ): Either<String, PlaidTransactionsSyncResponse>
 
     /**
      * Performs the complete Plaid Link OAuth flow.
