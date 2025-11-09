@@ -141,6 +141,19 @@ object Constants {
             }
         }
 
+        object Transactions {
+            const val NAME = "transactions"
+            const val HELP = "Manage and view transactions"
+
+            object List {
+                const val NAME = "list"
+                const val HELP = "List transactions with optional filters"
+                const val FROM_HELP = "Start date (YYYY-MM-DD)"
+                const val TO_HELP = "End date (YYYY-MM-DD)"
+                const val INSTITUTION_HELP = "Filter by institution name (can be specified multiple times)"
+            }
+        }
+
         object ErrorMessages {
             const val UNKNOWN_ENVIRONMENT = "Unknown environment"
             const val ACCOUNT_ADD_FAILED = "Error adding account"
@@ -148,6 +161,9 @@ object Constants {
             const val ACCOUNT_LIST_FAILED = "Error listing accounts"
             const val PLAID_CONFIGURE_FAILED = "Error configuring Plaid"
             const val PLAID_CONFIGURE_SUCCESS = "Plaid configuration saved successfully!"
+            const val TRANSACTION_LIST_FAILED = "Error listing transactions"
+            const val INVALID_DATE_FORMAT = "Invalid date format. Expected YYYY-MM-DD"
+            const val INVALID_DATE_RANGE = "Start date must be before or equal to end date"
         }
     }
 

@@ -9,6 +9,7 @@ import dao.JsonTokenDaoImpl
 import plaid.HttpClientFactory
 import plaid.OAuthRedirectServer
 import plaid.PlaidServiceImpl
+import transaction.TransactionServiceImpl
 
 expect fun createBrowserLauncher(): BrowserLauncher
 
@@ -42,11 +43,20 @@ object InterpreterFactory {
                         ),
                         configDao,
                     )
+                val transactionService = TransactionServiceImpl()
+                val transactionCommandInterpreter =
+                    ValidatingTransactionCommandInterpreter(
+                        TransactionCommandInterpreterImpl(
+                            transactionService,
+                        ),
+                        configDao,
+                    )
                 InterpreterImpl(
                     accountCommandInterpreter,
                     PlaidCommandInterpreterImpl(
                         plaidService,
                     ),
+                    transactionCommandInterpreter,
                 )
             }
             else -> throw IllegalArgumentException("${Constants.Commands.ErrorMessages.UNKNOWN_ENVIRONMENT}: $env")

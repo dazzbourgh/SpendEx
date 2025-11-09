@@ -5,6 +5,8 @@ import command.AccountsCommand
 import command.PlaidCommand
 import command.PlaidConfigureCommand
 import command.RootCommand
+import command.TransactionListCommand
+import command.TransactionsCommand
 import config.Constants
 import interpreter.Interpreter
 import interpreter.InterpreterFactory
@@ -26,6 +28,12 @@ fun main(args: Array<String>) {
                 .subcommands(
                     PlaidConfigureCommand(
                         interpreter.plaidCommandInterpreter::configure,
+                    ),
+                ),
+            TransactionsCommand
+                .subcommands(
+                    TransactionListCommand(
+                        interpreter.transactionCommandInterpreter::listTransactions,
                     ),
                 ),
         )
