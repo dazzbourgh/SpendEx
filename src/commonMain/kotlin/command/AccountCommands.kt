@@ -3,8 +3,6 @@ package command
 import arrow.core.Either
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.options.help
-import com.github.ajalt.clikt.parameters.options.option
-import com.github.ajalt.clikt.parameters.options.required
 import config.Constants
 import kotlinx.coroutines.runBlocking
 
@@ -16,16 +14,14 @@ object AccountCommand : CliktCommand(
 }
 
 class AccountAddCommand(
-    private val addCommand: suspend (String) -> Either<String, Unit>,
+    private val addCommand: suspend () -> Either<String, Unit>,
 ) : CliktCommand(
         name = Constants.Commands.Account.Add.NAME,
         help = Constants.Commands.Account.Add.HELP,
     ) {
-    val username by option().required().help(Constants.Commands.Account.Add.USERNAME_HELP)
-
     override fun run() =
         runBlocking {
-            addCommand(username).fold(
+            addCommand().fold(
                 { error -> println("${Constants.Commands.ErrorMessages.ACCOUNT_ADD_FAILED}: $error") },
                 { println(Constants.Commands.ErrorMessages.ACCOUNT_ADD_SUCCESS) },
             )
@@ -47,7 +43,7 @@ class AccountListCommand(
                         println("No accounts added yet")
                     } else {
                         accounts.forEach { account ->
-                            println("${account.name} - ${account.username} (added: ${account.dateAdded})")
+                            println("${account.name} (added: ${account.dateAdded})")
                         }
                     }
                 },

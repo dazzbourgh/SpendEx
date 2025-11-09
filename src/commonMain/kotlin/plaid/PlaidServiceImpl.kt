@@ -21,7 +21,7 @@ class PlaidServiceImpl(
     private val oauthRedirectServerFactory: () -> OAuthRedirectServer,
     private val environmentConfig: config.EnvironmentConfig,
 ) : PlaidService {
-    override suspend fun createLinkToken(username: String): Either<String, String> =
+    override suspend fun createLinkToken(): Either<String, String> =
         either {
             val config = configDao.loadPlaidConfig().bind()
             val request =
@@ -29,7 +29,7 @@ class PlaidServiceImpl(
                     clientId = config.client_id,
                     secret = config.secret,
                     clientName = Constants.Plaid.CLIENT_NAME,
-                    user = LinkTokenUser(clientUserId = username),
+                    user = LinkTokenUser(clientUserId = Constants.Plaid.CLIENT_USER_ID),
                     products = listOf(PlaidProduct.AUTH, PlaidProduct.TRANSACTIONS),
                     countryCodes = listOf(PlaidCountryCode.US),
                     language = Constants.Plaid.LANGUAGE,

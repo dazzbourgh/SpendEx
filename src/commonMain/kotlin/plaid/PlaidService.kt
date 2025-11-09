@@ -10,10 +10,9 @@ interface PlaidService {
      * Creates a link token for initiating Plaid Link flow.
      * User will select the institution in the Plaid Link UI.
      *
-     * @param username The username for the account
      * @return Either an error message or the link token
      */
-    suspend fun createLinkToken(username: String): Either<String, String>
+    suspend fun createLinkToken(): Either<String, String>
 
     /**
      * Exchanges a public token for an access token.

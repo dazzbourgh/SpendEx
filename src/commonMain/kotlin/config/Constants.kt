@@ -40,6 +40,11 @@ object Constants {
         const val LANGUAGE = "en"
         const val UNKNOWN_BANK = "Unknown Bank"
 
+        // Single user ID for Plaid Link token creation
+        // NOTE: This assumes only one user per Plaid app instance.
+        // Will not work if SpendEx CLI is used by multiple users through the same Plaid app.
+        const val CLIENT_USER_ID = "SpendEx"
+
         object Endpoints {
             const val LINK_TOKEN_CREATE = "/link/token/create"
             const val PUBLIC_TOKEN_EXCHANGE = "/item/public_token/exchange"
@@ -117,7 +122,6 @@ object Constants {
             object Add {
                 const val NAME = "add"
                 const val HELP = "Add a new financial account. You will select the bank and login in your browser."
-                const val USERNAME_HELP = "Your app user identifier (not your bank login)"
             }
 
             object List {

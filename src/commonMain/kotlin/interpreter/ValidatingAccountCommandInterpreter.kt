@@ -20,7 +20,7 @@ class ValidatingAccountCommandInterpreter(
             block().bind()
         }
 
-    override suspend fun addAccount(username: String): Either<String, Unit> = validatingConfig { delegate.addAccount(username) }
+    override suspend fun addAccount(): Either<String, Unit> = validatingConfig { delegate.addAccount() }
 
     override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = validatingConfig { delegate.listAccounts() }
 }

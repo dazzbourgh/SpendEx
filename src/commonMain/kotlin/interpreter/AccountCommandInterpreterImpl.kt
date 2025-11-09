@@ -19,10 +19,10 @@ class AccountCommandInterpreterImpl(
     private val configDao: ConfigDao,
     private val now: suspend () -> Instant = { Clock.System.now() },
 ) : AccountCommandInterpreter {
-    override suspend fun addAccount(username: String): Either<String, Unit> =
+    override suspend fun addAccount(): Either<String, Unit> =
         either {
             val config = configDao.loadPlaidConfig().bind()
-            val linkToken = plaidService.createLinkToken(username).bind()
+            val linkToken = plaidService.createLinkToken().bind()
 
             val publicToken =
                 plaidService.performLinkFlow(
@@ -39,7 +39,6 @@ class AccountCommandInterpreterImpl(
             val bankDetails =
                 BankDetails(
                     name = institutionName,
-                    username = username,
                     dateAdded = now(),
                 )
 
