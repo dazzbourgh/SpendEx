@@ -11,6 +11,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import plaid.PlaidService
 import plaid.PlaidToken
+import validation.ValidationHelper.ensurePlaidConfigValid
 
 class AccountCommandInterpreterImpl(
     private val tokenDao: TokenDao,
@@ -21,7 +22,7 @@ class AccountCommandInterpreterImpl(
 ) : AccountCommandInterpreter {
     override suspend fun addAccount(): Either<String, Unit> =
         either {
-            val config = configDao.loadPlaidConfig().bind()
+            ensurePlaidConfigValid(configDao)
             val linkToken = plaidService.createLinkToken().bind()
 
             val publicToken =

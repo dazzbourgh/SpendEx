@@ -34,21 +34,16 @@ object InterpreterFactory {
                     )
                 val accountService = AccountServiceImpl(tokenDao)
                 val accountCommandInterpreter =
-                    ValidatingAccountCommandInterpreter(
-                        AccountCommandInterpreterImpl(
-                            tokenDao,
-                            plaidService,
-                            configDao,
-                            accountService,
-                        ),
+                    AccountCommandInterpreterImpl(
+                        tokenDao,
+                        plaidService,
                         configDao,
+                        accountService,
                     )
                 val transactionService = TransactionServiceImpl()
                 val transactionCommandInterpreter =
-                    ValidatingTransactionCommandInterpreter(
-                        TransactionCommandInterpreterImpl(
-                            transactionService,
-                        ),
+                    TransactionCommandInterpreterImpl(
+                        transactionService,
                         configDao,
                     )
                 InterpreterImpl(
