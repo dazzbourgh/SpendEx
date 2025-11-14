@@ -3,9 +3,11 @@ package transaction
 import account.AccountService
 import arrow.core.Either
 import arrow.core.raise.either
+import arrow.fx.coroutines.parMap
 import dao.TokenDao
 import dao.TransactionDao
 import kotlinx.datetime.LocalDate
+import model.PlaidToken
 import model.PlaidTransaction
 import model.StoredTransaction
 import model.StoredTransactions
@@ -35,33 +37,51 @@ class TransactionServiceImpl(
                     tokens
                 }
 
-            // Sync transactions for each token in parallel using Arrow-KT
-            val syncResults =
-                filteredTokens.map { token ->
-                    syncTransactionsForToken(token)
+            // Process each token in parallel: load local transactions and conditionally fetch new ones
+            filteredTokens
+                .parMap { token ->
+                    getTransactionsForToken(token, from, to).bind()
+                }.flatten()
+        }
+
+    private suspend fun getTransactionsForToken(
+        token: PlaidToken,
+        from: LocalDate?,
+        to: LocalDate?,
+    ): Either<String, List<Transaction>> =
+        either {
+            val savedTransactions = transactionDao.loadTransactions(token.itemId)
+            // Load existing transactions from local storage
+            val localDomainTransactions =
+                savedTransactions
+                    ?.transactions
+                    .orEmpty()
+                    .map { it.toDomainModel(token.bankName) }
+
+            // Determine the effective date range
+            val effectiveFrom = from ?: localDomainTransactions.minByOrNull { it.date }?.date
+            val latestLocalDate = localDomainTransactions.maxByOrNull { it.date }?.date
+
+            // Check if we need to fetch new transactions
+            val needsFetch = to == null || (latestLocalDate != null && to > latestLocalDate)
+
+            // If we need to fetch, sync new transactions from Plaid
+            val allTransactions =
+                if (needsFetch) {
+                    syncTransactionsForToken(token).bind()
+                } else {
+                    localDomainTransactions
                 }
 
-            // Extract successful results and flatten
-            val allTransactionsList =
-                syncResults
-                    .mapNotNull { eitherResult ->
-                        eitherResult.getOrNull()
-                    }.flatten()
-
-            // Filter by date range if specified using functional approach
-            allTransactionsList.filter { transaction ->
-                val dateMatches =
-                    when {
-                        from != null && to != null -> transaction.date in from..to
-                        from != null -> transaction.date >= from
-                        to != null -> transaction.date <= to
-                        else -> true
-                    }
-                dateMatches
+            // Filter by date range
+            allTransactions.filter { transaction ->
+                val matchesFrom = effectiveFrom == null || transaction.date >= effectiveFrom
+                val matchesTo = to == null || transaction.date <= to
+                matchesFrom && matchesTo
             }
         }
 
-    private suspend fun syncTransactionsForToken(token: model.PlaidToken): Either<String, List<Transaction>> =
+    private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> =
         either {
             // Load existing transactions to get cursor
             val existing = transactionDao.loadTransactions(token.itemId)
@@ -76,7 +96,7 @@ class TransactionServiceImpl(
             } while (response.hasMore)
 
             // Convert to stored transactions
-            val storedTransactions =
+            val newStoredTransactions =
                 allNewTransactions.map { plaidTx ->
                     StoredTransaction(
                         transactionId = plaidTx.transactionId,
@@ -91,15 +111,20 @@ class TransactionServiceImpl(
                     )
                 }
 
-            // Save transactions with the latest cursor
+            // Combine existing transactions with new ones, avoiding duplicates
+            val allStoredTransactions =
+                (existing?.transactions.orEmpty() + newStoredTransactions)
+                    .distinctBy { it.transactionId }
+
+            // Save combined transactions with the latest cursor
             val transactionsToSave =
                 StoredTransactions(
                     cursor = cursor,
-                    transactions = storedTransactions,
+                    transactions = allStoredTransactions,
                 )
             transactionDao.saveTransactions(token.itemId, transactionsToSave)
 
             // Convert to domain model and return
-            storedTransactions.map { it.toDomainModel(token.bankName) }
+            allStoredTransactions.map { it.toDomainModel(token.bankName) }
         }
 }
