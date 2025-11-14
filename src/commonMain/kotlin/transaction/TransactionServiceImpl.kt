@@ -1,6 +1,5 @@
 package transaction
 
-import account.AccountService
 import arrow.core.Either
 import arrow.core.raise.either
 import arrow.fx.coroutines.parMap
@@ -15,7 +14,6 @@ import model.Transaction
 import plaid.PlaidService
 
 class TransactionServiceImpl(
-    private val accountService: AccountService,
     private val tokenDao: TokenDao,
     private val transactionDao: TransactionDao,
     private val plaidService: PlaidService,

@@ -44,7 +44,6 @@ object InterpreterFactory {
                     )
                 val transactionService =
                     TransactionServiceImpl(
-                        accountService,
                         tokenDao,
                         transactionDao,
                         plaidService,
