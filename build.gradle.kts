@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform") version "2.1.20"
     kotlin("plugin.serialization") version "2.1.20"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.7"
 }
 
 group = "leonoid"
@@ -54,8 +55,27 @@ configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
     }
 }
 
+// Detekt configuration
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config.setFrom("$projectDir/detekt.yml")
+    baseline = file("$projectDir/detekt-baseline.xml")
+    parallel = true
+    ignoreFailures = false
+}
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
+}
+
 // Auto-format on build
 tasks.named("check") {
+    dependsOn("ktlintFormat")
+}
+
+// Run Detekt after ktlint formatting
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     dependsOn("ktlintFormat")
 }
 

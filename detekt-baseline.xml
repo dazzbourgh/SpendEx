@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>MaximumLineLength:JsonTokenDaoImpl.kt$JsonTokenDaoImpl$ </ID>
+    <ID>SwallowedException:JsonTokenDaoImpl.kt$JsonTokenDaoImpl$e: Exception</ID>
+    <ID>SwallowedException:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:BrowserLauncherImpl.kt$BrowserLauncherImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:JsonConfigDao.kt$JsonConfigDao$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:JsonTokenDaoImpl.kt$JsonTokenDaoImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>
+    <ID>TooGenericExceptionCaught:OAuthRedirectServerImpl.kt$OAuthRedirectServerImpl$e: Exception</ID>
+    <ID>UseCheckOrError:FileSystemHelper.kt$FileSystemHelper$throw IllegalStateException("${Constants.FileSystem.ErrorMessages.CANNOT_OPEN_FILE}: $path")</ID>
+    <ID>Wrapping:JsonTokenDaoImpl.kt$JsonTokenDaoImpl$it.bankName == bankName</ID>
+  </CurrentIssues>
+</SmellBaseline>
