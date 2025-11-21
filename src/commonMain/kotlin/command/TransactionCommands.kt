@@ -61,7 +61,7 @@ class TransactionListCommand(
     private fun parseDate(dateString: String): LocalDate? =
         try {
             LocalDate.parse(dateString)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
 }
