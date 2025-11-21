@@ -69,7 +69,17 @@ dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
 }
 
-// Auto-format on build
+// Ensure ktlint check tasks always run after format tasks
+tasks.matching { it.name.startsWith("ktlint") && it.name.contains("Check") }.configureEach {
+    mustRunAfter(tasks.matching { it.name.startsWith("ktlint") && it.name.contains("Format") })
+}
+
+// Also ensure runKtlintCheckOver* tasks run after runKtlintFormatOver* tasks
+tasks.matching { it.name.startsWith("runKtlintCheck") }.configureEach {
+    mustRunAfter(tasks.matching { it.name.startsWith("runKtlintFormat") })
+}
+
+// Auto-format before check
 tasks.named("check") {
     dependsOn("ktlintFormat")
 }

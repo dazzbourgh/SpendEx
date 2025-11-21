@@ -24,7 +24,8 @@ class TransactionListCommand(
     ) {
     private val from by option("--from").help(Constants.Commands.Transactions.List.FROM_HELP)
     private val to by option("--to").help(Constants.Commands.Transactions.List.TO_HELP)
-    private val institutions by option("--institution").multiple().help(Constants.Commands.Transactions.List.INSTITUTION_HELP)
+    private val institutions by option("--institution").multiple()
+        .help(Constants.Commands.Transactions.List.INSTITUTION_HELP)
 
     override fun run() =
         runBlocking {
@@ -47,7 +48,7 @@ class TransactionListCommand(
                     if (transactions.none()) {
                         println("No transactions found")
                     } else {
-                        transactions.forEach { transaction ->
+                        transactions.sortedByDescending { it.date }.forEach { transaction ->
                             println(
                                 "${transaction.date} | ${transaction.institutionName} | ${transaction.description} | ${transaction.amount}",
                             )
