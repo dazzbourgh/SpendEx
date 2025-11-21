@@ -7,7 +7,6 @@ package config
 object Constants {
     object App {
         const val NAME = "spndx"
-        const val DISPLAY_NAME = "SpendEx"
         const val DESCRIPTION = "SpendEx - CLI tool for managing financial accounts and transactions"
         const val ENVIRONMENT_SANDBOX = "sandbox"
     }
@@ -179,9 +178,5 @@ object Constants {
             const val LAUNCH_FAILED = "Browser launch failed with exit code"
             const val OPEN_FAILED = "Failed to open browser"
         }
-    }
-
-    object Resources {
-        const val LINK_HTML_FILE = "link.html"
     }
 }
