@@ -9,10 +9,13 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.serialization.json.Json
 import model.AccountsGetRequest
 import model.LinkTokenCreateRequest
 import model.LinkTokenUser
@@ -41,22 +44,25 @@ class PlaidServiceImpl(
                     secret = config.secret,
                     clientName = Constants.Plaid.CLIENT_NAME,
                     user = LinkTokenUser(clientUserId = Constants.Plaid.CLIENT_USER_ID),
-                    products = listOf(PlaidProduct.AUTH, PlaidProduct.TRANSACTIONS),
+                    products = listOf(PlaidProduct.TRANSACTIONS),
                     countryCodes = listOf(PlaidCountryCode.US),
                     language = Constants.Plaid.LANGUAGE,
                     redirectUri = Constants.OAuth.REDIRECT_URL,
                 )
-
-            try {
-                httpClient
-                    .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
-                        contentType(ContentType.Application.Json)
-                        setBody(request)
-                    }.body<PlaidLinkTokenResponse>()
-                    .linkToken
-            } catch (exception: Exception) {
-                "${Constants.Plaid.ErrorMessages.LINK_TOKEN_FAILED}: ${exception.message}"
-            }
+            arrow.core.raise.catch(
+                block = {
+                    val response =
+                        httpClient
+                            .post("${environmentConfig.plaidBaseUrl}${Constants.Plaid.Endpoints.LINK_TOKEN_CREATE}") {
+                                contentType(ContentType.Application.Json)
+                                setBody(request)
+                            }
+                    if (!response.status.isSuccess()) raise("Error response from Plaid:\n\n${response.bodyAsText()}")
+                    response.body<PlaidLinkTokenResponse>()
+                        .linkToken
+                },
+                catch = { exception -> raise("${Constants.Plaid.ErrorMessages.LINK_TOKEN_FAILED}: ${exception.stackTraceToString()}") },
+            )
         }
 
     override suspend fun exchangePublicToken(publicToken: String): Either<String, PlaidAccessTokenResponse> =
