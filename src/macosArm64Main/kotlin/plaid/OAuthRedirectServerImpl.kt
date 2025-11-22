@@ -30,7 +30,22 @@ class OAuthRedirectServerImpl : OAuthRedirectServer {
             server =
                 embeddedServer(CIO, port = port, host = Constants.OAuth.SERVER_HOST) {
                     routing {
-                        get(Constants.OAuth.ROOT_PATH) {
+                        // Serve the Plaid Link HTML page
+                        get(Constants.OAuth.LINK_PATH) {
+                            val html =
+                                Constants.OAuth.Html.LINK_PAGE
+                                    .replace("{{LINK_TOKEN}}", linkToken)
+                                    .replace("{{REDIRECT_URL}}", Constants.OAuth.REDIRECT_URL)
+
+                            call.respondText(
+                                html,
+                                contentType = ContentType.Text.Html,
+                                status = HttpStatusCode.OK,
+                            )
+                        }
+
+                        // Handle OAuth callbacks
+                        get(Constants.OAuth.CALLBACK_PATH) {
                             val publicToken = call.request.queryParameters[Constants.OAuth.PUBLIC_TOKEN_PARAM]
                             val oauthStateId = call.request.queryParameters[Constants.OAuth.OAUTH_STATE_ID_PARAM]
 

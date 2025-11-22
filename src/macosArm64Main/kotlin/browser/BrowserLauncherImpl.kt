@@ -4,53 +4,12 @@ import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
 import config.Constants
-import dao.FileSystemHelper
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.datetime.Clock
 import platform.posix.pclose
 import platform.posix.popen
 
 @OptIn(ExperimentalForeignApi::class)
 class BrowserLauncherImpl : BrowserLauncher {
-    companion object {
-        private const val LINK_HTML_TEMPLATE = """<!DOCTYPE html>
-<html>
-<head>
-<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
-</head>
-<body>
-<script>
-const linkToken = "{{LINK_TOKEN}}";
-const redirectBase = "{{REDIRECT_URL}}";
-
-// Check if this is a redirect from OAuth
-const urlParams = new URLSearchParams(window.location.search);
-const oauthStateId = urlParams.get('oauth_state_id');
-
-const config = {
-  token: linkToken,
-  onSuccess: function(public_token, metadata) {
-    const redirectUrl = redirectBase + "?public_token=" + encodeURIComponent(public_token);
-    console.log("Redirecting to:", redirectUrl);
-    window.location.href = redirectUrl;
-  },
-  onExit: function(err, metadata) {
-    console.log("User exited Plaid Link", err, metadata);
-  }
-};
-
-// If returning from OAuth, include the receivedRedirectUri
-if (oauthStateId) {
-  config.receivedRedirectUri = window.location.href;
-}
-
-const handler = Plaid.create(config);
-handler.open();
-</script>
-</body>
-</html>"""
-    }
-
     override suspend fun openUrl(url: String): Either<String, Unit> =
         try {
             val command = "${Constants.Browser.MACOS_OPEN_COMMAND} \"$url\""
@@ -74,21 +33,13 @@ handler.open();
         redirectUrl: String,
     ): Either<String, Unit> =
         try {
-            // Substitute placeholders in HTML template
-            val htmlContent =
-                LINK_HTML_TEMPLATE
-                    .replace("{{LINK_TOKEN}}", linkToken)
-                    .replace("{{REDIRECT_URL}}", redirectUrl)
+            // Build the server link URL
+            val linkUrl =
+                "http://${Constants.OAuth.SERVER_HOST}${Constants.OAuth.PORT_DELIMITER}" +
+                    "${Constants.OAuth.DEFAULT_PORT}${Constants.OAuth.LINK_PATH}"
 
-            // Create temp file path with current timestamp
-            val timestamp = Clock.System.now().toEpochMilliseconds()
-            val tempFilePath = "/tmp/spendex-link-$timestamp.html"
-
-            // Write HTML content to temp file
-            FileSystemHelper.writeFile(tempFilePath, htmlContent)
-
-            // Open the file with default browser
-            openUrl("file://$tempFilePath")
+            // Open the server URL in browser
+            openUrl(linkUrl)
         } catch (e: Exception) {
             "${Constants.Browser.ErrorMessages.OPEN_FAILED}: ${e.message}".left()
         }

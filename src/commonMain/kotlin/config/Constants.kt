@@ -63,8 +63,9 @@ object Constants {
     object OAuth {
         const val SERVER_HOST = "127.0.0.1"
         const val DEFAULT_PORT = 34432
-        const val REDIRECT_URL = "http://$SERVER_HOST:$DEFAULT_PORT"
-        const val ROOT_PATH = "/"
+        const val LINK_PATH = "/link"
+        const val CALLBACK_PATH = "/callback"
+        const val REDIRECT_URL = "http://$SERVER_HOST:$DEFAULT_PORT$CALLBACK_PATH"
         const val PUBLIC_TOKEN_PARAM = "public_token"
         const val OAUTH_STATE_ID_PARAM = "oauth_state_id"
         const val PORT_DELIMITER = ":"
@@ -74,6 +75,43 @@ object Constants {
         const val SHUTDOWN_TIMEOUT_MILLIS = 2000L
 
         object Html {
+            const val LINK_PAGE = """<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+</head>
+<body>
+<script>
+const linkToken = "{{LINK_TOKEN}}";
+const redirectBase = "{{REDIRECT_URL}}";
+
+// Check if this is a redirect from OAuth
+const urlParams = new URLSearchParams(window.location.search);
+const oauthStateId = urlParams.get('oauth_state_id');
+
+const config = {
+  token: linkToken,
+  onSuccess: function(public_token, metadata) {
+    const redirectUrl = redirectBase + "?public_token=" + encodeURIComponent(public_token);
+    console.log("Redirecting to:", redirectUrl);
+    window.location.href = redirectUrl;
+  },
+  onExit: function(err, metadata) {
+    console.log("User exited Plaid Link", err, metadata);
+  }
+};
+
+// If returning from OAuth, include the receivedRedirectUri
+if (oauthStateId) {
+  config.receivedRedirectUri = window.location.href;
+}
+
+const handler = Plaid.create(config);
+handler.open();
+</script>
+</body>
+</html>"""
+
             const val SUCCESS_PAGE = """<!DOCTYPE html>
 <html>
 <head><title>Authorization Successful</title></head>
