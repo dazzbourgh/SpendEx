@@ -16,7 +16,7 @@ import plaid.PlaidService
 class TransactionServiceImpl(
     private val tokenDao: TokenDao,
     private val transactionDao: TransactionDao,
-    private val plaidService: PlaidService
+    private val plaidService: PlaidService,
 ) : TransactionService {
     override suspend fun listTransactions(
         from: LocalDate?,

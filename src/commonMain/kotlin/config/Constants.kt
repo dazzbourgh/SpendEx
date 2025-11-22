@@ -9,6 +9,7 @@ object Constants {
         const val NAME = "spndx"
         const val DESCRIPTION = "SpendEx - CLI tool for managing financial accounts and transactions"
         const val ENVIRONMENT_SANDBOX = "sandbox"
+        const val ENVIRONMENT_PROD = "prod"
     }
 
     object FileSystem {
