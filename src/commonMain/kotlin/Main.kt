@@ -11,11 +11,10 @@ import config.Constants
 import interpreter.InterpreterFactory
 
 fun main(args: Array<String>) {
-    // Parse environment flag first by creating a temporary root command
     val rootCmd = RootCommand()
 
-    // Pre-parse to get environment (we need to parse twice unfortunately due to Clikt's design)
-    // First parse to extract environment
+    // Manually extract environment before creating interpreter
+    // (InterpreterFactory needs environment to wire up the dependency graph before subcommands are constructed)
     val environment = extractEnvironment(args)
 
     // Create interpreter based on environment
