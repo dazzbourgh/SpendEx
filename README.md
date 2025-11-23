@@ -1,11 +1,13 @@
 # SpendEx
 
-SpendEx is a CLI tool for managing financial accounts and transactions.
+SpendEx is a Kotlin Multiplatform CLI tool for managing financial accounts and transactions via Plaid API integration.
 
 ## Features
 
-- Add and manage financial accounts from multiple banks
+- Configure Plaid API credentials
+- Add financial accounts from multiple banks via secure OAuth flow
 - List all registered accounts with details
+- View and filter transaction history
 
 ## Building
 
@@ -27,8 +29,10 @@ To install the `spndx` command globally to `/usr/local/bin`, run:
 After installation, you can run:
 
 ```bash
-spndx command add --bank Chase --username john.doe@email.com
-spndx command list
+spndx plaid configure
+spndx accounts add
+spndx accounts list
+spndx transactions list
 ```
 
 ## Running
@@ -50,21 +54,65 @@ Or build and run the native binary directly:
 
 The examples below show commands using the installed `spndx` binary. If you haven't installed it yet, replace `spndx` with `./gradlew run --args="..."`.
 
-### Add an Account
+### Configure Plaid API
 
-Add a new financial account with a bank name and username:
+Before adding accounts, configure your Plaid API credentials:
 
 ```bash
-spndx command add --bank Chase --username john.doe@email.com
+spndx plaid configure
 ```
+
+You'll be prompted to enter your Plaid client ID and secret.
+
+### Add an Account
+
+Add a new financial account (opens browser for OAuth authentication):
+
+```bash
+spndx accounts add
+```
+
+This will:
+1. Open your browser to Plaid Link
+2. Let you select your bank and authenticate
+3. Securely link your account
 
 ### List Accounts
 
 View all registered accounts:
 
 ```bash
-spndx command list
+spndx accounts list
 ```
+
+### List Transactions
+
+View transactions with optional filters:
+
+```bash
+# List all transactions
+spndx transactions list
+
+# Filter by date range
+spndx transactions list --from 2024-01-01 --to 2024-12-31
+
+# Filter by institution
+spndx transactions list --institution "Chase Bank"
+
+# Combine filters
+spndx transactions list --from 2024-01-01 --institution "Chase Bank"
+```
+
+### Environment
+
+Specify the Plaid environment (sandbox or prod):
+
+```bash
+spndx --environment sandbox accounts add
+spndx --environment prod accounts add
+```
+
+Default is `prod`.
 
 ### Help
 
@@ -77,20 +125,30 @@ spndx --help
 Or get help for a specific command:
 
 ```bash
-spndx command add --help
+spndx accounts --help
+spndx accounts add --help
+spndx transactions list --help
 ```
 
 ## Project Structure
 
-The project follows a feature-based organization:
+The project follows a three-layer architecture:
 
-- `command/` - CLI command definitions and data models
-- `interpreter/` - Business logic implementation for commands
+- `command/` - CLI command definitions using Clikt framework
+- `interpreter/` - Business logic orchestration layer
+- `service/` - Domain logic implementation (account, transaction, plaid services)
 - `dao/` - Data access layer for persistent storage
+- `config/` - Application configuration and constants
 
 ### Data Storage
 
-Account data is stored in JSON format at `~/.spndx/banks.json` with secure permissions (0600 - owner read/write only). The directory is created automatically with 0700 permissions.
+Data is stored securely in the `~/.spndx/` directory:
+
+- `config.json` - Plaid API credentials (0600 permissions)
+- `tokens.json` - Plaid access tokens for linked accounts (0600 permissions)
+- `transactions.json` - Transaction data (0600 permissions)
+
+All files are created with 0600 permissions (owner read/write only). The directory is created automatically with 0700 permissions.
 
 ## Development
 
