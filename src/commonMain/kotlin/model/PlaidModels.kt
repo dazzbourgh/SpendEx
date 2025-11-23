@@ -96,7 +96,6 @@ data class LinkTokenCreateRequest(
     val products: List<PlaidProduct>,
     @SerialName("country_codes") val countryCodes: List<PlaidCountryCode>,
     val language: String,
-    @SerialName("redirect_uri") val redirectUri: String,
 )
 
 /**

@@ -15,7 +15,6 @@ import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.serialization.json.Json
 import model.AccountsGetRequest
 import model.LinkTokenCreateRequest
 import model.LinkTokenUser
@@ -47,7 +46,6 @@ class PlaidServiceImpl(
                     products = listOf(PlaidProduct.TRANSACTIONS),
                     countryCodes = listOf(PlaidCountryCode.US),
                     language = Constants.Plaid.LANGUAGE,
-                    redirectUri = Constants.OAuth.REDIRECT_URL,
                 )
             arrow.core.raise.catch(
                 block = {
