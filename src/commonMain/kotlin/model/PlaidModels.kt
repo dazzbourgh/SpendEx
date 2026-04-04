@@ -158,7 +158,16 @@ data class PlaidTransaction(
     @SerialName("category_id") val categoryId: String?,
     @SerialName("location") val location: PlaidLocation?,
     val pending: Boolean,
-)
+) {
+    fun toDomainModel(institutionName: String): Transaction =
+        Transaction(
+            id = transactionId,
+            date = kotlinx.datetime.LocalDate.parse(date),
+            description = merchantName ?: name,
+            amount = amount,
+            institutionName = institutionName,
+        )
+}
 
 /**
  * Plaid transaction location information

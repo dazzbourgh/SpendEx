@@ -8,7 +8,6 @@ import config.ProductionEnvironmentConfig
 import config.SandboxEnvironmentConfig
 import dao.JsonConfigDao
 import dao.JsonTokenDaoImpl
-import dao.JsonTransactionDaoImpl
 import plaid.HttpClientFactory
 import plaid.OAuthRedirectServer
 import plaid.PlaidServiceImpl
@@ -45,7 +44,6 @@ object InterpreterFactory {
                 environmentConfig,
             )
         val accountService = AccountServiceImpl(tokenDao)
-        val transactionDao = JsonTransactionDaoImpl()
         val accountCommandInterpreter =
             AccountCommandInterpreterImpl(
                 tokenDao,
@@ -56,7 +54,6 @@ object InterpreterFactory {
         val transactionService =
             TransactionServiceImpl(
                 tokenDao,
-                transactionDao,
                 plaidService,
             )
         val transactionCommandInterpreter =

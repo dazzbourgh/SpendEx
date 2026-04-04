@@ -2,11 +2,11 @@
   "meta": {
     "format": "ai-code-index",
     "version": 1,
-    "generated_at": "2026-04-04T04:06:15.649842+00:00",
+    "generated_at": "2026-04-04T04:47:50.045749+00:00",
     "project_root": "SpendEx",
-    "indexed_file_count": 60,
-    "indexed_kotlin_file_count": 49,
-    "symbol_count": 169
+    "indexed_file_count": 57,
+    "indexed_kotlin_file_count": 46,
+    "symbol_count": 158
   },
   "entry_points": [
     {
@@ -86,31 +86,13 @@
       ]
     },
     {
-      "package": "dao",
-      "symbol": "JsonTransactionDaoImpl",
-      "expects": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 5,
-          "end_line": 12
-        }
-      ],
-      "actuals": [
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 12,
-          "end_line": 62
-        }
-      ]
-    },
-    {
       "package": "interpreter",
       "symbol": "createBrowserLauncher",
       "expects": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 17,
-          "end_line": 17
+          "line": 16,
+          "end_line": 16
         }
       ],
       "actuals": [
@@ -127,8 +109,8 @@
       "expects": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 19,
-          "end_line": 19
+          "line": 18,
+          "end_line": 18
         }
       ],
       "actuals": [
@@ -355,7 +337,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 47,
+          "line": 46,
           "kind": "usage",
           "snippet": "val accountService = AccountServiceImpl(tokenDao)"
         }
@@ -447,7 +429,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 17,
+          "line": 16,
           "kind": "usage",
           "snippet": "expect fun createBrowserLauncher(): BrowserLauncher"
         },
@@ -583,8 +565,8 @@
         "kotlinx.coroutines.runBlocking"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156",
         "config.Constants@7"
       ],
       "reference_count": 2,
@@ -657,9 +639,9 @@
       ],
       "dependencies": [
         "interpreter.AccountCommandInterpreter@6",
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157.Accounts@158.Add@162",
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156.Accounts@157.Add@161",
+        "config.Constants@7.Commands@156",
         "config.Constants@7"
       ],
       "reference_count": 2,
@@ -732,11 +714,11 @@
       ],
       "dependencies": [
         "interpreter.AccountCommandInterpreter@6",
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156",
         "config.Constants@7",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189"
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188"
       ],
       "reference_count": 2,
       "references": [
@@ -809,10 +791,10 @@
         "kotlinx.coroutines.runBlocking"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156",
         "config.Constants@7",
-        "config.Constants@7.Plaid@37",
-        "config.Constants@7.Commands@157.Plaid@173"
+        "config.Constants@7.Plaid@36",
+        "config.Constants@7.Commands@156.Plaid@172"
       ],
       "reference_count": 2,
       "references": [
@@ -887,11 +869,11 @@
         "kotlinx.coroutines.runBlocking"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157",
-        "config.Constants@7.Commands@157.Plaid@173.Configure@177",
+        "config.Constants@7.Commands@156",
+        "config.Constants@7.Commands@156.Plaid@172.Configure@176",
         "config.Constants@7",
-        "config.Constants@7.Plaid@37",
-        "config.Constants@7.Commands@157.Plaid@173",
+        "config.Constants@7.Plaid@36",
+        "config.Constants@7.Commands@156.Plaid@172",
         "interpreter.PlaidCommandInterpreter@3"
       ],
       "reference_count": 2,
@@ -1034,9 +1016,9 @@
         "kotlinx.datetime.LocalDate"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156",
         "config.Constants@7",
-        "config.Constants@7.Commands@157.Transactions@185"
+        "config.Constants@7.Commands@156.Transactions@184"
       ],
       "reference_count": 2,
       "references": [
@@ -1113,12 +1095,12 @@
         "kotlinx.datetime.LocalDate"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157",
+        "config.Constants@7.Commands@156",
         "config.Constants@7",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
         "interpreter.TransactionCommandInterpreter@7",
-        "config.Constants@7.Commands@157.Transactions@185"
+        "config.Constants@7.Commands@156.Transactions@184"
       ],
       "reference_count": 2,
       "references": [
@@ -1227,11 +1209,11 @@
       "is_expect": false,
       "is_actual": false,
       "start_line": 7,
-      "end_line": 221,
+      "end_line": 220,
       "signature": "object Constants {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 88,
+      "reference_count": 85,
       "references": [
         {
           "path": "src/commonMain/kotlin/Main.kt",
@@ -1451,13 +1433,13 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_SANDBOX -> SandboxEnvironmentConfig"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 30,
+          "line": 29,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_PROD -> ProductionEnvironmentConfig"
         },
@@ -1632,24 +1614,6 @@
         {
           "path": "src/macosArm64Main/kotlin/dao/JsonTokenDaoImpl.kt",
           "line": 20,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 3,
-          "kind": "import",
-          "snippet": "import config.Constants"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 18,
-          "kind": "usage",
-          "snippet": "getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
           "kind": "usage",
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
@@ -1821,13 +1785,13 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_SANDBOX -> SandboxEnvironmentConfig"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 30,
+          "line": 29,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_PROD -> ProductionEnvironmentConfig"
         }
@@ -1847,11 +1811,11 @@
       "is_expect": false,
       "is_actual": false,
       "start_line": 15,
-      "end_line": 35,
+      "end_line": 34,
       "signature": "object FileSystem {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 17,
+      "reference_count": 15,
       "references": [
         {
           "path": "src/macosArm64Main/kotlin/browser/BrowserLauncherImpl.kt",
@@ -1938,18 +1902,6 @@
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 18,
-          "kind": "usage",
-          "snippet": "getenv(Constants.FileSystem.HOME_ENV_VAR)?.toKString()"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -1958,7 +1910,7 @@
       ]
     },
     {
-      "id": "config.Constants@7.FileSystem@15.ErrorMessages@29",
+      "id": "config.Constants@7.FileSystem@15.ErrorMessages@28",
       "name": "ErrorMessages",
       "simple_name": "ErrorMessages",
       "kind": "object",
@@ -1970,12 +1922,12 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 29,
-      "end_line": 34,
+      "start_line": 28,
+      "end_line": 33,
       "signature": "object ErrorMessages {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 11,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -1985,19 +1937,19 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 55,
+          "line": 54,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 198,
+          "line": 197,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 215,
+          "line": 214,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
@@ -2038,12 +1990,6 @@
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -2052,7 +1998,7 @@
       ]
     },
     {
-      "id": "config.Constants@7.Plaid@37",
+      "id": "config.Constants@7.Plaid@36",
       "name": "Plaid",
       "simple_name": "Plaid",
       "kind": "object",
@@ -2064,8 +2010,8 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 37,
-      "end_line": 61,
+      "start_line": 36,
+      "end_line": 60,
       "signature": "object Plaid {",
       "imports": [],
       "dependencies": [],
@@ -2109,7 +2055,7 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 173,
+          "line": 172,
           "kind": "usage",
           "snippet": "object Plaid {"
         },
@@ -2146,20 +2092,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Plaid@37.Endpoints@48",
+      "id": "config.Constants@7.Plaid@36.Endpoints@47",
       "name": "Endpoints",
       "simple_name": "Endpoints",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Plaid@37",
+      "container_id": "config.Constants@7.Plaid@36",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 48,
-      "end_line": 53,
+      "start_line": 47,
+      "end_line": 52,
       "signature": "object Endpoints {",
       "imports": [],
       "dependencies": [],
@@ -2167,24 +2113,24 @@
       "references": []
     },
     {
-      "id": "config.Constants@7.Plaid@37.ErrorMessages@55",
+      "id": "config.Constants@7.Plaid@36.ErrorMessages@54",
       "name": "ErrorMessages",
       "simple_name": "ErrorMessages",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Plaid@37",
+      "container_id": "config.Constants@7.Plaid@36",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 55,
-      "end_line": 60,
+      "start_line": 54,
+      "end_line": 59,
       "signature": "object ErrorMessages {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 11,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -2194,19 +2140,19 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 198,
+          "line": 197,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 215,
+          "line": 214,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
@@ -2247,12 +2193,6 @@
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -2261,7 +2201,7 @@
       ]
     },
     {
-      "id": "config.Constants@7.OAuth@63",
+      "id": "config.Constants@7.OAuth@62",
       "name": "OAuth",
       "simple_name": "OAuth",
       "kind": "object",
@@ -2273,8 +2213,8 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 63,
-      "end_line": 155,
+      "start_line": 62,
+      "end_line": 154,
       "signature": "object OAuth {",
       "imports": [],
       "dependencies": [],
@@ -2391,20 +2331,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.OAuth@63.Html@77",
+      "id": "config.Constants@7.OAuth@62.Html@76",
       "name": "Html",
       "simple_name": "Html",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.OAuth@63",
+      "container_id": "config.Constants@7.OAuth@62",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 77,
-      "end_line": 146,
+      "start_line": 76,
+      "end_line": 145,
       "signature": "object Html {",
       "imports": [],
       "dependencies": [],
@@ -2461,20 +2401,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.OAuth@63.Messages@148",
+      "id": "config.Constants@7.OAuth@62.Messages@147",
       "name": "Messages",
       "simple_name": "Messages",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.OAuth@63",
+      "container_id": "config.Constants@7.OAuth@62",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 148,
-      "end_line": 154,
+      "start_line": 147,
+      "end_line": 153,
       "signature": "object Messages {",
       "imports": [],
       "dependencies": [],
@@ -2507,7 +2447,7 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157",
+      "id": "config.Constants@7.Commands@156",
       "name": "Commands",
       "simple_name": "Commands",
       "kind": "object",
@@ -2519,8 +2459,8 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 157,
-      "end_line": 209,
+      "start_line": 156,
+      "end_line": 208,
       "signature": "object Commands {",
       "imports": [],
       "dependencies": [],
@@ -2661,20 +2601,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Accounts@158",
+      "id": "config.Constants@7.Commands@156.Accounts@157",
       "name": "Accounts",
       "simple_name": "Accounts",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157",
+      "container_id": "config.Constants@7.Commands@156",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 158,
-      "end_line": 171,
+      "start_line": 157,
+      "end_line": 170,
       "signature": "object Accounts {",
       "imports": [],
       "dependencies": [],
@@ -2719,20 +2659,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Accounts@158.Add@162",
+      "id": "config.Constants@7.Commands@156.Accounts@157.Add@161",
       "name": "Add",
       "simple_name": "Add",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157.Accounts@158",
+      "container_id": "config.Constants@7.Commands@156.Accounts@157",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 162,
-      "end_line": 165,
+      "start_line": 161,
+      "end_line": 164,
       "signature": "object Add {",
       "imports": [],
       "dependencies": [],
@@ -2753,24 +2693,24 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Accounts@158.List@167",
+      "id": "config.Constants@7.Commands@156.Accounts@157.List@166",
       "name": "List",
       "simple_name": "List",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157.Accounts@158",
+      "container_id": "config.Constants@7.Commands@156.Accounts@157",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 167,
-      "end_line": 170,
+      "start_line": 166,
+      "end_line": 169,
       "signature": "object List {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 20,
+      "reference_count": 18,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -2816,7 +2756,7 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 189,
+          "line": 188,
           "kind": "usage",
           "snippet": "object List {"
         },
@@ -2863,28 +2803,16 @@
           "snippet": "@SerialName() val category: List<String>?,"
         },
         {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 34,
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 43,
           "kind": "usage",
-          "snippet": "val transactions: List<StoredTransaction>,"
-        },
-        {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 57,
-          "kind": "usage",
-          "snippet": "val category: List<String>?,"
+          "snippet": "private suspend fun fetchTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 49,
+          "line": 63,
           "kind": "usage",
-          "snippet": "): Either<String, List<Transaction>> ="
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 82,
-          "kind": "usage",
-          "snippet": "private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
+          "snippet": "removedTransactions: List<PlaidRemovedTransaction>,"
         },
         {
           "path": "src/macosArm64Main/kotlin/dao/JsonTokenDaoImpl.kt",
@@ -2895,20 +2823,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Plaid@173",
+      "id": "config.Constants@7.Commands@156.Plaid@172",
       "name": "Plaid",
       "simple_name": "Plaid",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157",
+      "container_id": "config.Constants@7.Commands@156",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 173,
-      "end_line": 183,
+      "start_line": 172,
+      "end_line": 182,
       "signature": "object Plaid {",
       "imports": [],
       "dependencies": [],
@@ -2952,7 +2880,7 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 37,
+          "line": 36,
           "kind": "usage",
           "snippet": "object Plaid {"
         },
@@ -2989,20 +2917,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Plaid@173.Configure@177",
+      "id": "config.Constants@7.Commands@156.Plaid@172.Configure@176",
       "name": "Configure",
       "simple_name": "Configure",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157.Plaid@173",
+      "container_id": "config.Constants@7.Commands@156.Plaid@172",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 177,
-      "end_line": 182,
+      "start_line": 176,
+      "end_line": 181,
       "signature": "object Configure {",
       "imports": [],
       "dependencies": [],
@@ -3035,20 +2963,20 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Transactions@185",
+      "id": "config.Constants@7.Commands@156.Transactions@184",
       "name": "Transactions",
       "simple_name": "Transactions",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157",
+      "container_id": "config.Constants@7.Commands@156",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 185,
-      "end_line": 196,
+      "start_line": 184,
+      "end_line": 195,
       "signature": "object Transactions {",
       "imports": [],
       "dependencies": [],
@@ -3099,24 +3027,24 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.Transactions@185.List@189",
+      "id": "config.Constants@7.Commands@156.Transactions@184.List@188",
       "name": "List",
       "simple_name": "List",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157.Transactions@185",
+      "container_id": "config.Constants@7.Commands@156.Transactions@184",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 189,
-      "end_line": 195,
+      "start_line": 188,
+      "end_line": 194,
       "signature": "object List {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 20,
+      "reference_count": 18,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -3162,7 +3090,7 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 167,
+          "line": 166,
           "kind": "usage",
           "snippet": "object List {"
         },
@@ -3209,28 +3137,16 @@
           "snippet": "@SerialName() val category: List<String>?,"
         },
         {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 34,
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 43,
           "kind": "usage",
-          "snippet": "val transactions: List<StoredTransaction>,"
-        },
-        {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 57,
-          "kind": "usage",
-          "snippet": "val category: List<String>?,"
+          "snippet": "private suspend fun fetchTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 49,
+          "line": 63,
           "kind": "usage",
-          "snippet": "): Either<String, List<Transaction>> ="
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 82,
-          "kind": "usage",
-          "snippet": "private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
+          "snippet": "removedTransactions: List<PlaidRemovedTransaction>,"
         },
         {
           "path": "src/macosArm64Main/kotlin/dao/JsonTokenDaoImpl.kt",
@@ -3241,24 +3157,24 @@
       ]
     },
     {
-      "id": "config.Constants@7.Commands@157.ErrorMessages@198",
+      "id": "config.Constants@7.Commands@156.ErrorMessages@197",
       "name": "ErrorMessages",
       "simple_name": "ErrorMessages",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Commands@157",
+      "container_id": "config.Constants@7.Commands@156",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 198,
-      "end_line": 208,
+      "start_line": 197,
+      "end_line": 207,
       "signature": "object ErrorMessages {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 11,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -3268,19 +3184,19 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 55,
+          "line": 54,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 215,
+          "line": 214,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
@@ -3321,12 +3237,6 @@
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -3335,7 +3245,7 @@
       ]
     },
     {
-      "id": "config.Constants@7.Browser@211",
+      "id": "config.Constants@7.Browser@210",
       "name": "Browser",
       "simple_name": "Browser",
       "kind": "object",
@@ -3347,8 +3257,8 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 211,
-      "end_line": 220,
+      "start_line": 210,
+      "end_line": 219,
       "signature": "object Browser {",
       "imports": [],
       "dependencies": [],
@@ -3369,24 +3279,24 @@
       ]
     },
     {
-      "id": "config.Constants@7.Browser@211.ErrorMessages@215",
+      "id": "config.Constants@7.Browser@210.ErrorMessages@214",
       "name": "ErrorMessages",
       "simple_name": "ErrorMessages",
       "kind": "object",
       "package": "config",
-      "container_id": "config.Constants@7.Browser@211",
+      "container_id": "config.Constants@7.Browser@210",
       "file": "src/commonMain/kotlin/config/Constants.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 215,
-      "end_line": 219,
+      "start_line": 214,
+      "end_line": 218,
       "signature": "object ErrorMessages {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 11,
       "references": [
         {
           "path": "src/commonMain/kotlin/command/AccountCommands.kt",
@@ -3396,19 +3306,19 @@
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 55,
+          "line": 54,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
         {
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 198,
+          "line": 197,
           "kind": "usage",
           "snippet": "object ErrorMessages {"
         },
@@ -3445,12 +3355,6 @@
         {
           "path": "src/macosArm64Main/kotlin/dao/JsonTokenDaoImpl.kt",
           "line": 20,
-          "kind": "usage",
-          "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 19,
           "kind": "usage",
           "snippet": "?: throw IllegalStateException(Constants.FileSystem.ErrorMessages.HOME_NOT_SET)"
         },
@@ -3514,13 +3418,13 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 27,
+          "line": 26,
           "kind": "usage",
           "snippet": "private fun getEnvironmentConfig(env: String): EnvironmentConfig ="
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 34,
+          "line": 33,
           "kind": "usage",
           "snippet": "private fun buildInterpreter(environmentConfig: EnvironmentConfig): Interpreter {"
         },
@@ -3672,7 +3576,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 30,
+          "line": 29,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_PROD -> ProductionEnvironmentConfig"
         }
@@ -3708,7 +3612,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 29,
+          "line": 28,
           "kind": "usage",
           "snippet": "Constants.App.ENVIRONMENT_SANDBOX -> SandboxEnvironmentConfig"
         }
@@ -3937,7 +3841,7 @@
       "signature": "expect object FileSystemHelper {",
       "imports": [],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 9,
       "references": [
         {
           "path": "src/macosArm64Main/kotlin/dao/FileSystemHelper.kt",
@@ -3988,24 +3892,6 @@
           "snippet": "FileSystemHelper.writeFile(dataFile, jsonContent)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.ensureDirectoryExists(transactionsDir)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 26,
-          "kind": "usage",
-          "snippet": "val content = FileSystemHelper.readFile(filePath) ?: return null"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 60,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.writeFile(filePath, jsonContent)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -4031,7 +3917,7 @@
       "signature": "fun ensureDirectoryExists(path: String)",
       "imports": [],
       "dependencies": [],
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         {
           "path": "src/macosArm64Main/kotlin/dao/FileSystemHelper.kt",
@@ -4050,12 +3936,6 @@
           "line": 23,
           "kind": "usage",
           "snippet": "FileSystemHelper.ensureDirectoryExists(dataDir)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.ensureDirectoryExists(transactionsDir)"
         }
       ]
     },
@@ -4077,7 +3957,7 @@
       "signature": "fun readFile(path: String): String?",
       "imports": [],
       "dependencies": [],
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         {
           "path": "src/macosArm64Main/kotlin/dao/FileSystemHelper.kt",
@@ -4096,12 +3976,6 @@
           "line": 36,
           "kind": "usage",
           "snippet": "val content = FileSystemHelper.readFile(dataFile) ?: return emptyList()"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 26,
-          "kind": "usage",
-          "snippet": "val content = FileSystemHelper.readFile(filePath) ?: return null"
         }
       ]
     },
@@ -4123,7 +3997,7 @@
       "signature": "fun writeFile( path: String, content: String, )",
       "imports": [],
       "dependencies": [],
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
         {
           "path": "src/macosArm64Main/kotlin/dao/FileSystemHelper.kt",
@@ -4148,12 +4022,6 @@
           "line": 51,
           "kind": "usage",
           "snippet": "FileSystemHelper.writeFile(dataFile, jsonContent)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 60,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.writeFile(filePath, jsonContent)"
         }
       ]
     },
@@ -4194,7 +4062,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 36,
+          "line": 35,
           "kind": "usage",
           "snippet": "val configDao = JsonConfigDao(environmentConfig)"
         },
@@ -4368,7 +4236,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 35,
+          "line": 34,
           "kind": "usage",
           "snippet": "val tokenDao = JsonTokenDaoImpl()"
         },
@@ -4492,7 +4360,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 28,
+          "line": 23,
           "kind": "usage",
           "snippet": "val tokens = tokenDao.list()"
         },
@@ -4603,170 +4471,6 @@
       ]
     },
     {
-      "id": "dao.JsonTransactionDaoImpl@5",
-      "name": "JsonTransactionDaoImpl",
-      "simple_name": "JsonTransactionDaoImpl",
-      "kind": "class",
-      "package": "dao",
-      "container_id": null,
-      "file": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "expect"
-      ],
-      "is_expect": true,
-      "is_actual": false,
-      "start_line": 5,
-      "end_line": 12,
-      "signature": "expect class JsonTransactionDaoImpl() : TransactionDao {",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [
-        "dao.TransactionDao@5"
-      ],
-      "reference_count": 5,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 11,
-          "kind": "import",
-          "snippet": "import dao.JsonTransactionDaoImpl"
-        },
-        {
-          "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 48,
-          "kind": "usage",
-          "snippet": "val transactionDao = JsonTransactionDaoImpl()"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 12,
-          "kind": "usage",
-          "snippet": "actual class JsonTransactionDaoImpl : TransactionDao {"
-        },
-        {
-          "path": "detekt-baseline.xml",
-          "line": 7,
-          "kind": "usage",
-          "snippet": "<ID>SwallowedException:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>"
-        },
-        {
-          "path": "detekt-baseline.xml",
-          "line": 11,
-          "kind": "usage",
-          "snippet": "<ID>TooGenericExceptionCaught:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>"
-        }
-      ]
-    },
-    {
-      "id": "dao.JsonTransactionDaoImpl@5.loadTransactions@6",
-      "name": "loadTransactions",
-      "simple_name": "loadTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.JsonTransactionDaoImpl@5",
-      "file": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "override",
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 6,
-      "end_line": 6,
-      "signature": "override suspend fun loadTransactions(itemId: String): StoredTransactions?",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 5,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 12,
-          "kind": "usage",
-          "snippet": "suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 51,
-          "kind": "usage",
-          "snippet": "val savedTransactions = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 85,
-          "kind": "usage",
-          "snippet": "val existing = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 24,
-          "kind": "usage",
-          "snippet": "actual override suspend fun loadTransactions(itemId: String): StoredTransactions? {"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 42,
-          "kind": "usage",
-          "snippet": "val existing = loadTransactions(itemId)"
-        }
-      ]
-    },
-    {
-      "id": "dao.JsonTransactionDaoImpl@5.saveTransactions@8",
-      "name": "saveTransactions",
-      "simple_name": "saveTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.JsonTransactionDaoImpl@5",
-      "file": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "override",
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 8,
-      "end_line": 11,
-      "signature": "override suspend fun saveTransactions( itemId: String, storedTransactions: StoredTransactions, )",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 3,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "suspend fun saveTransactions("
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 123,
-          "kind": "usage",
-          "snippet": "transactionDao.saveTransactions(token.itemId, transactionsToSave)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 35,
-          "kind": "usage",
-          "snippet": "actual override suspend fun saveTransactions("
-        }
-      ]
-    },
-    {
       "id": "dao.TokenDao@5",
       "name": "TokenDao",
       "simple_name": "TokenDao",
@@ -4826,7 +4530,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 17,
+          "line": 14,
           "kind": "usage",
           "snippet": "private val tokenDao: TokenDao,"
         },
@@ -4924,7 +4628,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 28,
+          "line": 23,
           "kind": "usage",
           "snippet": "val tokens = tokenDao.list()"
         },
@@ -5029,158 +4733,6 @@
           "line": 47,
           "kind": "usage",
           "snippet": "actual override suspend fun delete(bankName: String) {"
-        }
-      ]
-    },
-    {
-      "id": "dao.TransactionDao@5",
-      "name": "TransactionDao",
-      "simple_name": "TransactionDao",
-      "kind": "interface",
-      "package": "dao",
-      "container_id": null,
-      "file": "src/commonMain/kotlin/dao/TransactionDao.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 5,
-      "end_line": 25,
-      "signature": "interface TransactionDao {",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [],
-      "reference_count": 4,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 5,
-          "kind": "usage",
-          "snippet": "expect class JsonTransactionDaoImpl() : TransactionDao {"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 7,
-          "kind": "import",
-          "snippet": "import dao.TransactionDao"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 18,
-          "kind": "usage",
-          "snippet": "private val transactionDao: TransactionDao,"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 12,
-          "kind": "usage",
-          "snippet": "actual class JsonTransactionDaoImpl : TransactionDao {"
-        }
-      ]
-    },
-    {
-      "id": "dao.TransactionDao@5.loadTransactions@12",
-      "name": "loadTransactions",
-      "simple_name": "loadTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.TransactionDao@5",
-      "file": "src/commonMain/kotlin/dao/TransactionDao.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 12,
-      "end_line": 12,
-      "signature": "suspend fun loadTransactions(itemId: String): StoredTransactions?",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 5,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 6,
-          "kind": "usage",
-          "snippet": "override suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 51,
-          "kind": "usage",
-          "snippet": "val savedTransactions = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 85,
-          "kind": "usage",
-          "snippet": "val existing = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 24,
-          "kind": "usage",
-          "snippet": "actual override suspend fun loadTransactions(itemId: String): StoredTransactions? {"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 42,
-          "kind": "usage",
-          "snippet": "val existing = loadTransactions(itemId)"
-        }
-      ]
-    },
-    {
-      "id": "dao.TransactionDao@5.saveTransactions@21",
-      "name": "saveTransactions",
-      "simple_name": "saveTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.TransactionDao@5",
-      "file": "src/commonMain/kotlin/dao/TransactionDao.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 21,
-      "end_line": 24,
-      "signature": "suspend fun saveTransactions( itemId: String, storedTransactions: StoredTransactions, )",
-      "imports": [
-        "model.StoredTransactions"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 3,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 8,
-          "kind": "usage",
-          "snippet": "override suspend fun saveTransactions("
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 123,
-          "kind": "usage",
-          "snippet": "transactionDao.saveTransactions(token.itemId, transactionsToSave)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 35,
-          "kind": "usage",
-          "snippet": "actual override suspend fun saveTransactions("
         }
       ]
     },
@@ -5377,7 +4929,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 50,
+          "line": 48,
           "kind": "usage",
           "snippet": "AccountCommandInterpreterImpl("
         }
@@ -5519,13 +5071,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 22,
+          "line": 21,
           "kind": "usage",
           "snippet": "fun get(env: String): Interpreter {"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 34,
+          "line": 33,
           "kind": "usage",
           "snippet": "private fun buildInterpreter(environmentConfig: EnvironmentConfig): Interpreter {"
         },
@@ -5538,7 +5090,7 @@
       ]
     },
     {
-      "id": "interpreter.createBrowserLauncher@17",
+      "id": "interpreter.createBrowserLauncher@16",
       "name": "createBrowserLauncher",
       "simple_name": "createBrowserLauncher",
       "kind": "fun",
@@ -5552,8 +5104,8 @@
       ],
       "is_expect": true,
       "is_actual": false,
-      "start_line": 17,
-      "end_line": 17,
+      "start_line": 16,
+      "end_line": 16,
       "signature": "expect fun createBrowserLauncher(): BrowserLauncher",
       "imports": [
         "account.AccountServiceImpl",
@@ -5564,7 +5116,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5577,7 +5128,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 38,
+          "line": 37,
           "kind": "usage",
           "snippet": "val browserLauncher = createBrowserLauncher()"
         },
@@ -5590,7 +5141,7 @@
       ]
     },
     {
-      "id": "interpreter.createOAuthRedirectServer@19",
+      "id": "interpreter.createOAuthRedirectServer@18",
       "name": "createOAuthRedirectServer",
       "simple_name": "createOAuthRedirectServer",
       "kind": "fun",
@@ -5604,8 +5155,8 @@
       ],
       "is_expect": true,
       "is_actual": false,
-      "start_line": 19,
-      "end_line": 19,
+      "start_line": 18,
+      "end_line": 18,
       "signature": "expect fun createOAuthRedirectServer(): OAuthRedirectServer",
       "imports": [
         "account.AccountServiceImpl",
@@ -5616,7 +5167,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5629,7 +5179,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 44,
+          "line": 43,
           "kind": "usage",
           "snippet": "::createOAuthRedirectServer,"
         },
@@ -5642,7 +5192,7 @@
       ]
     },
     {
-      "id": "interpreter.InterpreterFactory@21",
+      "id": "interpreter.InterpreterFactory@20",
       "name": "InterpreterFactory",
       "simple_name": "InterpreterFactory",
       "kind": "object",
@@ -5654,8 +5204,8 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 21,
-      "end_line": 75,
+      "start_line": 20,
+      "end_line": 72,
       "signature": "object InterpreterFactory {",
       "imports": [
         "account.AccountServiceImpl",
@@ -5666,7 +5216,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5690,20 +5239,20 @@
       ]
     },
     {
-      "id": "interpreter.InterpreterFactory@21.get@22",
+      "id": "interpreter.InterpreterFactory@20.get@21",
       "name": "get",
       "simple_name": "get",
       "kind": "fun",
       "package": "interpreter",
-      "container_id": "interpreter.InterpreterFactory@21",
+      "container_id": "interpreter.InterpreterFactory@20",
       "file": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
       "source_set": "commonMain",
       "visibility": "public",
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 22,
-      "end_line": 25,
+      "start_line": 21,
+      "end_line": 24,
       "signature": "fun get(env: String): Interpreter {",
       "imports": [
         "account.AccountServiceImpl",
@@ -5714,7 +5263,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5752,12 +5300,12 @@
       ]
     },
     {
-      "id": "interpreter.InterpreterFactory@21.getEnvironmentConfig@27",
+      "id": "interpreter.InterpreterFactory@20.getEnvironmentConfig@26",
       "name": "getEnvironmentConfig",
       "simple_name": "getEnvironmentConfig",
       "kind": "fun",
       "package": "interpreter",
-      "container_id": "interpreter.InterpreterFactory@21",
+      "container_id": "interpreter.InterpreterFactory@20",
       "file": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
       "source_set": "commonMain",
       "visibility": "private",
@@ -5766,8 +5314,8 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 27,
-      "end_line": 27,
+      "start_line": 26,
+      "end_line": 26,
       "signature": "private fun getEnvironmentConfig(env: String): EnvironmentConfig =",
       "imports": [
         "account.AccountServiceImpl",
@@ -5778,7 +5326,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5791,19 +5338,19 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 23,
+          "line": 22,
           "kind": "usage",
           "snippet": "val environmentConfig = getEnvironmentConfig(env)"
         }
       ]
     },
     {
-      "id": "interpreter.InterpreterFactory@21.buildInterpreter@34",
+      "id": "interpreter.InterpreterFactory@20.buildInterpreter@33",
       "name": "buildInterpreter",
       "simple_name": "buildInterpreter",
       "kind": "fun",
       "package": "interpreter",
-      "container_id": "interpreter.InterpreterFactory@21",
+      "container_id": "interpreter.InterpreterFactory@20",
       "file": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
       "source_set": "commonMain",
       "visibility": "private",
@@ -5812,8 +5359,8 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 34,
-      "end_line": 74,
+      "start_line": 33,
+      "end_line": 71,
       "signature": "private fun buildInterpreter(environmentConfig: EnvironmentConfig): Interpreter {",
       "imports": [
         "account.AccountServiceImpl",
@@ -5824,7 +5371,6 @@
         "config.SandboxEnvironmentConfig",
         "dao.JsonConfigDao",
         "dao.JsonTokenDaoImpl",
-        "dao.JsonTransactionDaoImpl",
         "plaid.HttpClientFactory",
         "plaid.OAuthRedirectServer",
         "plaid.PlaidServiceImpl",
@@ -5838,7 +5384,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 24,
+          "line": 23,
           "kind": "usage",
           "snippet": "return buildInterpreter(environmentConfig)"
         }
@@ -5871,7 +5417,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 67,
+          "line": 64,
           "kind": "usage",
           "snippet": "return InterpreterImpl("
         }
@@ -5999,7 +5545,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 69,
+          "line": 66,
           "kind": "usage",
           "snippet": "PlaidCommandInterpreterImpl("
         }
@@ -6131,7 +5677,7 @@
         "model.Transaction"
       ],
       "dependencies": [
-        "model.Transaction@17"
+        "model.Transaction@16"
       ],
       "reference_count": 5,
       "references": [
@@ -6161,7 +5707,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 21,
+          "line": 17,
           "kind": "usage",
           "snippet": "override suspend fun listTransactions("
         }
@@ -6202,7 +5748,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 63,
+          "line": 60,
           "kind": "usage",
           "snippet": "TransactionCommandInterpreterImpl("
         }
@@ -6238,7 +5784,7 @@
         "validation.ValidationHelper.ensurePlaidConfigValid"
       ],
       "dependencies": [
-        "model.Transaction@17"
+        "model.Transaction@16"
       ],
       "reference_count": 5,
       "references": [
@@ -6268,7 +5814,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 21,
+          "line": 17,
           "kind": "usage",
           "snippet": "override suspend fun listTransactions("
         }
@@ -6474,8 +6020,8 @@
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
         "model.PlaidAccount@39"
       ],
       "reference_count": 5,
@@ -6704,8 +6250,8 @@
       ],
       "dependencies": [
         "model.LinkTokenUser@83",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
         "model.PlaidCountryCode@68",
         "model.PlaidProduct@50"
       ],
@@ -6865,9 +6411,9 @@
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "model.PlaidRemovedTransaction@182",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
+        "model.PlaidRemovedTransaction@191",
         "model.PlaidTransaction@149"
       ],
       "reference_count": 5,
@@ -6920,18 +6466,18 @@
       "is_expect": false,
       "is_actual": false,
       "start_line": 149,
-      "end_line": 161,
-      "signature": "data class PlaidTransaction( @SerialName(\"transaction_id\") val transactionId: String, @SerialName(\"pending_transaction_id\") val pendingTransactionId: String?, val amount: Double, val date: String, @SerialName(\"authorized_date\") val authorizedDate: String?, @SerialName(\"name\") val name: String, @SerialName(\"merchant_name\") val merchantName: String?, @SerialName(\"category\") val category: List<String>?, @SerialName(\"category_id\") val categoryId: String?, @SerialName(\"location\") val location: PlaidLocation?, val pending: Boolean, )",
+      "end_line": 170,
+      "signature": "data class PlaidTransaction( @SerialName(\"transaction_id\") val transactionId: String, @SerialName(\"pending_transaction_id\") val pendingTransactionId: String?, val amount: Double, val date: String, @SerialName(\"authorized_date\") val authorizedDate: String?, @SerialName(\"name\") val name: String, @SerialName(\"merchant_name\") val merchantName: String?, @SerialName(\"category\") val category: List<String>?, @SerialName(\"category_id\") val categoryId: String?, @SerialName(\"location\") val location: PlaidLocation?, val pending: Boolean, ) {",
       "imports": [
         "kotlinx.serialization.SerialName",
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "model.PlaidLocation@167"
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
+        "model.PlaidLocation@176"
       ],
-      "reference_count": 4,
+      "reference_count": 2,
       "references": [
         {
           "path": "src/commonMain/kotlin/model/PlaidModels.kt",
@@ -6944,23 +6490,44 @@
           "line": 138,
           "kind": "usage",
           "snippet": "@SerialName() val modified: List<PlaidTransaction>,"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 10,
-          "kind": "import",
-          "snippet": "import model.PlaidTransaction"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 87,
-          "kind": "usage",
-          "snippet": "val allNewTransactions = mutableListOf<PlaidTransaction>()"
         }
       ]
     },
     {
-      "id": "model.PlaidLocation@167",
+      "id": "model.PlaidTransaction@149.toDomainModel@162",
+      "name": "toDomainModel",
+      "simple_name": "toDomainModel",
+      "kind": "fun",
+      "package": "model",
+      "container_id": "model.PlaidTransaction@149",
+      "file": "src/commonMain/kotlin/model/PlaidModels.kt",
+      "source_set": "commonMain",
+      "visibility": "public",
+      "modifiers": [],
+      "is_expect": false,
+      "is_actual": false,
+      "start_line": 162,
+      "end_line": 162,
+      "signature": "fun toDomainModel(institutionName: String): Transaction =",
+      "imports": [
+        "kotlinx.serialization.SerialName",
+        "kotlinx.serialization.Serializable"
+      ],
+      "dependencies": [
+        "model.Transaction@16"
+      ],
+      "reference_count": 1,
+      "references": [
+        {
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 52,
+          "kind": "usage",
+          "snippet": "transactionsById[plaidTransaction.transactionId] = plaidTransaction.toDomainModel(token.bankName)"
+        }
+      ]
+    },
+    {
+      "id": "model.PlaidLocation@176",
       "name": "PlaidLocation",
       "simple_name": "PlaidLocation",
       "kind": "data class",
@@ -6974,32 +6541,26 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 167,
-      "end_line": 176,
+      "start_line": 176,
+      "end_line": 185,
       "signature": "data class PlaidLocation( val address: String?, val city: String?, val region: String?, @SerialName(\"postal_code\") val postalCode: String?, val country: String?, val lat: Double?, val lon: Double?, @SerialName(\"store_number\") val storeNumber: String?, )",
       "imports": [
         "kotlinx.serialization.SerialName",
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [],
-      "reference_count": 2,
+      "reference_count": 1,
       "references": [
         {
           "path": "src/commonMain/kotlin/model/PlaidModels.kt",
           "line": 159,
           "kind": "usage",
           "snippet": "@SerialName() val location: PlaidLocation?,"
-        },
-        {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 58,
-          "kind": "usage",
-          "snippet": "val location: PlaidLocation?,"
         }
       ]
     },
     {
-      "id": "model.PlaidRemovedTransaction@182",
+      "id": "model.PlaidRemovedTransaction@191",
       "name": "PlaidRemovedTransaction",
       "simple_name": "PlaidRemovedTransaction",
       "kind": "data class",
@@ -7013,21 +6574,33 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 182,
-      "end_line": 184,
+      "start_line": 191,
+      "end_line": 193,
       "signature": "data class PlaidRemovedTransaction( @SerialName(\"transaction_id\") val transactionId: String, )",
       "imports": [
         "kotlinx.serialization.SerialName",
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [],
-      "reference_count": 1,
+      "reference_count": 3,
       "references": [
         {
           "path": "src/commonMain/kotlin/model/PlaidModels.kt",
           "line": 139,
           "kind": "usage",
           "snippet": "@SerialName() val removed: List<PlaidRemovedTransaction>,"
+        },
+        {
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 8,
+          "kind": "import",
+          "snippet": "import model.PlaidRemovedTransaction"
+        },
+        {
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 63,
+          "kind": "usage",
+          "snippet": "removedTransactions: List<PlaidRemovedTransaction>,"
         }
       ]
     },
@@ -7054,7 +6627,7 @@
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [],
-      "reference_count": 18,
+      "reference_count": 17,
       "references": [
         {
           "path": "src/commonMain/kotlin/dao/JsonTokenDaoImpl.kt",
@@ -7124,15 +6697,9 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 46,
+          "line": 43,
           "kind": "usage",
-          "snippet": "token: PlaidToken,"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 82,
-          "kind": "usage",
-          "snippet": "private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
+          "snippet": "private suspend fun fetchTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
         },
         {
           "path": "src/macosArm64Main/kotlin/dao/JsonTokenDaoImpl.kt",
@@ -7167,7 +6734,7 @@
       ]
     },
     {
-      "id": "model.Transaction@17",
+      "id": "model.Transaction@16",
       "name": "Transaction",
       "simple_name": "Transaction",
       "kind": "data class",
@@ -7181,16 +6748,15 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 17,
-      "end_line": 23,
+      "start_line": 16,
+      "end_line": 22,
       "signature": "data class Transaction( val id: String, val date: LocalDate, val description: String, val amount: Double, val institutionName: String, )",
       "imports": [
         "kotlinx.datetime.LocalDate",
-        "kotlinx.serialization.SerialName",
         "kotlinx.serialization.Serializable"
       ],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 13,
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/TransactionCommandInterpreter.kt",
@@ -7217,14 +6783,14 @@
           "snippet": "): Either<String, Iterable<Transaction>> ="
         },
         {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 65,
+          "path": "src/commonMain/kotlin/model/PlaidModels.kt",
+          "line": 162,
           "kind": "usage",
           "snippet": "fun toDomainModel(institutionName: String): Transaction ="
         },
         {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 66,
+          "path": "src/commonMain/kotlin/model/PlaidModels.kt",
+          "line": 163,
           "kind": "usage",
           "snippet": "Transaction("
         },
@@ -7242,217 +6808,33 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 13,
+          "line": 10,
           "kind": "import",
           "snippet": "import model.Transaction"
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 25,
+          "line": 21,
           "kind": "usage",
           "snippet": "): Either<String, Iterable<Transaction>> ="
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 49,
+          "line": 43,
           "kind": "usage",
-          "snippet": "): Either<String, List<Transaction>> ="
+          "snippet": "private suspend fun fetchTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 82,
+          "line": 46,
           "kind": "usage",
-          "snippet": "private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> ="
-        }
-      ]
-    },
-    {
-      "id": "model.StoredTransactions@32",
-      "name": "StoredTransactions",
-      "simple_name": "StoredTransactions",
-      "kind": "data class",
-      "package": "model",
-      "container_id": null,
-      "file": "src/commonMain/kotlin/model/Transaction.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "data"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 32,
-      "end_line": 33,
-      "signature": "data class StoredTransactions( val cursor: String? = null,",
-      "imports": [
-        "kotlinx.datetime.LocalDate",
-        "kotlinx.serialization.SerialName",
-        "kotlinx.serialization.Serializable"
-      ],
-      "dependencies": [],
-      "reference_count": 12,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 3,
-          "kind": "import",
-          "snippet": "import model.StoredTransactions"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 6,
-          "kind": "usage",
-          "snippet": "override suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 10,
-          "kind": "usage",
-          "snippet": "storedTransactions: StoredTransactions,"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 3,
-          "kind": "import",
-          "snippet": "import model.StoredTransactions"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 12,
-          "kind": "usage",
-          "snippet": "suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 23,
-          "kind": "usage",
-          "snippet": "storedTransactions: StoredTransactions,"
+          "snippet": "val transactionsById = linkedMapOf<String, Transaction>()"
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 12,
-          "kind": "import",
-          "snippet": "import model.StoredTransactions"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 119,
+          "line": 64,
           "kind": "usage",
-          "snippet": "StoredTransactions("
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 8,
-          "kind": "import",
-          "snippet": "import model.StoredTransactions"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 24,
-          "kind": "usage",
-          "snippet": "actual override suspend fun loadTransactions(itemId: String): StoredTransactions? {"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 29,
-          "kind": "usage",
-          "snippet": "json.decodeFromString<StoredTransactions>(content)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 37,
-          "kind": "usage",
-          "snippet": "storedTransactions: StoredTransactions,"
-        }
-      ]
-    },
-    {
-      "id": "model.StoredTransaction@51",
-      "name": "StoredTransaction",
-      "simple_name": "StoredTransaction",
-      "kind": "data class",
-      "package": "model",
-      "container_id": null,
-      "file": "src/commonMain/kotlin/model/Transaction.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [
-        "data"
-      ],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 51,
-      "end_line": 73,
-      "signature": "data class StoredTransaction( @SerialName(\"transaction_id\") val transactionId: String, val amount: Double, val date: String, val name: String, @SerialName(\"merchant_name\") val merchantName: String?, val category: List<String>?, val location: PlaidLocation?, val pending: Boolean, @SerialName(\"authorized_date\") val authorizedDate: String?, ) {",
-      "imports": [
-        "kotlinx.datetime.LocalDate",
-        "kotlinx.serialization.SerialName",
-        "kotlinx.serialization.Serializable"
-      ],
-      "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "model.PlaidLocation@167"
-      ],
-      "reference_count": 3,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 34,
-          "kind": "usage",
-          "snippet": "val transactions: List<StoredTransaction>,"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 11,
-          "kind": "import",
-          "snippet": "import model.StoredTransaction"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 99,
-          "kind": "usage",
-          "snippet": "StoredTransaction("
-        }
-      ]
-    },
-    {
-      "id": "model.StoredTransaction@51.toDomainModel@65",
-      "name": "toDomainModel",
-      "simple_name": "toDomainModel",
-      "kind": "fun",
-      "package": "model",
-      "container_id": "model.StoredTransaction@51",
-      "file": "src/commonMain/kotlin/model/Transaction.kt",
-      "source_set": "commonMain",
-      "visibility": "public",
-      "modifiers": [],
-      "is_expect": false,
-      "is_actual": false,
-      "start_line": 65,
-      "end_line": 65,
-      "signature": "fun toDomainModel(institutionName: String): Transaction =",
-      "imports": [
-        "kotlinx.datetime.LocalDate",
-        "kotlinx.serialization.SerialName",
-        "kotlinx.serialization.Serializable"
-      ],
-      "dependencies": [
-        "model.Transaction@17"
-      ],
-      "reference_count": 2,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 57,
-          "kind": "usage",
-          "snippet": ".map { it.toDomainModel(token.bankName) }"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 126,
-          "kind": "usage",
-          "snippet": "allStoredTransactions.map { it.toDomainModel(token.bankName) }"
+          "snippet": "transactionsById: MutableMap<String, Transaction>,"
         }
       ]
     },
@@ -7483,13 +6865,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 12,
+          "line": 11,
           "kind": "import",
           "snippet": "import plaid.HttpClientFactory"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 37,
+          "line": 36,
           "kind": "usage",
           "snippet": "val httpClient = HttpClientFactory.create()"
         }
@@ -7522,7 +6904,7 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 37,
+          "line": 36,
           "kind": "usage",
           "snippet": "val httpClient = HttpClientFactory.create()"
         }
@@ -7552,13 +6934,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 13,
+          "line": 12,
           "kind": "import",
           "snippet": "import plaid.OAuthRedirectServer"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 19,
+          "line": 18,
           "kind": "usage",
           "snippet": "expect fun createOAuthRedirectServer(): OAuthRedirectServer"
         },
@@ -7683,13 +7065,13 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 14,
+          "line": 11,
           "kind": "import",
           "snippet": "import plaid.PlaidService"
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 19,
+          "line": 15,
           "kind": "usage",
           "snippet": "private val plaidService: PlaidService,"
         }
@@ -7857,7 +7239,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 91,
+          "line": 49,
           "kind": "usage",
           "snippet": "val response = plaidService.syncTransactions(token.accessToken, cursor).bind()"
         }
@@ -8000,13 +7382,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 14,
+          "line": 13,
           "kind": "import",
           "snippet": "import plaid.PlaidServiceImpl"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 40,
+          "line": 39,
           "kind": "usage",
           "snippet": "PlaidServiceImpl("
         }
@@ -8268,7 +7650,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 91,
+          "line": 49,
           "kind": "usage",
           "snippet": "val response = plaidService.syncTransactions(token.accessToken, cursor).bind()"
         }
@@ -8440,7 +7822,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 20,
+          "line": 16,
           "kind": "usage",
           "snippet": ") : TransactionService {"
         }
@@ -8470,7 +7852,7 @@
         "model.Transaction"
       ],
       "dependencies": [
-        "model.Transaction@17"
+        "model.Transaction@16"
       ],
       "reference_count": 5,
       "references": [
@@ -8500,14 +7882,14 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 21,
+          "line": 17,
           "kind": "usage",
           "snippet": "override suspend fun listTransactions("
         }
       ]
     },
     {
-      "id": "transaction.TransactionServiceImpl@16",
+      "id": "transaction.TransactionServiceImpl@13",
       "name": "TransactionServiceImpl",
       "simple_name": "TransactionServiceImpl",
       "kind": "class",
@@ -8519,52 +7901,48 @@
       "modifiers": [],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 16,
-      "end_line": 128,
-      "signature": "class TransactionServiceImpl( private val tokenDao: TokenDao, private val transactionDao: TransactionDao, private val plaidService: PlaidService, ) : TransactionService {",
+      "start_line": 13,
+      "end_line": 70,
+      "signature": "class TransactionServiceImpl( private val tokenDao: TokenDao, private val plaidService: PlaidService, ) : TransactionService {",
       "imports": [
         "arrow.core.Either",
         "arrow.core.raise.either",
         "arrow.fx.coroutines.parMap",
         "dao.TokenDao",
-        "dao.TransactionDao",
         "kotlinx.datetime.LocalDate",
+        "model.PlaidRemovedTransaction",
         "model.PlaidToken",
-        "model.PlaidTransaction",
-        "model.StoredTransaction",
-        "model.StoredTransactions",
         "model.Transaction",
         "plaid.PlaidService"
       ],
       "dependencies": [
         "plaid.PlaidService@11",
         "dao.TokenDao@5",
-        "dao.TransactionDao@5",
         "transaction.TransactionService@7"
       ],
       "reference_count": 2,
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 15,
+          "line": 14,
           "kind": "import",
           "snippet": "import transaction.TransactionServiceImpl"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 57,
+          "line": 55,
           "kind": "usage",
           "snippet": "TransactionServiceImpl("
         }
       ]
     },
     {
-      "id": "transaction.TransactionServiceImpl@16.listTransactions@21",
+      "id": "transaction.TransactionServiceImpl@13.listTransactions@17",
       "name": "listTransactions",
       "simple_name": "listTransactions",
       "kind": "fun",
       "package": "transaction",
-      "container_id": "transaction.TransactionServiceImpl@16",
+      "container_id": "transaction.TransactionServiceImpl@13",
       "file": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
       "source_set": "commonMain",
       "visibility": "public",
@@ -8574,25 +7952,22 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 21,
-      "end_line": 25,
+      "start_line": 17,
+      "end_line": 21,
       "signature": "override suspend fun listTransactions( from: LocalDate?, to: LocalDate?, institutions: Set<String>, ): Either<String, Iterable<Transaction>> =",
       "imports": [
         "arrow.core.Either",
         "arrow.core.raise.either",
         "arrow.fx.coroutines.parMap",
         "dao.TokenDao",
-        "dao.TransactionDao",
         "kotlinx.datetime.LocalDate",
+        "model.PlaidRemovedTransaction",
         "model.PlaidToken",
-        "model.PlaidTransaction",
-        "model.StoredTransaction",
-        "model.StoredTransactions",
         "model.Transaction",
         "plaid.PlaidService"
       ],
       "dependencies": [
-        "model.Transaction@17"
+        "model.Transaction@16"
       ],
       "reference_count": 5,
       "references": [
@@ -8629,12 +8004,12 @@
       ]
     },
     {
-      "id": "transaction.TransactionServiceImpl@16.getTransactionsForToken@45",
-      "name": "getTransactionsForToken",
-      "simple_name": "getTransactionsForToken",
+      "id": "transaction.TransactionServiceImpl@13.fetchTransactionsForToken@43",
+      "name": "fetchTransactionsForToken",
+      "simple_name": "fetchTransactionsForToken",
       "kind": "fun",
       "package": "transaction",
-      "container_id": "transaction.TransactionServiceImpl@16",
+      "container_id": "transaction.TransactionServiceImpl@13",
       "file": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
       "source_set": "commonMain",
       "visibility": "private",
@@ -8644,85 +8019,78 @@
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 45,
-      "end_line": 49,
-      "signature": "private suspend fun getTransactionsForToken( token: PlaidToken, from: LocalDate?, to: LocalDate?, ): Either<String, List<Transaction>> =",
+      "start_line": 43,
+      "end_line": 43,
+      "signature": "private suspend fun fetchTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> =",
       "imports": [
         "arrow.core.Either",
         "arrow.core.raise.either",
         "arrow.fx.coroutines.parMap",
         "dao.TokenDao",
-        "dao.TransactionDao",
         "kotlinx.datetime.LocalDate",
+        "model.PlaidRemovedTransaction",
         "model.PlaidToken",
-        "model.PlaidTransaction",
-        "model.StoredTransaction",
-        "model.StoredTransactions",
         "model.Transaction",
         "plaid.PlaidService"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
         "model.PlaidToken@15",
-        "model.Transaction@17"
+        "model.Transaction@16"
       ],
       "reference_count": 1,
       "references": [
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 41,
+          "line": 33,
           "kind": "usage",
-          "snippet": "getTransactionsForToken(token, from, to).bind()"
+          "snippet": "fetchTransactionsForToken(token)"
         }
       ]
     },
     {
-      "id": "transaction.TransactionServiceImpl@16.syncTransactionsForToken@82",
-      "name": "syncTransactionsForToken",
-      "simple_name": "syncTransactionsForToken",
+      "id": "transaction.TransactionServiceImpl@13.removeTransactions@62",
+      "name": "removeTransactions",
+      "simple_name": "removeTransactions",
       "kind": "fun",
       "package": "transaction",
-      "container_id": "transaction.TransactionServiceImpl@16",
+      "container_id": "transaction.TransactionServiceImpl@13",
       "file": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
       "source_set": "commonMain",
       "visibility": "private",
       "modifiers": [
-        "private",
-        "suspend"
+        "private"
       ],
       "is_expect": false,
       "is_actual": false,
-      "start_line": 82,
-      "end_line": 82,
-      "signature": "private suspend fun syncTransactionsForToken(token: PlaidToken): Either<String, List<Transaction>> =",
+      "start_line": 62,
+      "end_line": 69,
+      "signature": "private fun removeTransactions( removedTransactions: List<PlaidRemovedTransaction>, transactionsById: MutableMap<String, Transaction>, ) {",
       "imports": [
         "arrow.core.Either",
         "arrow.core.raise.either",
         "arrow.fx.coroutines.parMap",
         "dao.TokenDao",
-        "dao.TransactionDao",
         "kotlinx.datetime.LocalDate",
+        "model.PlaidRemovedTransaction",
         "model.PlaidToken",
-        "model.PlaidTransaction",
-        "model.StoredTransaction",
-        "model.StoredTransactions",
         "model.Transaction",
         "plaid.PlaidService"
       ],
       "dependencies": [
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "model.PlaidToken@15",
-        "model.Transaction@17"
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
+        "model.PlaidRemovedTransaction@191",
+        "model.Transaction@16"
       ],
       "reference_count": 1,
       "references": [
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 69,
+          "line": 54,
           "kind": "usage",
-          "snippet": "syncTransactionsForToken(token).bind()"
+          "snippet": "removeTransactions(response.removed, transactionsById)"
         }
       ]
     },
@@ -8987,7 +8355,7 @@
         "platform.posix.mkdir"
       ],
       "dependencies": [],
-      "reference_count": 12,
+      "reference_count": 9,
       "references": [
         {
           "path": "src/commonMain/kotlin/dao/FileSystemHelper.kt",
@@ -9038,24 +8406,6 @@
           "snippet": "FileSystemHelper.writeFile(dataFile, jsonContent)"
         },
         {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.ensureDirectoryExists(transactionsDir)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 26,
-          "kind": "usage",
-          "snippet": "val content = FileSystemHelper.readFile(filePath) ?: return null"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 60,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.writeFile(filePath, jsonContent)"
-        },
-        {
           "path": "detekt-baseline.xml",
           "line": 13,
           "kind": "usage",
@@ -9094,7 +8444,7 @@
         "platform.posix.mkdir"
       ],
       "dependencies": [],
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         {
           "path": "src/commonMain/kotlin/dao/FileSystemHelper.kt",
@@ -9113,12 +8463,6 @@
           "line": 23,
           "kind": "usage",
           "snippet": "FileSystemHelper.ensureDirectoryExists(dataDir)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.ensureDirectoryExists(transactionsDir)"
         }
       ]
     },
@@ -9153,7 +8497,7 @@
         "platform.posix.mkdir"
       ],
       "dependencies": [],
-      "reference_count": 4,
+      "reference_count": 3,
       "references": [
         {
           "path": "src/commonMain/kotlin/dao/FileSystemHelper.kt",
@@ -9172,12 +8516,6 @@
           "line": 36,
           "kind": "usage",
           "snippet": "val content = FileSystemHelper.readFile(dataFile) ?: return emptyList()"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 26,
-          "kind": "usage",
-          "snippet": "val content = FileSystemHelper.readFile(filePath) ?: return null"
         }
       ]
     },
@@ -9212,7 +8550,7 @@
         "platform.posix.mkdir"
       ],
       "dependencies": [],
-      "reference_count": 5,
+      "reference_count": 4,
       "references": [
         {
           "path": "src/commonMain/kotlin/dao/FileSystemHelper.kt",
@@ -9237,12 +8575,6 @@
           "line": 51,
           "kind": "usage",
           "snippet": "FileSystemHelper.writeFile(dataFile, jsonContent)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 60,
-          "kind": "usage",
-          "snippet": "FileSystemHelper.writeFile(filePath, jsonContent)"
         }
       ]
     },
@@ -9296,7 +8628,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 36,
+          "line": 35,
           "kind": "usage",
           "snippet": "val configDao = JsonConfigDao(environmentConfig)"
         },
@@ -9492,7 +8824,7 @@
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 35,
+          "line": 34,
           "kind": "usage",
           "snippet": "val tokenDao = JsonTokenDaoImpl()"
         },
@@ -9630,7 +8962,7 @@
         },
         {
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 28,
+          "line": 23,
           "kind": "usage",
           "snippet": "val tokens = tokenDao.list()"
         },
@@ -9749,190 +9081,6 @@
       ]
     },
     {
-      "id": "dao.JsonTransactionDaoImpl@12",
-      "name": "JsonTransactionDaoImpl",
-      "simple_name": "JsonTransactionDaoImpl",
-      "kind": "class",
-      "package": "dao",
-      "container_id": null,
-      "file": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "macosArm64Main",
-      "visibility": "public",
-      "modifiers": [
-        "actual"
-      ],
-      "is_expect": false,
-      "is_actual": true,
-      "start_line": 12,
-      "end_line": 62,
-      "signature": "actual class JsonTransactionDaoImpl : TransactionDao {",
-      "imports": [
-        "config.Constants",
-        "kotlinx.cinterop.ExperimentalForeignApi",
-        "kotlinx.cinterop.toKString",
-        "kotlinx.serialization.encodeToString",
-        "kotlinx.serialization.json.Json",
-        "model.StoredTransactions",
-        "platform.posix.getenv"
-      ],
-      "dependencies": [
-        "dao.TransactionDao@5"
-      ],
-      "reference_count": 5,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 5,
-          "kind": "usage",
-          "snippet": "expect class JsonTransactionDaoImpl() : TransactionDao {"
-        },
-        {
-          "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 11,
-          "kind": "import",
-          "snippet": "import dao.JsonTransactionDaoImpl"
-        },
-        {
-          "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 48,
-          "kind": "usage",
-          "snippet": "val transactionDao = JsonTransactionDaoImpl()"
-        },
-        {
-          "path": "detekt-baseline.xml",
-          "line": 7,
-          "kind": "usage",
-          "snippet": "<ID>SwallowedException:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>"
-        },
-        {
-          "path": "detekt-baseline.xml",
-          "line": 11,
-          "kind": "usage",
-          "snippet": "<ID>TooGenericExceptionCaught:JsonTransactionDaoImpl.kt$JsonTransactionDaoImpl$e: Exception</ID>"
-        }
-      ]
-    },
-    {
-      "id": "dao.JsonTransactionDaoImpl@12.loadTransactions@24",
-      "name": "loadTransactions",
-      "simple_name": "loadTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.JsonTransactionDaoImpl@12",
-      "file": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "macosArm64Main",
-      "visibility": "public",
-      "modifiers": [
-        "actual",
-        "override",
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": true,
-      "start_line": 24,
-      "end_line": 33,
-      "signature": "actual override suspend fun loadTransactions(itemId: String): StoredTransactions? {",
-      "imports": [
-        "config.Constants",
-        "kotlinx.cinterop.ExperimentalForeignApi",
-        "kotlinx.cinterop.toKString",
-        "kotlinx.serialization.encodeToString",
-        "kotlinx.serialization.json.Json",
-        "model.StoredTransactions",
-        "platform.posix.getenv"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 5,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 6,
-          "kind": "usage",
-          "snippet": "override suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 12,
-          "kind": "usage",
-          "snippet": "suspend fun loadTransactions(itemId: String): StoredTransactions?"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 51,
-          "kind": "usage",
-          "snippet": "val savedTransactions = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 85,
-          "kind": "usage",
-          "snippet": "val existing = transactionDao.loadTransactions(token.itemId)"
-        },
-        {
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 42,
-          "kind": "usage",
-          "snippet": "val existing = loadTransactions(itemId)"
-        }
-      ]
-    },
-    {
-      "id": "dao.JsonTransactionDaoImpl@12.saveTransactions@35",
-      "name": "saveTransactions",
-      "simple_name": "saveTransactions",
-      "kind": "fun",
-      "package": "dao",
-      "container_id": "dao.JsonTransactionDaoImpl@12",
-      "file": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-      "source_set": "macosArm64Main",
-      "visibility": "public",
-      "modifiers": [
-        "actual",
-        "override",
-        "suspend"
-      ],
-      "is_expect": false,
-      "is_actual": true,
-      "start_line": 35,
-      "end_line": 61,
-      "signature": "actual override suspend fun saveTransactions( itemId: String, storedTransactions: StoredTransactions, ) {",
-      "imports": [
-        "config.Constants",
-        "kotlinx.cinterop.ExperimentalForeignApi",
-        "kotlinx.cinterop.toKString",
-        "kotlinx.serialization.encodeToString",
-        "kotlinx.serialization.json.Json",
-        "model.StoredTransactions",
-        "platform.posix.getenv"
-      ],
-      "dependencies": [
-        "model.StoredTransactions@32"
-      ],
-      "reference_count": 3,
-      "references": [
-        {
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 8,
-          "kind": "usage",
-          "snippet": "override suspend fun saveTransactions("
-        },
-        {
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 21,
-          "kind": "usage",
-          "snippet": "suspend fun saveTransactions("
-        },
-        {
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 123,
-          "kind": "usage",
-          "snippet": "transactionDao.saveTransactions(token.itemId, transactionsToSave)"
-        }
-      ]
-    },
-    {
       "id": "interpreter.createBrowserLauncher@8",
       "name": "createBrowserLauncher",
       "simple_name": "createBrowserLauncher",
@@ -9964,13 +9112,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 17,
+          "line": 16,
           "kind": "usage",
           "snippet": "expect fun createBrowserLauncher(): BrowserLauncher"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 38,
+          "line": 37,
           "kind": "usage",
           "snippet": "val browserLauncher = createBrowserLauncher()"
         }
@@ -10008,13 +9156,13 @@
       "references": [
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 19,
+          "line": 18,
           "kind": "usage",
           "snippet": "expect fun createOAuthRedirectServer(): OAuthRedirectServer"
         },
         {
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 44,
+          "line": 43,
           "kind": "usage",
           "snippet": "::createOAuthRedirectServer,"
         }
@@ -10241,12 +9389,12 @@
       ],
       "Accounts": [
         {
-          "id": "config.Constants@7.Commands@157.Accounts@158",
+          "id": "config.Constants@7.Commands@156.Accounts@157",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 158,
+          "line": 157,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157"
+          "container_id": "config.Constants@7.Commands@156"
         }
       ],
       "AccountsCommand": [
@@ -10271,12 +9419,12 @@
       ],
       "Add": [
         {
-          "id": "config.Constants@7.Commands@157.Accounts@158.Add@162",
+          "id": "config.Constants@7.Commands@156.Accounts@157.Add@161",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 162,
+          "line": 161,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157.Accounts@158"
+          "container_id": "config.Constants@7.Commands@156.Accounts@157"
         }
       ],
       "App": [
@@ -10301,10 +9449,10 @@
       ],
       "Browser": [
         {
-          "id": "config.Constants@7.Browser@211",
+          "id": "config.Constants@7.Browser@210",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 211,
+          "line": 210,
           "package": "config",
           "container_id": "config.Constants@7"
         }
@@ -10331,10 +9479,10 @@
       ],
       "Commands": [
         {
-          "id": "config.Constants@7.Commands@157",
+          "id": "config.Constants@7.Commands@156",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 157,
+          "line": 156,
           "package": "config",
           "container_id": "config.Constants@7"
         }
@@ -10351,12 +9499,12 @@
       ],
       "Configure": [
         {
-          "id": "config.Constants@7.Commands@157.Plaid@173.Configure@177",
+          "id": "config.Constants@7.Commands@156.Plaid@172.Configure@176",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 177,
+          "line": 176,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157.Plaid@173"
+          "container_id": "config.Constants@7.Commands@156.Plaid@172"
         }
       ],
       "Constants": [
@@ -10371,12 +9519,12 @@
       ],
       "Endpoints": [
         {
-          "id": "config.Constants@7.Plaid@37.Endpoints@48",
+          "id": "config.Constants@7.Plaid@36.Endpoints@47",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 48,
+          "line": 47,
           "package": "config",
-          "container_id": "config.Constants@7.Plaid@37"
+          "container_id": "config.Constants@7.Plaid@36"
         }
       ],
       "EnvironmentConfig": [
@@ -10391,36 +9539,36 @@
       ],
       "ErrorMessages": [
         {
-          "id": "config.Constants@7.FileSystem@15.ErrorMessages@29",
+          "id": "config.Constants@7.FileSystem@15.ErrorMessages@28",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 29,
+          "line": 28,
           "package": "config",
           "container_id": "config.Constants@7.FileSystem@15"
         },
         {
-          "id": "config.Constants@7.Plaid@37.ErrorMessages@55",
+          "id": "config.Constants@7.Plaid@36.ErrorMessages@54",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 55,
+          "line": 54,
           "package": "config",
-          "container_id": "config.Constants@7.Plaid@37"
+          "container_id": "config.Constants@7.Plaid@36"
         },
         {
-          "id": "config.Constants@7.Commands@157.ErrorMessages@198",
+          "id": "config.Constants@7.Commands@156.ErrorMessages@197",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 198,
+          "line": 197,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157"
+          "container_id": "config.Constants@7.Commands@156"
         },
         {
-          "id": "config.Constants@7.Browser@211.ErrorMessages@215",
+          "id": "config.Constants@7.Browser@210.ErrorMessages@214",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 215,
+          "line": 214,
           "package": "config",
-          "container_id": "config.Constants@7.Browser@211"
+          "container_id": "config.Constants@7.Browser@210"
         }
       ],
       "FileSystem": [
@@ -10453,12 +9601,12 @@
       ],
       "Html": [
         {
-          "id": "config.Constants@7.OAuth@63.Html@77",
+          "id": "config.Constants@7.OAuth@62.Html@76",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 77,
+          "line": 76,
           "package": "config",
-          "container_id": "config.Constants@7.OAuth@63"
+          "container_id": "config.Constants@7.OAuth@62"
         }
       ],
       "HttpClientFactory": [
@@ -10483,10 +9631,10 @@
       ],
       "InterpreterFactory": [
         {
-          "id": "interpreter.InterpreterFactory@21",
+          "id": "interpreter.InterpreterFactory@20",
           "kind": "object",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 21,
+          "line": 20,
           "package": "interpreter",
           "container_id": null
         }
@@ -10537,24 +9685,6 @@
           "container_id": null
         }
       ],
-      "JsonTransactionDaoImpl": [
-        {
-          "id": "dao.JsonTransactionDaoImpl@5",
-          "kind": "class",
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 5,
-          "package": "dao",
-          "container_id": null
-        },
-        {
-          "id": "dao.JsonTransactionDaoImpl@12",
-          "kind": "class",
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 12,
-          "package": "dao",
-          "container_id": null
-        }
-      ],
       "LinkTokenCreateRequest": [
         {
           "id": "model.LinkTokenCreateRequest@91",
@@ -10577,38 +9707,38 @@
       ],
       "List": [
         {
-          "id": "config.Constants@7.Commands@157.Accounts@158.List@167",
+          "id": "config.Constants@7.Commands@156.Accounts@157.List@166",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 167,
+          "line": 166,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157.Accounts@158"
+          "container_id": "config.Constants@7.Commands@156.Accounts@157"
         },
         {
-          "id": "config.Constants@7.Commands@157.Transactions@185.List@189",
+          "id": "config.Constants@7.Commands@156.Transactions@184.List@188",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 189,
+          "line": 188,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157.Transactions@185"
+          "container_id": "config.Constants@7.Commands@156.Transactions@184"
         }
       ],
       "Messages": [
         {
-          "id": "config.Constants@7.OAuth@63.Messages@148",
+          "id": "config.Constants@7.OAuth@62.Messages@147",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 148,
+          "line": 147,
           "package": "config",
-          "container_id": "config.Constants@7.OAuth@63"
+          "container_id": "config.Constants@7.OAuth@62"
         }
       ],
       "OAuth": [
         {
-          "id": "config.Constants@7.OAuth@63",
+          "id": "config.Constants@7.OAuth@62",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 63,
+          "line": 62,
           "package": "config",
           "container_id": "config.Constants@7"
         }
@@ -10635,20 +9765,20 @@
       ],
       "Plaid": [
         {
-          "id": "config.Constants@7.Plaid@37",
+          "id": "config.Constants@7.Plaid@36",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 37,
+          "line": 36,
           "package": "config",
           "container_id": "config.Constants@7"
         },
         {
-          "id": "config.Constants@7.Commands@157.Plaid@173",
+          "id": "config.Constants@7.Commands@156.Plaid@172",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 173,
+          "line": 172,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157"
+          "container_id": "config.Constants@7.Commands@156"
         }
       ],
       "PlaidAccessTokenResponse": [
@@ -10753,10 +9883,10 @@
       ],
       "PlaidLocation": [
         {
-          "id": "model.PlaidLocation@167",
+          "id": "model.PlaidLocation@176",
           "kind": "data class",
           "path": "src/commonMain/kotlin/model/PlaidModels.kt",
-          "line": 167,
+          "line": 176,
           "package": "model",
           "container_id": null
         }
@@ -10773,10 +9903,10 @@
       ],
       "PlaidRemovedTransaction": [
         {
-          "id": "model.PlaidRemovedTransaction@182",
+          "id": "model.PlaidRemovedTransaction@191",
           "kind": "data class",
           "path": "src/commonMain/kotlin/model/PlaidModels.kt",
-          "line": 182,
+          "line": 191,
           "package": "model",
           "container_id": null
         }
@@ -10871,26 +10001,6 @@
           "container_id": null
         }
       ],
-      "StoredTransaction": [
-        {
-          "id": "model.StoredTransaction@51",
-          "kind": "data class",
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 51,
-          "package": "model",
-          "container_id": null
-        }
-      ],
-      "StoredTransactions": [
-        {
-          "id": "model.StoredTransactions@32",
-          "kind": "data class",
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 32,
-          "package": "model",
-          "container_id": null
-        }
-      ],
       "TokenDao": [
         {
           "id": "dao.TokenDao@5",
@@ -10903,10 +10013,10 @@
       ],
       "Transaction": [
         {
-          "id": "model.Transaction@17",
+          "id": "model.Transaction@16",
           "kind": "data class",
           "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 17,
+          "line": 16,
           "package": "model",
           "container_id": null
         }
@@ -10928,16 +10038,6 @@
           "path": "src/commonMain/kotlin/interpreter/TransactionCommandInterpreterImpl.kt",
           "line": 12,
           "package": "interpreter",
-          "container_id": null
-        }
-      ],
-      "TransactionDao": [
-        {
-          "id": "dao.TransactionDao@5",
-          "kind": "interface",
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 5,
-          "package": "dao",
           "container_id": null
         }
       ],
@@ -10963,22 +10063,22 @@
       ],
       "TransactionServiceImpl": [
         {
-          "id": "transaction.TransactionServiceImpl@16",
+          "id": "transaction.TransactionServiceImpl@13",
           "kind": "class",
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 16,
+          "line": 13,
           "package": "transaction",
           "container_id": null
         }
       ],
       "Transactions": [
         {
-          "id": "config.Constants@7.Commands@157.Transactions@185",
+          "id": "config.Constants@7.Commands@156.Transactions@184",
           "kind": "object",
           "path": "src/commonMain/kotlin/config/Constants.kt",
-          "line": 185,
+          "line": 184,
           "package": "config",
-          "container_id": "config.Constants@7.Commands@157"
+          "container_id": "config.Constants@7.Commands@156"
         }
       ],
       "TransactionsCommand": [
@@ -11031,12 +10131,12 @@
       ],
       "buildInterpreter": [
         {
-          "id": "interpreter.InterpreterFactory@21.buildInterpreter@34",
+          "id": "interpreter.InterpreterFactory@20.buildInterpreter@33",
           "kind": "fun",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 34,
+          "line": 33,
           "package": "interpreter",
-          "container_id": "interpreter.InterpreterFactory@21"
+          "container_id": "interpreter.InterpreterFactory@20"
         }
       ],
       "close": [
@@ -11079,10 +10179,10 @@
       ],
       "createBrowserLauncher": [
         {
-          "id": "interpreter.createBrowserLauncher@17",
+          "id": "interpreter.createBrowserLauncher@16",
           "kind": "fun",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 17,
+          "line": 16,
           "package": "interpreter",
           "container_id": null
         },
@@ -11115,10 +10215,10 @@
       ],
       "createOAuthRedirectServer": [
         {
-          "id": "interpreter.createOAuthRedirectServer@19",
+          "id": "interpreter.createOAuthRedirectServer@18",
           "kind": "fun",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 19,
+          "line": 18,
           "package": "interpreter",
           "container_id": null
         },
@@ -11213,6 +10313,16 @@
           "container_id": null
         }
       ],
+      "fetchTransactionsForToken": [
+        {
+          "id": "transaction.TransactionServiceImpl@13.fetchTransactionsForToken@43",
+          "kind": "fun",
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 43,
+          "package": "transaction",
+          "container_id": "transaction.TransactionServiceImpl@13"
+        }
+      ],
       "findByBankName": [
         {
           "id": "dao.JsonTokenDaoImpl@5.findByBankName@10",
@@ -11241,12 +10351,12 @@
       ],
       "get": [
         {
-          "id": "interpreter.InterpreterFactory@21.get@22",
+          "id": "interpreter.InterpreterFactory@20.get@21",
           "kind": "fun",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 22,
+          "line": 21,
           "package": "interpreter",
-          "container_id": "interpreter.InterpreterFactory@21"
+          "container_id": "interpreter.InterpreterFactory@20"
         }
       ],
       "getAccounts": [
@@ -11269,22 +10379,12 @@
       ],
       "getEnvironmentConfig": [
         {
-          "id": "interpreter.InterpreterFactory@21.getEnvironmentConfig@27",
+          "id": "interpreter.InterpreterFactory@20.getEnvironmentConfig@26",
           "kind": "fun",
           "path": "src/commonMain/kotlin/interpreter/InterpreterFactory.kt",
-          "line": 27,
+          "line": 26,
           "package": "interpreter",
-          "container_id": "interpreter.InterpreterFactory@21"
-        }
-      ],
-      "getTransactionsForToken": [
-        {
-          "id": "transaction.TransactionServiceImpl@16.getTransactionsForToken@45",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 45,
-          "package": "transaction",
-          "container_id": "transaction.TransactionServiceImpl@16"
+          "container_id": "interpreter.InterpreterFactory@20"
         }
       ],
       "list": [
@@ -11373,12 +10473,12 @@
           "container_id": "transaction.TransactionService@7"
         },
         {
-          "id": "transaction.TransactionServiceImpl@16.listTransactions@21",
+          "id": "transaction.TransactionServiceImpl@13.listTransactions@17",
           "kind": "fun",
           "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 21,
+          "line": 17,
           "package": "transaction",
-          "container_id": "transaction.TransactionServiceImpl@16"
+          "container_id": "transaction.TransactionServiceImpl@13"
         }
       ],
       "loadPlaidConfig": [
@@ -11405,32 +10505,6 @@
           "line": 28,
           "package": "dao",
           "container_id": "dao.JsonConfigDao@15"
-        }
-      ],
-      "loadTransactions": [
-        {
-          "id": "dao.JsonTransactionDaoImpl@5.loadTransactions@6",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 6,
-          "package": "dao",
-          "container_id": "dao.JsonTransactionDaoImpl@5"
-        },
-        {
-          "id": "dao.TransactionDao@5.loadTransactions@12",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 12,
-          "package": "dao",
-          "container_id": "dao.TransactionDao@5"
-        },
-        {
-          "id": "dao.JsonTransactionDaoImpl@12.loadTransactions@24",
-          "kind": "fun",
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 24,
-          "package": "dao",
-          "container_id": "dao.JsonTransactionDaoImpl@12"
         }
       ],
       "main": [
@@ -11523,6 +10597,16 @@
           "line": 20,
           "package": "dao",
           "container_id": "dao.FileSystemHelper@15"
+        }
+      ],
+      "removeTransactions": [
+        {
+          "id": "transaction.TransactionServiceImpl@13.removeTransactions@62",
+          "kind": "fun",
+          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
+          "line": 62,
+          "package": "transaction",
+          "container_id": "transaction.TransactionServiceImpl@13"
         }
       ],
       "run": [
@@ -11661,32 +10745,6 @@
           "container_id": "dao.JsonConfigDao@15"
         }
       ],
-      "saveTransactions": [
-        {
-          "id": "dao.JsonTransactionDaoImpl@5.saveTransactions@8",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 8,
-          "package": "dao",
-          "container_id": "dao.JsonTransactionDaoImpl@5"
-        },
-        {
-          "id": "dao.TransactionDao@5.saveTransactions@21",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/dao/TransactionDao.kt",
-          "line": 21,
-          "package": "dao",
-          "container_id": "dao.TransactionDao@5"
-        },
-        {
-          "id": "dao.JsonTransactionDaoImpl@12.saveTransactions@35",
-          "kind": "fun",
-          "path": "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt",
-          "line": 35,
-          "package": "dao",
-          "container_id": "dao.JsonTransactionDaoImpl@12"
-        }
-      ],
       "startAndWaitForCallback": [
         {
           "id": "plaid.OAuthRedirectServer@5.startAndWaitForCallback@6",
@@ -11723,24 +10781,14 @@
           "container_id": "plaid.PlaidServiceImpl@30"
         }
       ],
-      "syncTransactionsForToken": [
-        {
-          "id": "transaction.TransactionServiceImpl@16.syncTransactionsForToken@82",
-          "kind": "fun",
-          "path": "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt",
-          "line": 82,
-          "package": "transaction",
-          "container_id": "transaction.TransactionServiceImpl@16"
-        }
-      ],
       "toDomainModel": [
         {
-          "id": "model.StoredTransaction@51.toDomainModel@65",
+          "id": "model.PlaidTransaction@149.toDomainModel@162",
           "kind": "fun",
-          "path": "src/commonMain/kotlin/model/Transaction.kt",
-          "line": 65,
+          "path": "src/commonMain/kotlin/model/PlaidModels.kt",
+          "line": 162,
           "package": "model",
-          "container_id": "model.StoredTransaction@51"
+          "container_id": "model.PlaidTransaction@149"
         }
       ],
       "writeFile": [
@@ -11775,15 +10823,13 @@
         "dao.JsonConfigDao@7",
         "dao.JsonTokenDaoImpl@12",
         "dao.JsonTokenDaoImpl@5",
-        "dao.JsonTransactionDaoImpl@12",
-        "dao.JsonTransactionDaoImpl@5",
         "interpreter.AccountCommandInterpreterImpl@16",
         "interpreter.InterpreterImpl@3",
         "interpreter.PlaidCommandInterpreterImpl@6",
         "interpreter.TransactionCommandInterpreterImpl@12",
         "plaid.OAuthRedirectServerImpl@21",
         "plaid.PlaidServiceImpl@30",
-        "transaction.TransactionServiceImpl@16"
+        "transaction.TransactionServiceImpl@13"
       ],
       "data class": [
         "config.PlaidConfig@6",
@@ -11795,15 +10841,13 @@
         "model.PlaidAccount@39",
         "model.PlaidAccountsResponse@30",
         "model.PlaidLinkTokenResponse@10",
-        "model.PlaidLocation@167",
-        "model.PlaidRemovedTransaction@182",
+        "model.PlaidLocation@176",
+        "model.PlaidRemovedTransaction@191",
         "model.PlaidToken@15",
         "model.PlaidTransaction@149",
         "model.PlaidTransactionsSyncResponse@136",
         "model.PublicTokenExchangeRequest@105",
-        "model.StoredTransaction@51",
-        "model.StoredTransactions@32",
-        "model.Transaction@17",
+        "model.Transaction@16",
         "model.TransactionsSyncRequest@125"
       ],
       "enum class": [
@@ -11848,32 +10892,26 @@
         "dao.JsonTokenDaoImpl@5.findByBankName@10",
         "dao.JsonTokenDaoImpl@5.list@8",
         "dao.JsonTokenDaoImpl@5.save@6",
-        "dao.JsonTransactionDaoImpl@12.loadTransactions@24",
-        "dao.JsonTransactionDaoImpl@12.saveTransactions@35",
-        "dao.JsonTransactionDaoImpl@5.loadTransactions@6",
-        "dao.JsonTransactionDaoImpl@5.saveTransactions@8",
         "dao.TokenDao@5.delete@12",
         "dao.TokenDao@5.findByBankName@10",
         "dao.TokenDao@5.list@8",
         "dao.TokenDao@5.save@6",
-        "dao.TransactionDao@5.loadTransactions@12",
-        "dao.TransactionDao@5.saveTransactions@21",
         "interpreter.AccountCommandInterpreter@6.addAccount@7",
         "interpreter.AccountCommandInterpreter@6.listAccounts@9",
-        "interpreter.InterpreterFactory@21.buildInterpreter@34",
-        "interpreter.InterpreterFactory@21.get@22",
-        "interpreter.InterpreterFactory@21.getEnvironmentConfig@27",
+        "interpreter.InterpreterFactory@20.buildInterpreter@33",
+        "interpreter.InterpreterFactory@20.get@21",
+        "interpreter.InterpreterFactory@20.getEnvironmentConfig@26",
         "interpreter.PlaidCommandInterpreter@3.configure@4",
         "interpreter.PlaidCommandInterpreterImpl@6.configure@9",
         "interpreter.TransactionCommandInterpreter@7.listTransactions@8",
         "interpreter.TransactionCommandInterpreterImpl@12.listTransactions@16",
         "interpreter.addAccount@23",
-        "interpreter.createBrowserLauncher@17",
+        "interpreter.createBrowserLauncher@16",
         "interpreter.createBrowserLauncher@8",
         "interpreter.createOAuthRedirectServer@10",
-        "interpreter.createOAuthRedirectServer@19",
+        "interpreter.createOAuthRedirectServer@18",
         "interpreter.listAccounts@50",
-        "model.StoredTransaction@51.toDomainModel@65",
+        "model.PlaidTransaction@149.toDomainModel@162",
         "plaid.HttpClientFactory@8.create@9",
         "plaid.OAuthRedirectServer@5.startAndWaitForCallback@6",
         "plaid.OAuthRedirectServerImpl@21.close@114",
@@ -11891,9 +10929,9 @@
         "plaid.PlaidServiceImpl@30.saveConfig@149",
         "plaid.PlaidServiceImpl@30.syncTransactions@108",
         "transaction.TransactionService@7.listTransactions@8",
-        "transaction.TransactionServiceImpl@16.getTransactionsForToken@45",
-        "transaction.TransactionServiceImpl@16.listTransactions@21",
-        "transaction.TransactionServiceImpl@16.syncTransactionsForToken@82",
+        "transaction.TransactionServiceImpl@13.fetchTransactionsForToken@43",
+        "transaction.TransactionServiceImpl@13.listTransactions@17",
+        "transaction.TransactionServiceImpl@13.removeTransactions@62",
         "validation.ValidationHelper@6.ensurePlaidConfigValid@7"
       ],
       "interface": [
@@ -11902,7 +10940,6 @@
         "config.EnvironmentConfig@3",
         "dao.ConfigDao@6",
         "dao.TokenDao@5",
-        "dao.TransactionDao@5",
         "interpreter.AccountCommandInterpreter@6",
         "interpreter.Interpreter@3",
         "interpreter.PlaidCommandInterpreter@3",
@@ -11917,30 +10954,30 @@
         "command.TransactionsCommand@12",
         "config.Constants@7",
         "config.Constants@7.App@8",
-        "config.Constants@7.Browser@211",
-        "config.Constants@7.Browser@211.ErrorMessages@215",
-        "config.Constants@7.Commands@157",
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157.Accounts@158.Add@162",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.ErrorMessages@198",
-        "config.Constants@7.Commands@157.Plaid@173",
-        "config.Constants@7.Commands@157.Plaid@173.Configure@177",
-        "config.Constants@7.Commands@157.Transactions@185",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
+        "config.Constants@7.Browser@210",
+        "config.Constants@7.Browser@210.ErrorMessages@214",
+        "config.Constants@7.Commands@156",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156.Accounts@157.Add@161",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.ErrorMessages@197",
+        "config.Constants@7.Commands@156.Plaid@172",
+        "config.Constants@7.Commands@156.Plaid@172.Configure@176",
+        "config.Constants@7.Commands@156.Transactions@184",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
         "config.Constants@7.FileSystem@15",
-        "config.Constants@7.FileSystem@15.ErrorMessages@29",
-        "config.Constants@7.OAuth@63",
-        "config.Constants@7.OAuth@63.Html@77",
-        "config.Constants@7.OAuth@63.Messages@148",
-        "config.Constants@7.Plaid@37",
-        "config.Constants@7.Plaid@37.Endpoints@48",
-        "config.Constants@7.Plaid@37.ErrorMessages@55",
+        "config.Constants@7.FileSystem@15.ErrorMessages@28",
+        "config.Constants@7.OAuth@62",
+        "config.Constants@7.OAuth@62.Html@76",
+        "config.Constants@7.OAuth@62.Messages@147",
+        "config.Constants@7.Plaid@36",
+        "config.Constants@7.Plaid@36.Endpoints@47",
+        "config.Constants@7.Plaid@36.ErrorMessages@54",
         "config.ProductionEnvironmentConfig@3",
         "config.SandboxEnvironmentConfig@3",
         "dao.FileSystemHelper@15",
         "dao.FileSystemHelper@7",
-        "interpreter.InterpreterFactory@21",
+        "interpreter.InterpreterFactory@20",
         "plaid.HttpClientFactory@8",
         "validation.ValidationHelper@6"
       ]
@@ -11989,27 +11026,27 @@
         "command.run@30"
       ],
       "src/commonMain/kotlin/config/Constants.kt": [
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157.Accounts@158.Add@162",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156.Accounts@157.Add@161",
         "config.Constants@7.App@8",
-        "config.Constants@7.Browser@211",
-        "config.Constants@7.Commands@157",
-        "config.Constants@7.Commands@157.Plaid@173.Configure@177",
+        "config.Constants@7.Browser@210",
+        "config.Constants@7.Commands@156",
+        "config.Constants@7.Commands@156.Plaid@172.Configure@176",
         "config.Constants@7",
-        "config.Constants@7.Plaid@37.Endpoints@48",
-        "config.Constants@7.FileSystem@15.ErrorMessages@29",
-        "config.Constants@7.Plaid@37.ErrorMessages@55",
-        "config.Constants@7.Commands@157.ErrorMessages@198",
-        "config.Constants@7.Browser@211.ErrorMessages@215",
+        "config.Constants@7.Plaid@36.Endpoints@47",
+        "config.Constants@7.FileSystem@15.ErrorMessages@28",
+        "config.Constants@7.Plaid@36.ErrorMessages@54",
+        "config.Constants@7.Commands@156.ErrorMessages@197",
+        "config.Constants@7.Browser@210.ErrorMessages@214",
         "config.Constants@7.FileSystem@15",
-        "config.Constants@7.OAuth@63.Html@77",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "config.Constants@7.OAuth@63.Messages@148",
-        "config.Constants@7.OAuth@63",
-        "config.Constants@7.Plaid@37",
-        "config.Constants@7.Commands@157.Plaid@173",
-        "config.Constants@7.Commands@157.Transactions@185"
+        "config.Constants@7.OAuth@62.Html@76",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
+        "config.Constants@7.OAuth@62.Messages@147",
+        "config.Constants@7.OAuth@62",
+        "config.Constants@7.Plaid@36",
+        "config.Constants@7.Commands@156.Plaid@172",
+        "config.Constants@7.Commands@156.Transactions@184"
       ],
       "src/commonMain/kotlin/config/EnvironmentConfig.kt": [
         "config.EnvironmentConfig@3"
@@ -12046,22 +11083,12 @@
         "dao.JsonTokenDaoImpl@5.list@8",
         "dao.JsonTokenDaoImpl@5.save@6"
       ],
-      "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt": [
-        "dao.JsonTransactionDaoImpl@5",
-        "dao.JsonTransactionDaoImpl@5.loadTransactions@6",
-        "dao.JsonTransactionDaoImpl@5.saveTransactions@8"
-      ],
       "src/commonMain/kotlin/dao/TokenDao.kt": [
         "dao.TokenDao@5",
         "dao.TokenDao@5.delete@12",
         "dao.TokenDao@5.findByBankName@10",
         "dao.TokenDao@5.list@8",
         "dao.TokenDao@5.save@6"
-      ],
-      "src/commonMain/kotlin/dao/TransactionDao.kt": [
-        "dao.TransactionDao@5",
-        "dao.TransactionDao@5.loadTransactions@12",
-        "dao.TransactionDao@5.saveTransactions@21"
       ],
       "src/commonMain/kotlin/interpreter/AccountCommandInterpreter.kt": [
         "interpreter.AccountCommandInterpreter@6",
@@ -12077,12 +11104,12 @@
         "interpreter.Interpreter@3"
       ],
       "src/commonMain/kotlin/interpreter/InterpreterFactory.kt": [
-        "interpreter.InterpreterFactory@21",
-        "interpreter.InterpreterFactory@21.buildInterpreter@34",
-        "interpreter.createBrowserLauncher@17",
-        "interpreter.createOAuthRedirectServer@19",
-        "interpreter.InterpreterFactory@21.get@22",
-        "interpreter.InterpreterFactory@21.getEnvironmentConfig@27"
+        "interpreter.InterpreterFactory@20",
+        "interpreter.InterpreterFactory@20.buildInterpreter@33",
+        "interpreter.createBrowserLauncher@16",
+        "interpreter.createOAuthRedirectServer@18",
+        "interpreter.InterpreterFactory@20.get@21",
+        "interpreter.InterpreterFactory@20.getEnvironmentConfig@26"
       ],
       "src/commonMain/kotlin/interpreter/InterpreterImpl.kt": [
         "interpreter.InterpreterImpl@3"
@@ -12115,22 +11142,20 @@
         "model.PlaidAccountsResponse@30",
         "model.PlaidCountryCode@68",
         "model.PlaidLinkTokenResponse@10",
-        "model.PlaidLocation@167",
+        "model.PlaidLocation@176",
         "model.PlaidProduct@50",
-        "model.PlaidRemovedTransaction@182",
+        "model.PlaidRemovedTransaction@191",
         "model.PlaidTransaction@149",
         "model.PlaidTransactionsSyncResponse@136",
         "model.PublicTokenExchangeRequest@105",
-        "model.TransactionsSyncRequest@125"
+        "model.TransactionsSyncRequest@125",
+        "model.PlaidTransaction@149.toDomainModel@162"
       ],
       "src/commonMain/kotlin/model/PlaidToken.kt": [
         "model.PlaidToken@15"
       ],
       "src/commonMain/kotlin/model/Transaction.kt": [
-        "model.StoredTransaction@51",
-        "model.StoredTransactions@32",
-        "model.Transaction@17",
-        "model.StoredTransaction@51.toDomainModel@65"
+        "model.Transaction@16"
       ],
       "src/commonMain/kotlin/plaid/HttpClientFactory.kt": [
         "plaid.HttpClientFactory@8",
@@ -12163,10 +11188,10 @@
         "transaction.TransactionService@7.listTransactions@8"
       ],
       "src/commonMain/kotlin/transaction/TransactionServiceImpl.kt": [
-        "transaction.TransactionServiceImpl@16",
-        "transaction.TransactionServiceImpl@16.getTransactionsForToken@45",
-        "transaction.TransactionServiceImpl@16.listTransactions@21",
-        "transaction.TransactionServiceImpl@16.syncTransactionsForToken@82"
+        "transaction.TransactionServiceImpl@13",
+        "transaction.TransactionServiceImpl@13.fetchTransactionsForToken@43",
+        "transaction.TransactionServiceImpl@13.listTransactions@17",
+        "transaction.TransactionServiceImpl@13.removeTransactions@62"
       ],
       "src/commonMain/kotlin/validation/ValidationHelper.kt": [
         "validation.ValidationHelper@6",
@@ -12194,11 +11219,6 @@
         "dao.JsonTokenDaoImpl@12.findByBankName@45",
         "dao.JsonTokenDaoImpl@12.list@35",
         "dao.JsonTokenDaoImpl@12.save@26"
-      ],
-      "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt": [
-        "dao.JsonTransactionDaoImpl@12",
-        "dao.JsonTransactionDaoImpl@12.loadTransactions@24",
-        "dao.JsonTransactionDaoImpl@12.saveTransactions@35"
       ],
       "src/macosArm64Main/kotlin/interpreter/InterpreterFactory.kt": [
         "interpreter.createBrowserLauncher@8",
@@ -12249,31 +11269,31 @@
         "command.run@30"
       ],
       "config": [
-        "config.Constants@7.Commands@157.Accounts@158",
-        "config.Constants@7.Commands@157.Accounts@158.Add@162",
+        "config.Constants@7.Commands@156.Accounts@157",
+        "config.Constants@7.Commands@156.Accounts@157.Add@161",
         "config.Constants@7.App@8",
-        "config.Constants@7.Browser@211",
-        "config.Constants@7.Commands@157",
-        "config.Constants@7.Commands@157.Plaid@173.Configure@177",
+        "config.Constants@7.Browser@210",
+        "config.Constants@7.Commands@156",
+        "config.Constants@7.Commands@156.Plaid@172.Configure@176",
         "config.Constants@7",
-        "config.Constants@7.Plaid@37.Endpoints@48",
+        "config.Constants@7.Plaid@36.Endpoints@47",
         "config.EnvironmentConfig@3",
-        "config.Constants@7.FileSystem@15.ErrorMessages@29",
-        "config.Constants@7.Plaid@37.ErrorMessages@55",
-        "config.Constants@7.Commands@157.ErrorMessages@198",
-        "config.Constants@7.Browser@211.ErrorMessages@215",
+        "config.Constants@7.FileSystem@15.ErrorMessages@28",
+        "config.Constants@7.Plaid@36.ErrorMessages@54",
+        "config.Constants@7.Commands@156.ErrorMessages@197",
+        "config.Constants@7.Browser@210.ErrorMessages@214",
         "config.Constants@7.FileSystem@15",
-        "config.Constants@7.OAuth@63.Html@77",
-        "config.Constants@7.Commands@157.Accounts@158.List@167",
-        "config.Constants@7.Commands@157.Transactions@185.List@189",
-        "config.Constants@7.OAuth@63.Messages@148",
-        "config.Constants@7.OAuth@63",
-        "config.Constants@7.Plaid@37",
-        "config.Constants@7.Commands@157.Plaid@173",
+        "config.Constants@7.OAuth@62.Html@76",
+        "config.Constants@7.Commands@156.Accounts@157.List@166",
+        "config.Constants@7.Commands@156.Transactions@184.List@188",
+        "config.Constants@7.OAuth@62.Messages@147",
+        "config.Constants@7.OAuth@62",
+        "config.Constants@7.Plaid@36",
+        "config.Constants@7.Commands@156.Plaid@172",
         "config.PlaidConfig@6",
         "config.ProductionEnvironmentConfig@3",
         "config.SandboxEnvironmentConfig@3",
-        "config.Constants@7.Commands@157.Transactions@185"
+        "config.Constants@7.Commands@156.Transactions@184"
       ],
       "dao": [
         "dao.ConfigDao@6",
@@ -12283,10 +11303,7 @@
         "dao.JsonConfigDao@15",
         "dao.JsonTokenDaoImpl@5",
         "dao.JsonTokenDaoImpl@12",
-        "dao.JsonTransactionDaoImpl@5",
-        "dao.JsonTransactionDaoImpl@12",
         "dao.TokenDao@5",
-        "dao.TransactionDao@5",
         "dao.JsonTokenDaoImpl@5.delete@12",
         "dao.TokenDao@5.delete@12",
         "dao.JsonTokenDaoImpl@12.delete@47",
@@ -12301,9 +11318,6 @@
         "dao.ConfigDao@6.loadPlaidConfig@7",
         "dao.JsonConfigDao@7.loadPlaidConfig@8",
         "dao.JsonConfigDao@15.loadPlaidConfig@28",
-        "dao.JsonTransactionDaoImpl@5.loadTransactions@6",
-        "dao.TransactionDao@5.loadTransactions@12",
-        "dao.JsonTransactionDaoImpl@12.loadTransactions@24",
         "dao.FileSystemHelper@7.readFile@21",
         "dao.FileSystemHelper@15.readFile@20",
         "dao.JsonTokenDaoImpl@5.save@6",
@@ -12312,9 +11326,6 @@
         "dao.ConfigDao@6.savePlaidConfig@9",
         "dao.JsonConfigDao@7.savePlaidConfig@10",
         "dao.JsonConfigDao@15.savePlaidConfig@38",
-        "dao.JsonTransactionDaoImpl@5.saveTransactions@8",
-        "dao.TransactionDao@5.saveTransactions@21",
-        "dao.JsonTransactionDaoImpl@12.saveTransactions@35",
         "dao.FileSystemHelper@7.writeFile@29",
         "dao.FileSystemHelper@15.writeFile@40"
       ],
@@ -12322,7 +11333,7 @@
         "interpreter.AccountCommandInterpreter@6",
         "interpreter.AccountCommandInterpreterImpl@16",
         "interpreter.Interpreter@3",
-        "interpreter.InterpreterFactory@21",
+        "interpreter.InterpreterFactory@20",
         "interpreter.InterpreterImpl@3",
         "interpreter.PlaidCommandInterpreter@3",
         "interpreter.PlaidCommandInterpreterImpl@6",
@@ -12330,15 +11341,15 @@
         "interpreter.TransactionCommandInterpreterImpl@12",
         "interpreter.AccountCommandInterpreter@6.addAccount@7",
         "interpreter.addAccount@23",
-        "interpreter.InterpreterFactory@21.buildInterpreter@34",
+        "interpreter.InterpreterFactory@20.buildInterpreter@33",
         "interpreter.PlaidCommandInterpreter@3.configure@4",
         "interpreter.PlaidCommandInterpreterImpl@6.configure@9",
-        "interpreter.createBrowserLauncher@17",
+        "interpreter.createBrowserLauncher@16",
         "interpreter.createBrowserLauncher@8",
-        "interpreter.createOAuthRedirectServer@19",
+        "interpreter.createOAuthRedirectServer@18",
         "interpreter.createOAuthRedirectServer@10",
-        "interpreter.InterpreterFactory@21.get@22",
-        "interpreter.InterpreterFactory@21.getEnvironmentConfig@27",
+        "interpreter.InterpreterFactory@20.get@21",
+        "interpreter.InterpreterFactory@20.getEnvironmentConfig@26",
         "interpreter.AccountCommandInterpreter@6.listAccounts@9",
         "interpreter.listAccounts@50",
         "interpreter.TransactionCommandInterpreter@7.listTransactions@8",
@@ -12354,18 +11365,16 @@
         "model.PlaidAccountsResponse@30",
         "model.PlaidCountryCode@68",
         "model.PlaidLinkTokenResponse@10",
-        "model.PlaidLocation@167",
+        "model.PlaidLocation@176",
         "model.PlaidProduct@50",
-        "model.PlaidRemovedTransaction@182",
+        "model.PlaidRemovedTransaction@191",
         "model.PlaidToken@15",
         "model.PlaidTransaction@149",
         "model.PlaidTransactionsSyncResponse@136",
         "model.PublicTokenExchangeRequest@105",
-        "model.StoredTransaction@51",
-        "model.StoredTransactions@32",
-        "model.Transaction@17",
+        "model.Transaction@16",
         "model.TransactionsSyncRequest@125",
-        "model.StoredTransaction@51.toDomainModel@65"
+        "model.PlaidTransaction@149.toDomainModel@162"
       ],
       "plaid": [
         "plaid.HttpClientFactory@8",
@@ -12392,11 +11401,11 @@
       ],
       "transaction": [
         "transaction.TransactionService@7",
-        "transaction.TransactionServiceImpl@16",
-        "transaction.TransactionServiceImpl@16.getTransactionsForToken@45",
+        "transaction.TransactionServiceImpl@13",
+        "transaction.TransactionServiceImpl@13.fetchTransactionsForToken@43",
         "transaction.TransactionService@7.listTransactions@8",
-        "transaction.TransactionServiceImpl@16.listTransactions@21",
-        "transaction.TransactionServiceImpl@16.syncTransactionsForToken@82"
+        "transaction.TransactionServiceImpl@13.listTransactions@17",
+        "transaction.TransactionServiceImpl@13.removeTransactions@62"
       ],
       "validation": [
         "validation.ValidationHelper@6",
@@ -12577,14 +11586,6 @@
         ],
         "symbol_count": 5
       },
-      "src/commonMain/kotlin/dao/JsonTransactionDaoImpl.kt": {
-        "package": "dao",
-        "source_set": "commonMain",
-        "imports": [
-          "model.StoredTransactions"
-        ],
-        "symbol_count": 3
-      },
       "src/commonMain/kotlin/dao/TokenDao.kt": {
         "package": "dao",
         "source_set": "commonMain",
@@ -12592,14 +11593,6 @@
           "model.PlaidToken"
         ],
         "symbol_count": 5
-      },
-      "src/commonMain/kotlin/dao/TransactionDao.kt": {
-        "package": "dao",
-        "source_set": "commonMain",
-        "imports": [
-          "model.StoredTransactions"
-        ],
-        "symbol_count": 3
       },
       "src/commonMain/kotlin/interpreter/AccountCommandInterpreter.kt": {
         "package": "interpreter",
@@ -12647,7 +11640,6 @@
           "config.SandboxEnvironmentConfig",
           "dao.JsonConfigDao",
           "dao.JsonTokenDaoImpl",
-          "dao.JsonTransactionDaoImpl",
           "plaid.HttpClientFactory",
           "plaid.OAuthRedirectServer",
           "plaid.PlaidServiceImpl",
@@ -12717,7 +11709,7 @@
           "kotlinx.serialization.SerialName",
           "kotlinx.serialization.Serializable"
         ],
-        "symbol_count": 15
+        "symbol_count": 16
       },
       "src/commonMain/kotlin/model/PlaidToken.kt": {
         "package": "model",
@@ -12733,10 +11725,9 @@
         "source_set": "commonMain",
         "imports": [
           "kotlinx.datetime.LocalDate",
-          "kotlinx.serialization.SerialName",
           "kotlinx.serialization.Serializable"
         ],
-        "symbol_count": 4
+        "symbol_count": 1
       },
       "src/commonMain/kotlin/plaid/HttpClientFactory.kt": {
         "package": "plaid",
@@ -12819,12 +11810,9 @@
           "arrow.core.raise.either",
           "arrow.fx.coroutines.parMap",
           "dao.TokenDao",
-          "dao.TransactionDao",
           "kotlinx.datetime.LocalDate",
+          "model.PlaidRemovedTransaction",
           "model.PlaidToken",
-          "model.PlaidTransaction",
-          "model.StoredTransaction",
-          "model.StoredTransactions",
           "model.Transaction",
           "plaid.PlaidService"
         ],
@@ -12900,20 +11888,6 @@
           "platform.posix.getenv"
         ],
         "symbol_count": 5
-      },
-      "src/macosArm64Main/kotlin/dao/JsonTransactionDaoImpl.kt": {
-        "package": "dao",
-        "source_set": "macosArm64Main",
-        "imports": [
-          "config.Constants",
-          "kotlinx.cinterop.ExperimentalForeignApi",
-          "kotlinx.cinterop.toKString",
-          "kotlinx.serialization.encodeToString",
-          "kotlinx.serialization.json.Json",
-          "model.StoredTransactions",
-          "platform.posix.getenv"
-        ],
-        "symbol_count": 3
       },
       "src/macosArm64Main/kotlin/interpreter/InterpreterFactory.kt": {
         "package": "interpreter",
