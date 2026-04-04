@@ -1,0 +1,54 @@
+#!/bin/sh
+set -eu
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$staged_files" ]; then
+    exit 0
+fi
+
+needs_index_refresh=0
+docs_sensitive_change=0
+agent_docs_updated=0
+
+old_ifs=$IFS
+IFS='
+'
+for path in $staged_files; do
+    case "$path" in
+        *.kt|*.kts|*.properties|*.xml|*.yml|*.sh|build_code_index.py)
+            needs_index_refresh=1
+            ;;
+    esac
+
+    case "$path" in
+        AGENTS.md|agents/*.md)
+            agent_docs_updated=1
+            ;;
+    esac
+
+    case "$path" in
+        src/commonMain/kotlin/Main.kt|src/commonMain/kotlin/command/*|src/commonMain/kotlin/interpreter/*|src/commonMain/kotlin/dao/*|src/commonMain/kotlin/plaid/*|src/macosArm64Main/kotlin/*/*|build.gradle.kts|settings.gradle.kts|build_code_index.py)
+            docs_sensitive_change=1
+            ;;
+    esac
+done
+IFS=$old_ifs
+
+if [ "$needs_index_refresh" -eq 1 ]; then
+    echo 'pre-commit: regenerating code-index.json'
+    python3 build_code_index.py
+    git add code-index.json
+fi
+
+if [ "$docs_sensitive_change" -eq 1 ] && [ "$agent_docs_updated" -eq 0 ]; then
+    echo 'pre-commit: docs-sensitive changes detected without AGENTS updates.'
+    echo 'Update AGENTS.md or the relevant agents/*.md section, then commit again.'
+    echo 'Use --no-verify only when the existing agent docs remain accurate.'
+    exit 1
+fi
+
+exit 0
