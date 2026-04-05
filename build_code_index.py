@@ -15,6 +15,40 @@ OUTPUT_PATH = ROOT / "code-index.json"
 SELF_FILE = Path(__file__).name
 INDEXABLE_EXTENSIONS = {".kt", ".kts", ".properties", ".xml", ".yml", ".sh"}
 KOTLIN_EXTENSIONS = {".kt", ".kts"}
+CONTAINER_KINDS = {"class", "data class", "enum class", "sealed class", "annotation class", "value class", "interface", "object"}
+CONTINUATION_PREFIXES = (
+    ".",
+    "?.",
+    "?:",
+    "!!",
+    "&&",
+    "||",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+    "as ",
+    "is ",
+)
+CONTINUATION_SUFFIXES = (
+    ".",
+    "?.",
+    "?:",
+    ",",
+    "(",
+    "[",
+    "{",
+    "=",
+    "->",
+    "&&",
+    "||",
+    "+",
+    "-",
+    "*",
+    "/",
+    "%",
+)
 DECLARATION_RE = re.compile(
     r"^\s*(?P<modifiers>(?:(?:private|public|internal|protected|override|suspend|tailrec|inline|operator|infix|expect|actual|open|abstract|final|sealed|data|enum|annotation|const|lateinit|value|external)\s+)*)"
     r"(?P<kind>class|interface|object|fun|typealias)\s+"
@@ -51,6 +85,11 @@ class SymbolRecord:
     modifiers: list[str]
     is_expect: bool
     is_actual: bool
+    declaration_start_line: int
+    declaration_end_line: int
+    body_start_line: int | None
+    body_end_line: int | None
+    span_kind: str
     start_line: int
     end_line: int
     signature: str
@@ -96,15 +135,13 @@ class KotlinFileIndex:
             modifiers = [modifier for modifier in match.group("modifiers").split() if modifier]
             kind = normalize_kind(match.group("kind"), modifiers)
             name = match.group("name")
-            signature, signature_end_line = collect_signature(self.lines, index)
-            body_range = find_body_range(self.lines, index) if "{" in signature else None
-
-            if body_range is None:
-                start_line = index + 1
-                end_line = signature_end_line
-            else:
-                start_line = index + 1
-                end_line = body_range[1]
+            signature, signature_end_line, body_style = collect_signature(self.lines, index)
+            spans = calculate_symbol_spans(
+                lines=self.lines,
+                start_index=index,
+                signature_end_line=signature_end_line,
+                body_style=body_style,
+            )
 
             raw_symbols.append(
                 {
@@ -119,14 +156,19 @@ class KotlinFileIndex:
                     "modifiers": modifiers,
                     "is_expect": "expect" in modifiers,
                     "is_actual": "actual" in modifiers,
-                    "start_line": start_line,
-                    "end_line": end_line,
+                    "declaration_start_line": spans["declaration_start_line"],
+                    "declaration_end_line": spans["declaration_end_line"],
+                    "body_start_line": spans["body_start_line"],
+                    "body_end_line": spans["body_end_line"],
+                    "span_kind": spans["span_kind"],
+                    "start_line": spans["start_line"],
+                    "end_line": spans["end_line"],
                     "signature": signature,
                     "imports": self.imports,
                     "dependencies": [],
                     "references": [],
-                    "_sort_span": end_line - start_line,
-                    "_is_container": kind in {"class", "data class", "enum class", "sealed class", "annotation class", "value class", "interface", "object"},
+                    "_sort_span": spans["end_line"] - spans["start_line"],
+                    "_is_container": kind in CONTAINER_KINDS,
                 }
             )
 
@@ -191,26 +233,203 @@ def detect_source_set(path: Path) -> str:
     return "project"
 
 
-def collect_signature(lines: list[str], start_index: int, max_lines: int = 16) -> tuple[str, int]:
+def collect_signature(lines: list[str], start_index: int, max_lines: int = 16) -> tuple[str, int, str | None]:
     collected: list[str] = []
-    paren_balance = 0
+    state = LexState()
+    paren_depth = 0
+    bracket_depth = 0
+    brace_depth = 0
+
     for index in range(start_index, min(len(lines), start_index + max_lines)):
         line = lines[index].rstrip()
         stripped = line.strip()
         if index > start_index and DECLARATION_RE.match(line):
             break
         collected.append(stripped)
-        paren_balance += line.count("(") - line.count(")")
 
-        if "{" in line or "=" in line:
-            return collapse_whitespace(" ".join(collected)), index + 1
+        clean, state = sanitize_line(line, state)
+        terminator, paren_depth, bracket_depth, brace_depth = scan_signature_line(
+            clean,
+            paren_depth,
+            bracket_depth,
+            brace_depth,
+        )
+        if terminator is not None:
+            body_style = "block" if terminator == "{" else "expression"
+            return collapse_whitespace(" ".join(collected)), index + 1, body_style
 
-        if paren_balance <= 0 and stripped and not stripped.endswith((",", "(", ":")):
+        if paren_depth <= 0 and bracket_depth <= 0 and brace_depth <= 0 and stripped and not stripped.endswith((",", "(", ":")):
             next_non_empty = next_non_empty_line(lines, index + 1)
-            if next_non_empty is None or not next_non_empty.startswith((":", "{")):
-                return collapse_whitespace(" ".join(collected)), index + 1
+            if next_non_empty is None or not next_non_empty.startswith((":", "{", "=")):
+                return collapse_whitespace(" ".join(collected)), index + 1, None
 
-    return collapse_whitespace(" ".join(collected)), min(len(lines), start_index + max_lines)
+    return collapse_whitespace(" ".join(collected)), min(len(lines), start_index + max_lines), None
+
+
+def scan_signature_line(
+    clean: str,
+    paren_depth: int,
+    bracket_depth: int,
+    brace_depth: int,
+) -> tuple[str | None, int, int, int]:
+    for char in clean:
+        at_top_level = paren_depth == 0 and bracket_depth == 0 and brace_depth == 0
+        if at_top_level and char in {"=", "{"}:
+            return char, paren_depth, bracket_depth, brace_depth
+
+        if char == "(":
+            paren_depth += 1
+        elif char == ")" and paren_depth > 0:
+            paren_depth -= 1
+        elif char == "[":
+            bracket_depth += 1
+        elif char == "]" and bracket_depth > 0:
+            bracket_depth -= 1
+        elif char == "{":
+            brace_depth += 1
+        elif char == "}" and brace_depth > 0:
+            brace_depth -= 1
+
+    return None, paren_depth, bracket_depth, brace_depth
+
+
+def calculate_symbol_spans(
+    lines: list[str],
+    start_index: int,
+    signature_end_line: int,
+    body_style: str | None,
+) -> dict[str, Any]:
+    declaration_start_line = start_index + 1
+    declaration_end_line = signature_end_line
+    body_range: tuple[int, int] | None = None
+    span_kind = "declaration_only"
+
+    if body_style == "block":
+        body_range = find_body_range(lines, start_index)
+        span_kind = "block_body" if body_range is not None else "declaration_only"
+    elif body_style == "expression":
+        body_range = find_expression_range(lines, signature_end_line - 1)
+        span_kind = "expression_body" if body_range is not None else "declaration_only"
+
+    return {
+        "declaration_start_line": declaration_start_line,
+        "declaration_end_line": declaration_end_line,
+        "body_start_line": body_range[0] if body_range is not None else None,
+        "body_end_line": body_range[1] if body_range is not None else None,
+        "span_kind": span_kind,
+        "start_line": declaration_start_line,
+        "end_line": body_range[1] if body_range is not None else declaration_end_line,
+    }
+
+
+def find_expression_range(lines: list[str], start_index: int) -> tuple[int, int] | None:
+    state = LexState()
+    paren_depth = 0
+    bracket_depth = 0
+    brace_depth = 0
+    body_start_line = None
+    body_end_line = None
+
+    for index in range(start_index, len(lines)):
+        raw_line = lines[index]
+        if body_start_line is not None and paren_depth == 0 and bracket_depth == 0 and brace_depth == 0 and is_expression_boundary_line(raw_line):
+            return body_start_line, body_end_line or index
+
+        clean, state = sanitize_line(raw_line, state)
+        if index == start_index:
+            clean = text_after_top_level_equals(clean)
+        stripped = clean.strip()
+        if body_start_line is None and stripped:
+            body_start_line = index + 1
+
+        paren_depth, bracket_depth, brace_depth = update_delimiter_depths(
+            clean,
+            paren_depth,
+            bracket_depth,
+            brace_depth,
+        )
+        if stripped:
+            body_end_line = index + 1
+
+        if body_start_line is not None and paren_depth == 0 and bracket_depth == 0 and brace_depth == 0:
+            next_line = next_non_empty_line(lines, index + 1)
+            if expression_can_end(stripped, next_line):
+                return body_start_line, body_end_line or (index + 1)
+
+    return None if body_start_line is None else (body_start_line, body_end_line or len(lines))
+
+
+def text_after_top_level_equals(clean: str) -> str:
+    paren_depth = 0
+    bracket_depth = 0
+    brace_depth = 0
+
+    for index, char in enumerate(clean):
+        at_top_level = paren_depth == 0 and bracket_depth == 0 and brace_depth == 0
+        if at_top_level and char == "=":
+            return clean[index + 1 :]
+
+        if char == "(":
+            paren_depth += 1
+        elif char == ")" and paren_depth > 0:
+            paren_depth -= 1
+        elif char == "[":
+            bracket_depth += 1
+        elif char == "]" and bracket_depth > 0:
+            bracket_depth -= 1
+        elif char == "{":
+            brace_depth += 1
+        elif char == "}" and brace_depth > 0:
+            brace_depth -= 1
+
+    return clean
+
+
+def update_delimiter_depths(
+    clean: str,
+    paren_depth: int,
+    bracket_depth: int,
+    brace_depth: int,
+) -> tuple[int, int, int]:
+    for char in clean:
+        if char == "(":
+            paren_depth += 1
+        elif char == ")" and paren_depth > 0:
+            paren_depth -= 1
+        elif char == "[":
+            bracket_depth += 1
+        elif char == "]" and bracket_depth > 0:
+            bracket_depth -= 1
+        elif char == "{":
+            brace_depth += 1
+        elif char == "}" and brace_depth > 0:
+            brace_depth -= 1
+    return paren_depth, bracket_depth, brace_depth
+
+
+def is_expression_boundary_line(line: str) -> bool:
+    stripped = line.strip()
+    return bool(stripped.startswith("@") or stripped.startswith("}") or DECLARATION_RE.match(line))
+
+
+def expression_can_end(current_line: str, next_line: str | None) -> bool:
+    if not current_line:
+        return False
+    if current_line.endswith(CONTINUATION_SUFFIXES):
+        return False
+    if next_line is None:
+        return True
+
+    next_stripped = next_line.strip()
+    if not next_stripped:
+        return True
+    if next_stripped.startswith(CONTINUATION_PREFIXES):
+        return False
+    if next_stripped.startswith(("@", "}")):
+        return True
+    if DECLARATION_RE.match(next_line):
+        return True
+    return False
 
 
 def next_non_empty_line(lines: list[str], start_index: int) -> str | None:
@@ -485,41 +704,93 @@ def build_entry_points(files: dict[str, KotlinFileIndex], all_text_files: dict[s
 
 
 def location(symbol: dict[str, Any]) -> dict[str, Any]:
-    return {"path": symbol["file"], "line": symbol["start_line"], "end_line": symbol["end_line"]}
+    return range_payload(symbol["file"], symbol["start_line"], symbol["end_line"])
+
+
+def range_payload(path: str, start_line: int, end_line: int) -> dict[str, Any]:
+    return {"path": path, "line": start_line, "end_line": end_line}
+
+
+def optional_range_payload(path: str, start_line: int | None, end_line: int | None) -> dict[str, Any] | None:
+    if start_line is None or end_line is None:
+        return None
+    return range_payload(path, start_line, end_line)
+
+
+def symbol_navigation_summary(symbol: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": symbol["id"],
+        "name": symbol["name"],
+        "simple_name": symbol["simple_name"],
+        "kind": symbol["kind"],
+        "path": symbol["file"],
+        "package": symbol["package"],
+        "source_set": symbol["source_set"],
+        "container_id": symbol["container_id"],
+        "visibility": symbol["visibility"],
+        "span_kind": symbol["span_kind"],
+        "signature": symbol["signature"],
+        "declaration": range_payload(
+            symbol["file"],
+            symbol["declaration_start_line"],
+            symbol["declaration_end_line"],
+        ),
+        "body": optional_range_payload(
+            symbol["file"],
+            symbol["body_start_line"],
+            symbol["body_end_line"],
+        ),
+        "span": range_payload(symbol["file"], symbol["start_line"], symbol["end_line"]),
+        "dependency_count": len(symbol["dependencies"]),
+        "reference_count": len(symbol["references"]),
+    }
 
 
 def build_lookup(symbols: list[dict[str, Any]], files: dict[str, KotlinFileIndex]) -> dict[str, Any]:
+    by_id: dict[str, dict[str, Any]] = {}
     by_name: dict[str, list[dict[str, Any]]] = defaultdict(list)
     by_kind: dict[str, list[str]] = defaultdict(list)
-    by_file: dict[str, list[str]] = defaultdict(list)
+    by_file: dict[str, dict[str, Any]] = {}
     by_package: dict[str, list[str]] = defaultdict(list)
+    by_container: dict[str, list[dict[str, Any]]] = defaultdict(list)
+
+    symbols_by_file: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for symbol in sorted(symbols, key=lambda item: (item["file"], item["start_line"], item["name"])):
+        symbols_by_file[symbol["file"]].append(symbol)
 
     for symbol in sorted(symbols, key=lambda item: (item["simple_name"], item["file"], item["start_line"])):
-        by_name[symbol["simple_name"]].append(
-            {
-                "id": symbol["id"],
-                "kind": symbol["kind"],
-                "path": symbol["file"],
-                "line": symbol["start_line"],
-                "package": symbol["package"],
-                "container_id": symbol["container_id"],
-            }
-        )
+        summary = symbol_navigation_summary(symbol)
+        by_id[symbol["id"]] = summary
+        by_name[symbol["simple_name"]].append(summary)
         by_kind[symbol["kind"]].append(symbol["id"])
-        by_file[symbol["file"]].append(symbol["id"])
         by_package[symbol["package"] or "<root>"] .append(symbol["id"])
+        if symbol["container_id"] is not None:
+            by_container[symbol["container_id"]].append(summary)
+
+    for path, file_symbols in sorted(symbols_by_file.items()):
+        sorted_symbols = sorted(file_symbols, key=lambda item: (item["start_line"], item["end_line"], item["name"]))
+        top_level_symbols = [symbol for symbol in sorted_symbols if symbol["container_id"] is None]
+        by_file[path] = {
+            "symbol_ids": [symbol["id"] for symbol in sorted_symbols],
+            "top_level_symbol_ids": [symbol["id"] for symbol in top_level_symbols],
+            "symbols": [symbol_navigation_summary(symbol) for symbol in sorted_symbols],
+            "top_level_symbols": [symbol_navigation_summary(symbol) for symbol in top_level_symbols],
+        }
 
     return {
+        "by_id": dict(sorted(by_id.items())),
         "by_name": dict(sorted(by_name.items())),
         "by_kind": {key: sorted(value) for key, value in sorted(by_kind.items())},
-        "by_file": {key: value for key, value in sorted(by_file.items())},
-        "by_package": {key: value for key, value in sorted(by_package.items())},
+        "by_file": by_file,
+        "by_package": {key: sorted(value) for key, value in sorted(by_package.items())},
+        "by_container": {key: value for key, value in sorted(by_container.items())},
         "files": {
             path: {
                 "package": file.package,
                 "source_set": file.source_set,
                 "imports": file.imports,
                 "symbol_count": len(file.symbols),
+                "top_level_symbol_count": len([symbol for symbol in file.symbols if symbol["container_id"] is None]),
             }
             for path, file in sorted(files.items())
         },
@@ -540,6 +811,11 @@ def serializable_symbol(symbol: dict[str, Any]) -> dict[str, Any]:
         "modifiers": symbol["modifiers"],
         "is_expect": symbol["is_expect"],
         "is_actual": symbol["is_actual"],
+        "span_kind": symbol["span_kind"],
+        "declaration_start_line": symbol["declaration_start_line"],
+        "declaration_end_line": symbol["declaration_end_line"],
+        "body_start_line": symbol["body_start_line"],
+        "body_end_line": symbol["body_end_line"],
         "start_line": symbol["start_line"],
         "end_line": symbol["end_line"],
         "signature": symbol["signature"],
@@ -563,7 +839,7 @@ def build_index() -> dict[str, Any]:
     index = {
         "meta": {
             "format": "ai-code-index",
-            "version": 1,
+            "version": 2,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "project_root": ROOT.name,
             "indexed_file_count": len(files),

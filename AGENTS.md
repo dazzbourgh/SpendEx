@@ -18,6 +18,12 @@ Use it as a task-first navigation page, then open the smallest linked section ne
 6. [Change Workflow](agents/60-change-workflow.md)
    - implementation sequence, repo rules, and doc maintenance conventions
 
+## Required workflow before code changes
+
+- Before making any code change, first read [AI Code Index](agents/40-code-index.md) and get familiar with the current `code-index.json` lookup workflow.
+- Use the index to narrow to the smallest relevant symbol or file range before reading source broadly or editing code.
+- Re-read `agents/40-code-index.md` whenever the index structure changes or `code-index.json` is regenerated in a way that affects navigation.
+
 ## Task-first shortcuts
 
 - Need symbol lookup or fast navigation? Open [AI Code Index](agents/40-code-index.md).
