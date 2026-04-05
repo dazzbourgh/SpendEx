@@ -1,5 +1,6 @@
 package interpreter
 
+import account.AccountLinkingServiceImpl
 import account.AccountServiceImpl
 import browser.BrowserLauncher
 import config.Constants
@@ -7,11 +8,14 @@ import config.EnvironmentConfig
 import config.ProductionEnvironmentConfig
 import config.SandboxEnvironmentConfig
 import dao.JsonConfigDao
-import dao.JsonTokenDaoImpl
+import dao.JsonInstitutionConnectionRepository
 import dao.JsonTransactionDaoImpl
-import plaid.HttpClientFactory
 import plaid.OAuthRedirectServer
-import plaid.PlaidServiceImpl
+import plaid.PlaidConfigurationServiceImpl
+import plaid.PlaidFinancialProviderModule
+import provider.FinancialProviderRegistryImpl
+import provider.ProviderIds
+import provider.SharedProviderDependencies
 import transaction.TransactionServiceImpl
 
 expect fun createBrowserLauncher(): BrowserLauncher
@@ -32,42 +36,41 @@ object InterpreterFactory {
         }
 
     private fun buildInterpreter(environmentConfig: EnvironmentConfig): Interpreter {
-        val tokenDao = JsonTokenDaoImpl()
         val configDao = JsonConfigDao(environmentConfig)
-        val httpClient = HttpClientFactory.create()
-        val browserLauncher = createBrowserLauncher()
-        val plaidService =
-            PlaidServiceImpl(
-                httpClient,
-                configDao,
-                browserLauncher,
-                ::createOAuthRedirectServer,
-                environmentConfig,
-            )
-        val accountService = AccountServiceImpl(tokenDao)
+        val institutionConnectionRepository = JsonInstitutionConnectionRepository()
         val transactionDao = JsonTransactionDaoImpl()
+        val browserLauncher = createBrowserLauncher()
+        val sharedProviderDependencies =
+            SharedProviderDependencies(
+                environmentConfig = environmentConfig,
+                browserLauncher = browserLauncher,
+                oauthRedirectServerFactory = ::createOAuthRedirectServer,
+            )
+        val plaidProviderRuntime = PlaidFinancialProviderModule(configDao).createRuntime(sharedProviderDependencies)
+        val providerRegistry = FinancialProviderRegistryImpl(listOf(plaidProviderRuntime))
+        val accountLinkingService =
+            AccountLinkingServiceImpl(
+                defaultProviderId = ProviderIds.PLAID,
+                providerRegistry = providerRegistry,
+                institutionConnectionRepository = institutionConnectionRepository,
+            )
+        val accountService = AccountServiceImpl(institutionConnectionRepository)
         val accountCommandInterpreter =
             AccountCommandInterpreterImpl(
-                tokenDao,
-                plaidService,
-                configDao,
+                accountLinkingService,
                 accountService,
             )
         val transactionService =
             TransactionServiceImpl(
-                tokenDao,
+                institutionConnectionRepository,
                 transactionDao,
-                plaidService,
+                providerRegistry,
             )
-        val transactionCommandInterpreter =
-            TransactionCommandInterpreterImpl(
-                transactionService,
-                configDao,
-            )
+        val transactionCommandInterpreter = TransactionCommandInterpreterImpl(transactionService)
         return InterpreterImpl(
             accountCommandInterpreter,
             PlaidCommandInterpreterImpl(
-                plaidService,
+                PlaidConfigurationServiceImpl(configDao),
             ),
             transactionCommandInterpreter,
         )

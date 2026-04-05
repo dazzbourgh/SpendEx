@@ -3,15 +3,17 @@ package interpreter
 import arrow.core.Either
 import arrow.core.raise.either
 import config.Constants
-import dao.ConfigDao
 import kotlinx.datetime.LocalDate
 import model.Transaction
 import transaction.TransactionService
-import validation.ValidationHelper.ensurePlaidConfigValid
 
+/**
+ * Command interpreter for transaction queries.
+ *
+ * @property transactionService Application service for listing transactions
+ */
 class TransactionCommandInterpreterImpl(
     private val transactionService: TransactionService,
-    private val configDao: ConfigDao,
 ) : TransactionCommandInterpreter {
     override suspend fun listTransactions(
         from: LocalDate?,
@@ -19,8 +21,6 @@ class TransactionCommandInterpreterImpl(
         institutions: Set<String>,
     ): Either<String, Iterable<Transaction>> =
         either {
-            ensurePlaidConfigValid(configDao)
-
             // Validate date range
             if (from != null && to != null && from > to) {
                 raise(Constants.Commands.ErrorMessages.INVALID_DATE_RANGE)

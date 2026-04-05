@@ -1,51 +1,21 @@
 package interpreter
 
+import account.AccountLinkingService
 import account.AccountService
 import arrow.core.Either
-import arrow.core.raise.either
-import config.Constants
-import dao.ConfigDao
-import dao.TokenDao
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import model.BankDetails
-import model.PlaidToken
-import plaid.PlaidService
-import validation.ValidationHelper.ensurePlaidConfigValid
 
+/**
+ * Command interpreter for account-related commands.
+ *
+ * @property accountLinkingService Application service responsible for linking accounts
+ * @property accountService Query service for listing linked accounts
+ */
 class AccountCommandInterpreterImpl(
-    private val tokenDao: TokenDao,
-    private val plaidService: PlaidService,
-    private val configDao: ConfigDao,
+    private val accountLinkingService: AccountLinkingService,
     private val accountService: AccountService,
-    private val now: suspend () -> Instant = { Clock.System.now() },
 ) : AccountCommandInterpreter {
-    override suspend fun addAccount(): Either<String, Unit> =
-        either {
-            ensurePlaidConfigValid(configDao)
-            val linkToken = plaidService.createLinkToken().bind()
-
-            val publicToken =
-                plaidService.performLinkFlow(
-                    linkToken,
-                    Constants.OAuth.REDIRECT_URL,
-                    Constants.OAuth.DEFAULT_PORT,
-                ).bind()
-
-            val tokenResponse = plaidService.exchangePublicToken(publicToken).bind()
-            val accountsResponse = plaidService.getAccounts(tokenResponse.accessToken).bind()
-
-            val institutionName = accountsResponse.accounts.firstOrNull()?.name ?: Constants.Plaid.UNKNOWN_BANK
-
-            val plaidToken =
-                PlaidToken(
-                    bankName = institutionName,
-                    accessToken = tokenResponse.accessToken,
-                    itemId = tokenResponse.itemId,
-                    createdAt = now(),
-                )
-            tokenDao.save(plaidToken)
-        }
+    override suspend fun addAccount(): Either<String, Unit> = accountLinkingService.linkDefaultAccount()
 
     override suspend fun listAccounts(): Either<String, Iterable<BankDetails>> = accountService.listAccounts()
 }

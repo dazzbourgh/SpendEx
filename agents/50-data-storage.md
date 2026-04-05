@@ -3,12 +3,12 @@
 ## Local storage
 
 SpendEx stores local state under `~/.spndx`.
-The repository uses JSON-backed persistence for Plaid configuration, linked account tokens, and transaction sync state.
+The repository uses JSON-backed persistence for Plaid configuration, linked institution connections, and transaction sync state.
 
 ## Main storage concerns
 
 - Plaid credentials
-- linked institution or account tokens
+- linked institution connections
 - synced transactions and cursors or transaction state
 
 ## Relevant code areas
@@ -24,4 +24,4 @@ Open storage-related code when you are changing:
 - local file layout
 - JSON schemas or serialized models
 - transaction persistence behavior
-- config or token loading and saving behavior
+- config or institution connection loading and saving behavior

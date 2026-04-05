@@ -1,6 +1,6 @@
 # Start Here
 
-SpendEx is a Kotlin Multiplatform CLI for managing financial accounts and transactions through Plaid.
+SpendEx is a Kotlin Multiplatform CLI for managing financial accounts and transactions through provider-specific integrations.
 The active runtime target is a native macOS ARM64 executable, with `main` as the runtime entrypoint.
 
 ## Fast orientation
@@ -11,7 +11,7 @@ If you are new to the repository, open files in this order:
 2. `src/commonMain/kotlin/Main.kt` for application startup
 3. `src/commonMain/kotlin/interpreter/InterpreterFactory.kt` for dependency wiring
 4. `src/commonMain/kotlin/command/` for CLI behavior
-5. `src/commonMain/kotlin/plaid/`, `transaction/`, and `dao/` for business logic and persistence
+5. `src/commonMain/kotlin/provider/`, `plaid/`, `transaction/`, and `dao/` for provider wiring, business logic, and persistence
 
 ## Core facts
 

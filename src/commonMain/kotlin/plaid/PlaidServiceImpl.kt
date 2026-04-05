@@ -26,6 +26,7 @@ import model.PlaidProduct
 import model.PlaidTransactionsSyncResponse
 import model.PublicTokenExchangeRequest
 import model.TransactionsSyncRequest
+import validation.ValidationHelper
 
 class PlaidServiceImpl(
     private val httpClient: HttpClient,
@@ -36,7 +37,7 @@ class PlaidServiceImpl(
 ) : PlaidService {
     override suspend fun createLinkToken(): Either<String, String> =
         either {
-            val config = configDao.loadPlaidConfig().bind()
+            val config = loadValidatedPlaidConfig()
             val request =
                 LinkTokenCreateRequest(
                     clientId = config.client_id,
@@ -65,7 +66,7 @@ class PlaidServiceImpl(
 
     override suspend fun exchangePublicToken(publicToken: String): Either<String, PlaidAccessTokenResponse> =
         either {
-            val config = configDao.loadPlaidConfig().bind()
+            val config = loadValidatedPlaidConfig()
             val request =
                 PublicTokenExchangeRequest(
                     clientId = config.client_id,
@@ -86,7 +87,7 @@ class PlaidServiceImpl(
 
     override suspend fun getAccounts(accessToken: String): Either<String, PlaidAccountsResponse> =
         either {
-            val config = configDao.loadPlaidConfig().bind()
+            val config = loadValidatedPlaidConfig()
             val request =
                 AccountsGetRequest(
                     clientId = config.client_id,
@@ -110,7 +111,7 @@ class PlaidServiceImpl(
         cursor: String?,
     ): Either<String, PlaidTransactionsSyncResponse> =
         either {
-            val config = configDao.loadPlaidConfig().bind()
+            val config = loadValidatedPlaidConfig()
             val request =
                 TransactionsSyncRequest(
                     clientId = config.client_id,
@@ -146,11 +147,12 @@ class PlaidServiceImpl(
             }
         }
 
-    override suspend fun saveConfig(
-        clientId: String,
-        clientSecret: String,
-    ): Either<String, Unit> {
-        val plaidConfig = config.PlaidConfig(client_id = clientId, secret = clientSecret)
-        return configDao.savePlaidConfig(plaidConfig)
+    /**
+     * Loads persisted Plaid credentials and validates that both required values are present.
+     */
+    private suspend fun arrow.core.raise.Raise<String>.loadValidatedPlaidConfig(): config.PlaidConfig {
+        val config = configDao.loadPlaidConfig().bind()
+        ValidationHelper.run { ensurePlaidConfigValid(config) }
+        return config
     }
 }

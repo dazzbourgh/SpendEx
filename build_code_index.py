@@ -565,7 +565,7 @@ def gather_tracked_files() -> list[Path]:
             text=True,
         )
         relative_paths = [Path(line) for line in completed.stdout.splitlines() if line.strip()]
-        files = [ROOT / relative_path for relative_path in relative_paths]
+        files = [ROOT / relative_path for relative_path in relative_paths if (ROOT / relative_path).is_file()]
     except (subprocess.CalledProcessError, FileNotFoundError):
         files = [path for path in ROOT.rglob("*") if path.is_file()]
 

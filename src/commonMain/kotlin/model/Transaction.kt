@@ -23,7 +23,7 @@ data class Transaction(
 )
 
 /**
- * Local storage model for transactions with cursor for pagination
+ * Local storage model for transactions with cursor for incremental sync.
  *
  * @property cursor The cursor for next sync request (nullable)
  * @property transactions List of transactions
@@ -35,9 +35,9 @@ data class StoredTransactions(
 )
 
 /**
- * Stored transaction with all necessary fields for analysis
+ * Stored transaction with provider-neutral fields used for local caching and analysis.
  *
- * @property transactionId Unique identifier from Plaid
+ * @property transactionId Provider-scoped transaction identifier
  * @property amount Transaction amount
  * @property date Transaction date
  * @property name Transaction name/description
@@ -55,7 +55,7 @@ data class StoredTransaction(
     val name: String,
     @SerialName("merchant_name") val merchantName: String?,
     val category: List<String>?,
-    val location: PlaidLocation?,
+    val location: TransactionLocation?,
     val pending: Boolean,
     @SerialName("authorized_date") val authorizedDate: String?,
 ) {
@@ -71,3 +71,27 @@ data class StoredTransaction(
             institutionName = institutionName,
         )
 }
+
+/**
+ * Provider-neutral transaction location details.
+ *
+ * @property address Street address when available
+ * @property city City when available
+ * @property region Region or state when available
+ * @property postalCode Postal code when available
+ * @property country Country when available
+ * @property lat Latitude when available
+ * @property lon Longitude when available
+ * @property storeNumber Store number when available
+ */
+@Serializable
+data class TransactionLocation(
+    val address: String?,
+    val city: String?,
+    val region: String?,
+    @SerialName("postal_code") val postalCode: String?,
+    val country: String?,
+    val lat: Double?,
+    val lon: Double?,
+    @SerialName("store_number") val storeNumber: String?,
+)

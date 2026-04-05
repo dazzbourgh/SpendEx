@@ -21,9 +21,12 @@ actual class JsonTransactionDaoImpl : TransactionDao {
         FileSystemHelper.ensureDirectoryExists(transactionsDir)
     }
 
-    actual override suspend fun loadTransactions(itemId: String): StoredTransactions? {
-        val filePath = "$transactionsDir/$itemId.json"
-        val content = FileSystemHelper.readFile(filePath) ?: return null
+    actual override suspend fun loadTransactions(
+        providerId: String,
+        connectionId: String,
+    ): StoredTransactions? {
+        val filePath = providerScopedFilePath(providerId, connectionId)
+        val content = FileSystemHelper.readFile(filePath) ?: FileSystemHelper.readFile(legacyFilePath(connectionId)) ?: return null
         if (content.isBlank()) return null
         return try {
             json.decodeFromString<StoredTransactions>(content)
@@ -33,13 +36,14 @@ actual class JsonTransactionDaoImpl : TransactionDao {
     }
 
     actual override suspend fun saveTransactions(
-        itemId: String,
+        providerId: String,
+        connectionId: String,
         storedTransactions: StoredTransactions,
     ) {
-        val filePath = "$transactionsDir/$itemId.json"
+        val filePath = providerScopedFilePath(providerId, connectionId)
 
         // Load existing transactions to merge
-        val existing = loadTransactions(itemId)
+        val existing = loadTransactions(providerId, connectionId)
         val mergedTransactions =
             if (existing != null) {
                 // Merge transactions, avoiding duplicates by transaction_id
@@ -59,4 +63,29 @@ actual class JsonTransactionDaoImpl : TransactionDao {
         val jsonContent = json.encodeToString(mergedTransactions)
         FileSystemHelper.writeFile(filePath, jsonContent)
     }
+
+    /**
+     * Builds a provider-scoped transaction file path and ensures the provider directory exists.
+     */
+    private fun providerScopedFilePath(
+        providerId: String,
+        connectionId: String,
+    ): String {
+        val providerDir = "$transactionsDir/${encodePathSegment(providerId)}"
+        FileSystemHelper.ensureDirectoryExists(providerDir)
+        return "$providerDir/${encodePathSegment(connectionId)}.json"
+    }
+
+    /**
+     * Resolves the pre-provider-neutral transaction file path for backward-compatible reads.
+     */
+    private fun legacyFilePath(connectionId: String): String = "$transactionsDir/$connectionId.json"
+
+    /**
+     * Encodes an arbitrary identifier into a filesystem-safe UTF-8 hex string.
+     */
+    private fun encodePathSegment(value: String): String =
+        value
+            .encodeToByteArray()
+            .joinToString(separator = "") { byte -> byte.toUByte().toString(16).padStart(length = 2, padChar = '0') }
 }
